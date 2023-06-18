@@ -58,7 +58,7 @@ export default function Index() {
         </div>
       </div>
 
-      <div className="w-full h-[500px] bg-blue-300 ">
+      <div className="w-full h-[500px] bg-white ">
         <div className="mx-auto max-w-3xl lg:max-w-7xl pt-20">
           <div className=" pt-12 pr-2 md:flex lg:flex lg:space-x-3 ">
             <button
@@ -176,7 +176,7 @@ export default function Index() {
           ประเภททุน
         </div>
         <div className="  grid grid-cols-1 md:grid-cols-3 gap-2">
-          <div className="h-[300px] p-5 border  duration-500 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
+          <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
             <div className="flex justify-center">
               <Image
                 src="/โลก.png"
@@ -192,7 +192,7 @@ export default function Index() {
               </div>
             </div>
           </div>
-          <div className="h-[300px] p-5 border  duration-500 shadow-md bg-white scale-90 hover:scale-100 ease-in">
+          <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in">
             <div className="flex justify-center">
               <Image
                 src="/ต่างเทศ.png"
@@ -206,7 +206,7 @@ export default function Index() {
               <div className="text-center">ทุนต่างประเทศ</div>
             </div>
           </div>
-          <div className="h-[300px] p-5 border  duration-500 shadow-md bg-white scale-90 hover:scale-100 ease-in">
+          <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in">
             <div className="flex justify-center">
               <Image
                 src="/มหาลัย.png"
