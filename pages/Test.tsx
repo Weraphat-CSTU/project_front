@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AiOutlineRest, AiOutlineEdit } from "react-icons/ai";
-
+import { Button, Modal, Table } from "react-daisyui";
+import { useForm } from "react-hook-form";
 type personType = {
   id: number;
   name: string;
@@ -11,8 +12,19 @@ type personType = {
 };
 
 const AboutPage = () => {
+  const { register, handleSubmit, reset } = useForm<personType>();
+  const {
+    register: registerEdit,
+    handleSubmit: handleSubmitEdit,
+    reset: resetEdit,
+    setValue,
+  } = useForm<personType>();
+  const [arrayIndex, setArrayIndex] = useState<number>(0);
+  const [edit, setEdit] = useState<boolean>(false);
+  const [editItem, setEditItem] = useState<personType>();
+  const [visible, setVisible] = useState<boolean>(false);
+  const [openModal, setOpenModal] = useState<boolean>(false);
   const [item, setItem] = useState<personType>();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [person, setPerson] = useState<personType[]>([
     {
       id: 1,
@@ -39,149 +51,99 @@ const AboutPage = () => {
       province: 2,
     },
   ]);
-  const showModel = (): JSX.Element => {
-    return (
-      <>
-        <input type="checkbox" id="my_modal_6" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box">
-            <h3 className="font-bold text-lg">
-              ต้องการลบหมายเลข {item?.id} ใช่หรือไม่
-            </h3>
-            <p className="py-4">ชื่อ {item?.name}</p>
-            <div className="modal-action flex">
-              <label
-                htmlFor="my_modal_6"
-                className="btn"
-                onClick={() => {
-                  const normalData = person.filter(
-                    (value) => value.id != item?.id
-                  );
-                  setPerson(normalData);
-                }}
-              >
-                ยืนยัน
-              </label>
-              <label htmlFor="my_modal_6" className="btn">
-                ยกเลิก
-              </label>
-            </div>
-          </div>
-        </div>
-      </>
-    );
+
+  const toggleVisible = () => {
+    setVisible(!visible);
   };
-  const showForm = (): JSX.Element => {
-    return (
-      <>
-        <input type="checkbox" id="my_modal_1" className="modal-toggle" />
-        <div className="modal">
-          <div className="modal-box">
-            <form>
-              <div className="text-center text-xl">เพิ่มรายชื่อ</div>
-              <div className="form-control w-full max-w-5xl">
-                <label className="label">
-                  <span className="label-text">ชื่อ</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="ชื่อ"
-                  className="input input-bordered w-full max-w-5xl"
-                />
-
-                <label className="label">
-                  <span className="label-text">อายุ</span>
-                </label>
-                <input
-                  type="number"
-                  placeholder="อายุ"
-                  className="input input-bordered w-full max-w-5xl"
-                />
-
-                <label className="label">
-                  <span className="label-text">เพศ</span>
-                </label>
-                <div className="form-control w-full max-w-xs">
-                  <label className="label cursor-pointer">
-                    <input
-                      type="radio"
-                      name="radio-10"
-                      className="radio checked:bg-sky-500"
-                      value={"male"}
-                      checked
-                    />
-                    <span className="label-text pr-20">ชาย</span>
-                    <input
-                      type="radio"
-                      name="radio-10"
-                      className="radio checked:bg-sky-500"
-                      value={"female"}
-                      checked
-                    />
-                    <span className="label-text">หญิง</span>
-                  </label>
-                </div>
-
-                <label className="label">
-                  <span className="label-text">ที่อยู่</span>
-                </label>
-                <input
-                  type="text"
-                  placeholder="ที่อยู่"
-                  className="input input-bordered w-full max-w-5xl"
-                />
-
-                <div className="form-control w-full max-w-5xl">
-                  <label className="label">
-                    <span className="label-text">จังหวัด</span>
-                  </label>
-                  <select className="select select-bordered">
-                    <option disabled selected></option>
-                    <option value={1}>กรุงเทพ</option>
-                    <option value={2}>ปทุมธานี</option>
-                  </select>
-                </div>
-
-                <div className="flex justify-center space-x-3 pt-5 modal-action ">
-                  <button
-                    type="submit"
-                    className="btn btn-outline btn-success w-1/2"
-                  >
-                    บันทึก
-                  </button>
-                  <label
-                    className="btn btn-outline btn-error w-1/2"
-                    htmlFor="my_modal_1"
-                    onClick={() => setIsOpen(false)}
-                  >
-                    ยกเลิก
-                  </label>
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </>
-    );
+  const toggleModal = () => {
+    setOpenModal(!openModal);
   };
+
+  const onSubmit = (event: personType) => {
+    const id = Math.floor(Math.random() * 100) + 1;
+    const name = event.name;
+    const age = event.age;
+    const gender = event.gender;
+    const address = event.address;
+    const province = event.province;
+    setPerson((oldPerson) => [
+      ...oldPerson,
+      { id, name, age, gender, address, province },
+    ]);
+    setOpenModal(!openModal);
+    reset();
+  };
+
+  const onSubmitEdit = (event: personType) => {
+    const id = event.id;
+    const name = event.name;
+    const age = event.age;
+    const gender = event.gender;
+    const address = event.address;
+    const province = event.province;
+    const newArray = person.map((item, index) => {
+      if (index === arrayIndex) {
+        return { id, name, age, gender, address, province };
+      } else {
+        return item;
+      }
+    });
+    setPerson(newArray);
+  };
+
   return (
     <div className="mx-auto max-w-5xl ">
-      {showModel()}
-      {showForm()}
-      <div className="flex justify-center text-2xl pt-10">รายชื่อนักเรียน</div>
-      <label className="btn btn-outline btn-info mt-10" htmlFor="my_modal_1">
-        เพิ่มข้อมูล
-      </label>
-      {isOpen && (
-        <form>
-          <div className="form-control w-full max-w-5xl">
+      <Modal open={visible}>
+        <Modal.Header className="font-bold">
+          <h3 className="font-bold text-lg">
+            ต้องการลบหมายเลข {item?.id} ใช่หรือไม่
+          </h3>
+        </Modal.Header>
+
+        <Modal.Body>
+          <p className="py-4">ชื่อ {item?.name}</p>
+        </Modal.Body>
+
+        <Modal.Actions>
+          <Button
+            className="btn btn-success"
+            onClick={() => {
+              const normalData = person.filter((value) => value.id != item?.id);
+              setPerson(normalData);
+              toggleVisible();
+            }}
+          >
+            ยืนยัน
+          </Button>
+          <button className="btn btn-error" onClick={toggleVisible}>
+            ยกเลิก
+          </button>
+        </Modal.Actions>
+      </Modal>
+
+      <Modal open={openModal}>
+        <Button
+          size="sm"
+          shape="circle"
+          className="absolute right-2 top-2 btn btn-error"
+          onClick={toggleModal}
+        >
+          ✕
+        </Button>
+        <Modal.Header className="font-bold">
+          <div className="text-center text-xl">เพิ่มรายชื่อ</div>
+        </Modal.Header>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <Modal.Body>
             <label className="label">
               <span className="label-text">ชื่อ</span>
             </label>
             <input
               type="text"
+              id="name"
               placeholder="ชื่อ"
               className="input input-bordered w-full max-w-5xl"
+              {...register("name")}
             />
 
             <label className="label">
@@ -189,8 +151,10 @@ const AboutPage = () => {
             </label>
             <input
               type="number"
+              id="age"
               placeholder="อายุ"
               className="input input-bordered w-full max-w-5xl"
+              {...register("age")}
             />
 
             <label className="label">
@@ -200,18 +164,16 @@ const AboutPage = () => {
               <label className="label cursor-pointer">
                 <input
                   type="radio"
-                  name="radio-10"
                   className="radio checked:bg-sky-500"
                   value={"male"}
-                  checked
+                  {...register("gender")}
                 />
                 <span className="label-text pr-20">ชาย</span>
                 <input
                   type="radio"
-                  name="radio-10"
                   className="radio checked:bg-sky-500"
                   value={"female"}
-                  checked
+                  {...register("gender")}
                 />
                 <span className="label-text">หญิง</span>
               </label>
@@ -222,83 +184,210 @@ const AboutPage = () => {
             </label>
             <input
               type="text"
+              id="address"
               placeholder="ที่อยู่"
               className="input input-bordered w-full max-w-5xl"
+              {...register("address")}
             />
 
             <div className="form-control w-full max-w-5xl">
               <label className="label">
                 <span className="label-text">จังหวัด</span>
               </label>
-              <select className="select select-bordered">
-                <option disabled selected></option>
+              <select
+                className="select select-bordered"
+                id="province"
+                {...register("province")}
+              >
+                <option defaultValue={0}>กรุณาเลือกจังหวัด</option>
                 <option value={1}>กรุงเทพ</option>
                 <option value={2}>ปทุมธานี</option>
               </select>
             </div>
+          </Modal.Body>
 
-            <div className="flex justify-center space-x-20 pt-5">
-              <button type="submit" className="btn btn-outline btn-success">
-                บันทึก
-              </button>
-              <button
-                className="btn btn-outline btn-error"
-                onClick={() => setIsOpen(false)}
-              >
-                ยกเลิก
-              </button>
-            </div>
-          </div>
+          <Modal.Actions>
+            <Button
+              type="submit"
+              className="btn btn-outline btn-success w-full"
+            >
+              บันทึก
+            </Button>
+          </Modal.Actions>
         </form>
-      )}
+      </Modal>
+
+      <Modal open={edit}>
+        <Button
+          size="sm"
+          shape="circle"
+          className="absolute right-2 top-2 btn btn-error"
+          onClick={() => setEdit(!edit)}
+        >
+          ✕
+        </Button>
+        <Modal.Header className="font-bold">
+          <div className="text-center text-xl">แก้ไขข้อมูล</div>
+        </Modal.Header>
+        <form onSubmit={handleSubmitEdit(onSubmitEdit)}>
+          <Modal.Body>
+            <label className="label">
+              <span className="label-text">ชื่อ</span>
+            </label>
+            <input
+              type="text"
+              id="name"
+              placeholder="ชื่อ"
+              className="input input-bordered w-full max-w-5xl"
+              {...registerEdit("name")}
+            />
+            <label className="label">
+              <span className="label-text">อายุ</span>
+            </label>
+            <input
+              type="number"
+              id="age"
+              placeholder="อายุ"
+              className="input input-bordered w-full max-w-5xl"
+              {...registerEdit("age")}
+            />
+
+            <label className="label">
+              <span className="label-text">เพศ</span>
+            </label>
+            <div className="form-control w-full max-w-xs">
+              <label className="label cursor-pointer">
+                <input
+                  type="radio"
+                  className="radio checked:bg-sky-500"
+                  value={"male"}
+                  {...registerEdit("gender")}
+                />
+                <span className="label-text pr-20">ชาย</span>
+                <input
+                  type="radio"
+                  className="radio checked:bg-sky-500"
+                  value={"female"}
+                  {...registerEdit("gender")}
+                />
+                <span className="label-text">หญิง</span>
+              </label>
+            </div>
+
+            <label className="label">
+              <span className="label-text">ที่อยู่</span>
+            </label>
+            <input
+              type="text"
+              id="address"
+              placeholder="ที่อยู่"
+              className="input input-bordered w-full max-w-5xl"
+              {...registerEdit("address")}
+            />
+
+            <div className="form-control w-full max-w-5xl">
+              <label className="label">
+                <span className="label-text">จังหวัด</span>
+              </label>
+              <select
+                className="select select-bordered"
+                id="province"
+                {...registerEdit("province")}
+              >
+                <option defaultValue={0}>กรุณาเลือกจังหวัด</option>
+                <option value={1}>กรุงเทพ</option>
+                <option value={2}>ปทุมธานี</option>
+              </select>
+            </div>
+          </Modal.Body>
+
+          <Modal.Actions>
+            <Button
+              className="btn btn-success"
+              onClick={() => {
+                const normalData = person.filter(
+                  (value) => value.id != item?.id
+                );
+                setPerson(normalData);
+                setEdit(!edit);
+              }}
+            >
+              ยืนยัน
+            </Button>
+            <button className="btn btn-error" onClick={() => setEdit(!edit)}>
+              ยกเลิก
+            </button>
+          </Modal.Actions>
+        </form>
+      </Modal>
+
+      <div className="flex justify-center text-2xl pt-10">รายชื่อนักเรียน</div>
+      <Button className="btn btn-outline btn-info mt-10" onClick={toggleModal}>
+        เพิ่มข้อมูล
+      </Button>
       <div className="overflow-x-auto pt-10">
-        <table className="table table-zebra">
+        <Table className="table table-zebra w-full">
           {/* head */}
-          <thead>
-            <tr>
-              <th>id</th>
-              <th>ชื่อ</th>
-              <th>อายุ</th>
-              <th className="text-center">เพศ</th>
-              <th>ที่อยู่</th>
-              <th>จังหวัด</th>
-              <th>แก้ไข</th>
-              <th>ลบ</th>
-            </tr>
-          </thead>
-          <tbody>
+          <Table.Head>
+            <span>id</span>
+            <span>ชื่อ</span>
+            <span>อายุ</span>
+            <span className="flex justify-center">เพศ</span>
+            <span>ที่อยู่</span>
+            <span>จังหวัด</span>
+            <span>แก้ไข</span>
+            <span>ลบ</span>
+          </Table.Head>
+          <Table.Body>
             {/* row 1 */}
             {person &&
               person.map((value, index) => (
-                <tr key={index}>
-                  <th>{value.id}</th>
-                  <td>{value.name}</td>
-                  <td>{value.age}</td>
-                  <td className="flex justify-center">
+                <Table.Row key={index}>
+                  <span>{value.id}</span>
+                  <span>{value.name}</span>
+                  <span>{value.age}</span>
+                  <span className="flex justify-center">
                     {value.gender === "male" ? (
-                      <div className="bg-blue-400 text-white font-bold inline px-4 py-1">
+                      <div className="bg-blue-400 text-white font-semibold inline px-4 py-1 rounded-sm">
                         male
                       </div>
                     ) : (
-                      <div className="bg-pink-400 text-white font-bold inline px-3 py-1">
+                      <div className="bg-pink-400 text-white font-semibold inline px-3 py-1 rounded-sm">
                         female
                       </div>
                     )}
-                  </td>
-                  <td>{value.address}</td>
-                  <td>{value.province == 1 ? "กรุงเทพ" : "ปทุมธานี"}</td>
-                  <td>
-                    <AiOutlineEdit className="text-cyan-600 text-xl cursor-pointer" />
-                  </td>
-                  <td>
-                    <label htmlFor="my_modal_6" onClick={() => setItem(value)}>
+                  </span>
+                  <span>{value.address}</span>
+                  <span>{value.province == 1 ? "กรุงเทพ" : "ปทุมธานี"}</span>
+                  <span>
+                    <label
+                      onClick={() => {
+                        setEdit(!edit);
+                        setEditItem(value);
+                        Object.entries(value).forEach(([name, value]: any) =>
+                          setValue(name, value)
+                        );
+                        setArrayIndex(index);
+                      }}
+                    >
+                      <AiOutlineEdit className="text-cyan-600 text-xl cursor-pointer" />
+                    </label>
+                  </span>
+                  <span>
+                    <label
+                      htmlFor="my_modal_6"
+                      onClick={() => {
+                        setItem(value);
+                        toggleVisible();
+                      }}
+                    >
                       <AiOutlineRest className="text-red-600 text-xl cursor-pointer" />
                     </label>
-                  </td>
-                </tr>
+                  </span>
+                </Table.Row>
               ))}
-          </tbody>
-        </table>
+          </Table.Body>
+        </Table>
       </div>
     </div>
   );
