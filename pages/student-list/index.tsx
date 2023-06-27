@@ -3,6 +3,7 @@ import { AiOutlineRest, AiOutlineEdit } from "react-icons/ai";
 import { Button, Modal, Table } from "react-daisyui";
 import { useForm } from "react-hook-form";
 import CreateForm from "./components/create-form";
+import TableForm from "./components/table";
 export type personType = {
   id: number;
   name: string;
@@ -23,7 +24,7 @@ const AboutPage = () => {
   const [edit, setEdit] = useState<boolean>(false);
   const [editItem, setEditItem] = useState<personType>();
   const [visible, setVisible] = useState<boolean>(false);
-  const [item, setItem] = useState<personType>();
+  const [item, setItem] = useState<personType>(); // เปนตัวแปรสำหรับเก็บข้อมูลที่จะลบ
   const [person, setPerson] = useState<personType[]>([
     {
       id: 1,
@@ -106,6 +107,13 @@ const AboutPage = () => {
         onValueChange={(value) =>
           setPerson((oldPerson) => [...oldPerson, value])
         }
+      />
+      <TableForm
+        person={person}
+        onValueCLick={(value) => {
+          setItem(value);
+          setVisible(!visible);
+        }}
       />
 
       <Modal open={edit}>
@@ -211,73 +219,6 @@ const AboutPage = () => {
           </Modal.Actions>
         </form>
       </Modal>
-
-      <div className="flex justify-center text-2xl pt-10">รายชื่อนักเรียน</div>
-
-      <div className="overflow-x-auto pt-10">
-        <Table className="table table-zebra w-full">
-          {/* head */}
-          <Table.Head>
-            <span>id</span>
-            <span>ชื่อ</span>
-            <span>อายุ</span>
-            <span className="flex justify-center">เพศ</span>
-            <span>ที่อยู่</span>
-            <span>จังหวัด</span>
-            <span>แก้ไข</span>
-            <span>ลบ</span>
-          </Table.Head>
-          <Table.Body>
-            {/* row 1 */}
-            {person &&
-              person.map((value, index) => (
-                <Table.Row key={index}>
-                  <span>{value.id}</span>
-                  <span>{value.name}</span>
-                  <span>{value.age}</span>
-                  <span className="flex justify-center">
-                    {value.gender === "male" ? (
-                      <div className="bg-blue-400 text-white font-semibold inline px-4 py-1 rounded-sm">
-                        male
-                      </div>
-                    ) : (
-                      <div className="bg-pink-400 text-white font-semibold inline px-3 py-1 rounded-sm">
-                        female
-                      </div>
-                    )}
-                  </span>
-                  <span>{value.address}</span>
-                  <span>{value.province == 1 ? "กรุงเทพ" : "ปทุมธานี"}</span>
-                  <span>
-                    <label
-                      onClick={() => {
-                        setEdit(!edit);
-                        setEditItem(value);
-                        Object.entries(value).forEach(([name, value]: any) =>
-                          setValue(name, value)
-                        );
-                        setArrayIndex(index);
-                      }}
-                    >
-                      <AiOutlineEdit className="text-cyan-600 text-xl cursor-pointer" />
-                    </label>
-                  </span>
-                  <span>
-                    <label
-                      htmlFor="my_modal_6"
-                      onClick={() => {
-                        setItem(value);
-                        toggleVisible();
-                      }}
-                    >
-                      <AiOutlineRest className="text-red-600 text-xl cursor-pointer" />
-                    </label>
-                  </span>
-                </Table.Row>
-              ))}
-          </Table.Body>
-        </Table>
-      </div>
     </div>
   );
 };
