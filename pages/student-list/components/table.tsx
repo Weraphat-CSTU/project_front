@@ -7,11 +7,9 @@ import { personType } from "..";
 type props = {
   person: personType[];
   onValueCLick: (valueItem: personType) => void;
+  arrayIndex:(array:number)=> void;
 };
-export default function TableForm({ person, onValueCLick }: props) {
-  const [arrayIndex, setArrayIndex] = useState<number>(0);
-  const [edit, setEdit] = useState<boolean>(false);
-
+export default function TableForm({ person, onValueCLick ,arrayIndex}: props) {
   return (
     <>
       <div className="flex justify-center text-2xl pt-10">รายชื่อนักเรียน</div>
@@ -51,12 +49,7 @@ export default function TableForm({ person, onValueCLick }: props) {
                 <span>
                   <label
                     onClick={() => {
-                      setEdit(!edit);
-                      // setEditItem(value);
-                      // Object.entries(value).forEach(([name, value]: any) =>
-                      //   setValue(name, value)
-                      // );
-                      setArrayIndex(index);
+                      arrayIndex(index);
                     }}
                   >
                     <AiOutlineEdit className="text-cyan-600 text-xl cursor-pointer" />
