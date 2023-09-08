@@ -4,9 +4,11 @@ import { Pagination } from "swiper";
 import "swiper/css/pagination";
 import "swiper/css";
 import { useRef } from "react";
+import { useRouter } from "next/router";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 export default function Index() {
   const useSwiperRef = useRef<SwiperClass>();
+  const Router = useRouter();
   return (
     <div className="w-full min-h-screen bg-[#EFF1FE]">
       <div className=" sticky top-0 bg-[#EFF1FE] z-50">
@@ -28,7 +30,10 @@ export default function Index() {
             <div>ติดต่อ</div>
           </div>
           <div className="flex justify-end">
-            <button className="w-full h-10 hover:bg-[#B89CC9] border border-[#B89CC9] px-5 rounded-lg font-bold hover:text-white">
+            <button
+              onClick={() => Router.push("/login")}
+              className="w-full h-10 hover:bg-[#B89CC9] border border-[#B89CC9] px-5 rounded-lg font-bold hover:text-white"
+            >
               เข้าสู่ระบบ
             </button>
           </div>
@@ -43,7 +48,10 @@ export default function Index() {
           <div className="font-bold text-md lg:text-xl">
             วิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
           </div>
-          <button className="text-white bg-[#EB9D48]  p-1 lg:p-2 rounded-lg">
+          <button
+            onClick={() => Router.push("/register")}
+            className="text-white bg-[#EB9D48]  p-1 lg:p-2 rounded-lg"
+          >
             ลงทะเบียน
           </button>
         </div>

@@ -2,6 +2,7 @@ import Image from "next/image";
 import React, { type FC } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Index from "@/pages";
 type props = {
   children?: React.ReactNode;
 };
@@ -9,6 +10,12 @@ type props = {
 const Layout: FC<props> = ({ children }) => {
   const Router = useRouter();
   console.log(Router.asPath);
+  const Navigator = [
+    { path: "/scholarship", lebel: "ทุนการศึกษา" },
+    { path: "/history", lebel: "ประวัตินักศึกษา" },
+    { path: "/historyscholarship", lebel: "ประวัติทุนการศึกษา" },
+    { path: "/", lebel: "ออกจากระบบ" }
+  ];
   return (
     <div>
       <div className="w-full h-[60px] bg-[#EB9D48] flex items-center">
@@ -24,30 +31,22 @@ const Layout: FC<props> = ({ children }) => {
               <div className="font-bold text-xl text-white ">CsScholarship</div>
             </div>
             <div className="flex items-center space-x-10">
-              {Router.asPath == "/scholarship" ? (
-                <div className="font-bold text-lg text-white cursor-pointer underline">
-                  <Link href="/scholarship">ทุนการศึกษา</Link>
-                </div>
-              ) : (
-                <div className="font-bold text-lg text-white cursor-pointer ">
-                  <Link href="/scholarship">ทุนการศึกษา</Link>
-                </div>
-              )}
-              {Router.asPath == "/history" ? (
-                <div className="font-bold text-lg text-white cursor-pointer underline">
-                  <Link href="/history">ประวัตินักศึกษา</Link>
-                </div>
-              ) : (
-                <div className="font-bold text-lg text-white cursor-pointer">
-                  <Link href="/history">ประวัตินักศึกษา</Link>
-                </div>
-              )}
-              <div className="font-bold text-lg text-white cursor-pointer">
-                ประวัติทุนการศึกษา
-              </div>
-              <div className="font-bold text-lg text-white cursor-pointer">
-                ออกจากระบบ
-              </div>
+              {Navigator.map((item, Index) => {
+                return (
+                  <div key={Index}>
+                  <Link
+                    href={item.path}
+                    className={
+                      item.path === Router.asPath
+                        ? "font-bold text-lg text-white cursor-pointer underline"
+                        : "font-bold text-lg text-white cursor-pointer "
+                    }
+                  >
+                    {item.lebel}
+                  </Link>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
