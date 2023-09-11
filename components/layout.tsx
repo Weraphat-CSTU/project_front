@@ -7,9 +7,12 @@ type props = {
   children?: React.ReactNode;
 };
 
+asdasd
+
 const Layout: FC<props> = ({ children }) => {
-  const Router = useRouter();
-  console.log(Router.asPath);
+  const router = useRouter();
+
+
   const Navigator = [
     { path: "/scholarship", lebel: "ทุนการศึกษา" },
     { path: "/history", lebel: "ประวัตินักศึกษา" },
@@ -37,7 +40,7 @@ const Layout: FC<props> = ({ children }) => {
                   <Link
                     href={item.path}
                     className={
-                      item.path === Router.asPath
+                      item.path === router.asPath
                         ? "font-bold text-lg text-white cursor-pointer underline"
                         : "font-bold text-lg text-white cursor-pointer "
                     }
