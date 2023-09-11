@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/router";
-export default function login() {
+export default function Login() {
   const Router = useRouter();
   return (
     <div className="flex justify-stretch">
