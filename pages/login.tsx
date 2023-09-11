@@ -28,7 +28,7 @@ export default function Login() {
       </div>
       <div className="w-full h-screen bg-white ">
         <div className="mt-60">
-          <div className="w-full flex justify-center mt-10">
+          <div className="w-full flex justify-center">
             <Image
               src="/qjg3jmr9-removebg-preview.png"
               width={250}
