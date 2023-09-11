@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 export default function Login() {
   const Router = useRouter();
   return (
-    <div className="flex justify-stretch">
+    <div className="flex flex-warp">
       <div className="w-full h-screen">
         <div className="relative">
           <div className="absolute inset-0 z-10 flex items-center justify-center -translate-y-7">
