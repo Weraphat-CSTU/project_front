@@ -52,7 +52,7 @@ export default function Login() {
               <label className="label">
                 <span className="label-text text-xl mt-5 ">รหัสผ่าน</span>
               </label>
-              <input
+              <input 
                 type="text"
                 placeholder="กรอกรหัสผ่าน"
                 className="input input-bordered w-full max-w-xl"
