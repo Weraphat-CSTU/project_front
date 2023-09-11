@@ -38,8 +38,8 @@ const Layout: FC<props> = ({ children }) => {
                     href={item.path}
                     className={
                       item.path === Router.asPath
-                        ? "font-bold text-lg text-white cursor-pointer underline"
-                        : "font-bold text-lg text-white cursor-pointer "
+                        ? "font-medium text-lg text-white cursor-pointer underline"
+                        : "font-medium text-lg text-white cursor-pointer "
                     }
                   >
                     {item.lebel}
