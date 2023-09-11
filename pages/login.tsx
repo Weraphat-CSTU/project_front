@@ -59,7 +59,7 @@ export default function Login() {
               className="input input-bordered w-full max-w-xl"
             />
             <button
-              className="btn bg-[#EB9D48] label-text text-xl text-white mt-10"
+              className="py-3 rounded-md bg-[#EB9D48] label-text text-xl text-white mt-10"
               onClick={() => Router.push("/scholarship")}
             >
               เข้าสู่ระบบ
