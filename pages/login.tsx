@@ -27,8 +27,8 @@ export default function Login() {
         </div>
       </div>
       <div className="w-full h-screen bg-white ">
-        <div className="mt-60">
-          <div className="w-full flex justify-center">
+      
+          <div className="w-full flex justify-center mt-10">
             <Image
               src="/qjg3jmr9-removebg-preview.png"
               width={250}
@@ -52,7 +52,7 @@ export default function Login() {
               <label className="label">
                 <span className="label-text text-xl mt-5 ">รหัสผ่าน</span>
               </label>
-              <input 
+              <input
                 type="text"
                 placeholder="กรอกรหัสผ่าน"
                 className="input input-bordered w-full max-w-xl"
@@ -69,7 +69,7 @@ export default function Login() {
                   </Link>
             </div>
           </div>
-        </div>
+        
       </div>
     </div>
   );
