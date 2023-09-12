@@ -50,7 +50,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "$(date +%Y%m%d%H%M)",
+                    "value": "${(date +%Y%m%d%H%M)}",
                     "inline": true
                   },
                   {
