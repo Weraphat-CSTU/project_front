@@ -48,14 +48,19 @@ jobs:
                 "color": 16711680,
                 "fields": [
                   {
+                    "name": "branch",
+                    "value": "${{ github.ref }}",
+                    "inline": true
+                  },
+                  {
                     "name": "เวลา",
                     "value": "${{ steps.current-time.outputs.time }}",
-                    "inline": false
+                    "inline": true
                   },
                   {
                     "name": "สถานะ",
                     "value": "Success",
-                    "inline": false
+                    "inline": true
                   }
                 ]
               }
