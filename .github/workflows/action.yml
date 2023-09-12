@@ -49,7 +49,7 @@ jobs:
                 "fields": [
                   {
                     "name": "branch",
-                    "value": "${{ github.head_ref }}",
+                    "value": "${{ github.ref_name }}",
                     "inline": false
                   },
                   {
