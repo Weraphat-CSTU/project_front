@@ -33,8 +33,6 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
-          FORMATTED_DATE=$(date +'%A, %B %d, %Y %I:%M%p %Z')
-
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
@@ -52,7 +50,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "'"${{ FORMATTED_DATE }}"'",
+                    "value": "$(date +%Y%m%d%H%M)",
                     "inline": true
                   },
                   {
