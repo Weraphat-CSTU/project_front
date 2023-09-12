@@ -1,0 +1,38 @@
+name: Next.js Build and Discord Notification
+
+on:
+  push:
+    branches:
+      - main 
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.13.1 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build Next.js
+        run: npm run build
+
+      - name: Check for build errors
+        run: |
+          if [ -f ./.next/failed ]; then
+            echo "Build failed" && exit 1
+          fi
+
+      - name: Send Discord notification on failure
+        if: ${{ failure() }}
+        run: |
+        curl -X POST -H "Content-Type: application/json" -d '{
+              "content": "Hello, Discord! This is a test message from curl."
+        }'  https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
