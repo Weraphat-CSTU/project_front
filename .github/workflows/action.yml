@@ -29,6 +29,7 @@ jobs:
           if [ -f ./.next/failed ]; then
             echo "Build failed" && exit 1
           fi
+          
       - name: Get current time
         uses: josStorer/get-current-time@v2
         id: current-time
@@ -52,7 +53,7 @@ jobs:
                   {
                     "name": "branch",
                     "value": "${{ github.ref_name }}",
-                    "inline": false
+                    "inline": true
                   },
                   {
                     "name": "เวลา",
