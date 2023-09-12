@@ -24,12 +24,6 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      - name: Check for build errors
-        run: |
-          if [ -f ./.next/failed ]; then
-            echo "Build failed" && exit 1
-          fi
-
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
@@ -50,7 +44,7 @@ jobs:
                   },
                   {
                     "name": "Time",
-                    "value": "${{ new Date()}}",
+                    "value": "${{ github.event.repository.updated_at}}",
                     "inline": true
                   },
                   {
