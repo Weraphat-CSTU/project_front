@@ -56,7 +56,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ steps.current-time.outputs.formattedTime }}",
+                    "value": "${{ steps.current-time.outputs.time }}",
                     "inline": true
                   },
                   {
