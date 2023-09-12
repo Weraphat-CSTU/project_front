@@ -30,7 +30,7 @@ jobs:
             echo "Build failed" && exit 1
           fi
 
-       - name: Format Date
+      - name: Format Date
         id: format-date
         run: |
           updatedDate="${{ github.event.repository.updated_at }}"
