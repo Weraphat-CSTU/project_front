@@ -33,6 +33,6 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
-        curl -X POST -H "Content-Type: application/json" -d '{
-              "content": "Hello, Discord! This is a test message from curl."
-        }'  https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
+          curl -X POST -H "Content-Type: application/json" -d '{
+                "content": "Hello, Discord! This is a test message from curl."
+          }' https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
