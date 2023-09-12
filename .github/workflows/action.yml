@@ -30,17 +30,11 @@ jobs:
             echo "Build failed" && exit 1
           fi
 
-      - name: Format Date
-        id: format-date
-        run: |
-          updatedDate="${{ github.event.repository.updated_at }}"
-          formattedDate=$(date -d "$updatedDate" "+%B %d, %Y %I:%M %p %Z")
-          echo "Formatted Date: $formattedDate"
-          echo "::set-output name=formattedDate::$formattedDate"
-
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
+          updatedDate="${{ github.event.repository.updated_at }}"
+          formattedDate=$(date -d "$updatedDate" "+%B %d, %Y %I:%M %p %Z")
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
@@ -58,7 +52,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ steps.current-time.outputs.time }}",
+                    "value": formattedDate,
                     "inline": true
                   },
                   {
