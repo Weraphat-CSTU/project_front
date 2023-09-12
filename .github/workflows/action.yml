@@ -29,18 +29,16 @@ jobs:
           if [ -f ./.next/failed ]; then
             echo "Build failed" && exit 1
           fi
-
-      - name: Get Time
-        id: time
-        uses: nanzm/get-time-action@master
+      - name: Get current time
+        uses: josStorer/get-current-time@v2
+        id: current-time
         with:
-          timeZone: UTC+7
-          format: 'YYYY-MM-DD-HH-mm-ss'
+          format: YYYYMMDD-HH
+          utcOffset: "+07:00"
 
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
-          FORMATTED_DATE=$(node -e "console.log(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' }))")
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
@@ -54,11 +52,11 @@ jobs:
                   {
                     "name": "branch",
                     "value": "${{ github.ref_name }}",
-                    "inline": true
+                    "inline": false
                   },
                   {
                     "name": "เวลา",
-                    "value": new Date(),
+                    "value": "${{ github.event.repository.updated_at}}",
                     "inline": true
                   },
                   {
