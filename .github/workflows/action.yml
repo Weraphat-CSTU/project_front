@@ -52,7 +52,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ FORMATTED_DATE }}",
+                    "value": "'"${{ FORMATTED_DATE }}"'",
                     "inline": true
                   },
                   {
