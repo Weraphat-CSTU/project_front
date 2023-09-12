@@ -49,12 +49,12 @@ jobs:
                 "fields": [
                   {
                     "name": "branch",
-                    "value": "${{ github.ref }}",
-                    "inline": true
+                    "value": "${{ github.head_ref }}",
+                    "inline": false
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ steps.current-time.outputs.time }}",
+                    "value": "${TIME}",
                     "inline": true
                   },
                   {
