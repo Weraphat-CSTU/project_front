@@ -44,7 +44,6 @@ jobs:
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
-                "title": "แจ้งเตือน",
                 "color": 16711680,
                 "fields": [
                   {
