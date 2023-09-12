@@ -50,7 +50,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ steps.time.outputs.time }}",
+                    "value": "${{ steps.date.outputs.date }}",
                     "inline": true
                   },
                   {
