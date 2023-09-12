@@ -40,6 +40,7 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
+          FORMATTED_DATE=$(node -e "console.log(new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', timeZoneName: 'short' }))")
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
