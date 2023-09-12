@@ -19,7 +19,7 @@ const Layout: FC<props> = ({ children }) => {
     { path: "/history", lebel: "ประวัตินักศึกษา" },
     { path: "/historyscholarship", lebel: "ประวัติทุนการศึกษา" },
     { path: "/", lebel: "ออกจากระบบ" }
-  ];
+  ];   
   return (
     <div>
       <div className="w-full h-[60px] bg-[#EB9D48] flex items-center">
