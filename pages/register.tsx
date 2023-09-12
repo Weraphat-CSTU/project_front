@@ -42,7 +42,6 @@ export default function Register() {
                 />
               </div>
             </div>
-
             <label className="label">
               <span className="label-text text-xl mt-5 ">
                 บัตรประจำตัวประชาชน
@@ -61,7 +60,6 @@ export default function Register() {
               placeholder="กรอกรหัสนักศึกษา"
               className="input input-bordered w-full max-w-xl"
             />
-
             <div className="flex justify-between">
               <div>
                 <label className="label">
@@ -78,7 +76,7 @@ export default function Register() {
                   <span className="label-text text-xl mt-3">อีเมล</span>
                 </label>
                 <input
-                  type="text"
+                  type="email"
                   placeholder="กรอกอีเมล"
                   className="input input-bordered w-full max-w-xl"
                 />
@@ -100,7 +98,7 @@ export default function Register() {
                   <span className="label-text text-xl mt-3">เกรดเฉลี่ย</span>
                 </label>
                 <input
-                  type="text"
+                  type="number"
                   placeholder="กรอกเกรดเฉลี่ย"
                   className="input input-bordered w-full max-w-xl"
                 />
@@ -112,7 +110,7 @@ export default function Register() {
                   <span className="label-text text-xl mt-3">รหัสผ่าน</span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="กรอกรหัสผ่าน"
                   className="input input-bordered w-full max-w-xl"
                 />
@@ -124,7 +122,7 @@ export default function Register() {
                   </span>
                 </label>
                 <input
-                  type="text"
+                  type="password"
                   placeholder="กรอกยืนยันรหัสผ่าน"
                   className="input input-bordered w-full max-w-xl"
                 />
