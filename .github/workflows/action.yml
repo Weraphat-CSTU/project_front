@@ -35,6 +35,8 @@ jobs:
         run: |
           updatedDate="${{ github.event.repository.updated_at }}"
           formattedDate=$(date -d "$updatedDate" "+%B %d, %Y %I:%M %p %Z")
+          echo "Formatted Date: $formattedDate"
+          echo "::set-output name=formattedDate::$formattedDate"
 
       - name: Send Discord notification on failure
         if: ${{ failure() }}
