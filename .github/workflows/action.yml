@@ -50,7 +50,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ github.event.repository.updated_at }}",
+                    "value": "${{ new Date(github.event.repository.updated_at) }}",
                     "inline": true
                   },
                   {
