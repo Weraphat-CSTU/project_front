@@ -33,6 +33,12 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
+          # Get the current timestamp from GitHub event
+          TIMESTAMP="${{ github.event.repository.updated_at }}"
+          
+          # Format the timestamp using JavaScript
+          FORMATTED_DATE=$(date -d "$TIMESTAMP" +'%A, %B %d, %Y %I:%M%p %Z')
+
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
@@ -50,7 +56,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ github.event.repository.updated_at | date: '%A, %B %d, %Y %I:%M%p %Z' }}",
+                    "value": "${{ FORMATTED_DATE }}",
                     "inline": true
                   },
                   {
