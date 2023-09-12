@@ -36,6 +36,7 @@ jobs:
         with:
           timeZone: UTC+7
           format: 'YYYY-MM-DD-HH-mm-ss'
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
 
       - name: Send Discord notification on failure
         if: ${{ failure() }}
