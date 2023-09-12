@@ -34,6 +34,6 @@ jobs:
         if: ${{ failure() }}
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{
-                "content":  "build failed in the main branch. project demo-frontend  $(date +'%Y-%m-%dT%H:%M:%S')"
+                "content":  "build failed in the main branch. project demo-frontend  {{$(date +'%Y-%m-%dT%H:%M:%S')}}"
           }' https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
         
