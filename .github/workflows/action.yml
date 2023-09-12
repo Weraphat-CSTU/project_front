@@ -33,8 +33,6 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
-          updatedDate="${{ github.event.repository.updated_at }}"
-          formattedDate=$(date -d "$updatedDate" "+%B %d, %Y %I:%M %p %Z")
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
@@ -52,7 +50,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": formattedDate,
+                    "value": ${{ steps.current-time.outputs.time }},
                     "inline": true
                   },
                   {
