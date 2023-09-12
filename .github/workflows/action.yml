@@ -45,22 +45,22 @@ jobs:
                 "color": 16711680,
                 "fields": [
                   {
-                    "name": "project name",
+                    "name": "Project Name",
                     "value": "${{ github.event.repository.name }}",
                     "inline": false
                   },
                   {
-                    "name": "branch",
+                    "name": "Branch",
                     "value": "${{ github.ref_name }}",
-                    "inline": false
+                    "inline": true
                   },
                   {
-                    "name": "เวลา",
+                    "name": "Time",
                     "value": "${{ github.event.repository.updated_at}}",
                     "inline": true
                   },
                   {
-                    "name": "สถานะ",
+                    "name": "Status",
                     "value": "Success",
                     "inline": true
                   }
