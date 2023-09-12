@@ -7,8 +7,6 @@ type props = {
   children?: React.ReactNode;
 };
   
-asdasd   
-  
 
 const Layout: FC<props> = ({ children }) => {  
   const router = useRouter();
