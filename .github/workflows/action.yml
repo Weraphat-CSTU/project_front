@@ -54,7 +54,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${{ github.event.repository.updated_at}}",
+                    "value": "${{ env.TIME }}",
                     "inline": true
                   },
                   {
