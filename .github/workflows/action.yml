@@ -45,9 +45,13 @@ jobs:
           "embeds": [
               {
                 "title": "แจ้งเตือน",
-                "description": "${{ github.event.repository.name }}",
                 "color": 16711680,
                 "fields": [
+                  {
+                    "name": "project name",
+                    "value": "${{ github.event.repository.name }}",
+                    "inline": false
+                  },
                   {
                     "name": "branch",
                     "value": "${{ github.ref_name }}",
