@@ -30,10 +30,16 @@ jobs:
             echo "Build failed" && exit 1
           fi
 
+       - name: Format Date
+        id: format-date
+        run: |
+          updatedDate="${{ github.event.repository.updated_at }}"
+          formattedDate=$(date -d "$updatedDate" "+%B %d, %Y %I:%M %p %Z")
+
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
           curl -X POST -H "Content-Type: application/json" -d '{
-                "content":  "build failed in the main branch. project demo-frontend  ${{ new Date(github.event.repository.updated_at)}} | sed 's/:/./g'"
+                "content":  "build failed in the main branch. project demo-frontend  ${{ steps.format-date.outputs.formattedDate}}"
           }' https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
         
