@@ -29,6 +29,12 @@ jobs:
           if [ -f ./.next/failed ]; then
             echo "Build failed" && exit 1
           fi
+      - name: Get current time
+        uses: josStorer/get-current-time@v2
+        id: current-time
+        with:
+          format: YYYYMMDD-HH
+          utcOffset: "+07:00"
 
       - name: Send Discord notification on failure
         if: ${{ failure() }}
@@ -50,7 +56,7 @@ jobs:
                   },
                   {
                     "name": "เวลา",
-                    "value": "${(date +%Y%m%d%H%M)}",
+                    "value": "${{ steps.current-time.outputs.formattedTime }}",
                     "inline": true
                   },
                   {
