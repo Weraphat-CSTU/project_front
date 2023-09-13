@@ -77,7 +77,7 @@ jobs:
                   },
                   {
                     "name": "Time",
-                    "value": "${{ github.event.repository.updated_at}}",
+                    "value": "${{ date -d github.event.repository.updated_at +'%d-%m-%Y %H:%M'}}",
                     "inline": true
                   },
                   {
