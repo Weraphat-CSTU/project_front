@@ -24,13 +24,6 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
-      # - name: Check for build errors
-      #   run: |
-      #     if [ -f ./.next/failed ]; then
-      #       echo "Build failed" && exit 1
-      #     fi
-
-
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
@@ -38,10 +31,6 @@ jobs:
           "embeds": [
               {
                 "color": 16711680,
-                "thumbnail": {
-                  "width": 100, 
-                  "height": 100 
-                },
                 "fields": [
                   {
                     "name": "Project Name",
@@ -67,4 +56,38 @@ jobs:
               }
             ]
           }' https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
+
+      - name: Send Discord notification on success
+        if: ${{ success() }}
+        run: |
+          curl -X POST -H "Content-Type: application/json" -d '{
+          "embeds": [
+              {
+                "color": 65280,
+                "fields": [
+                  {
+                    "name": "Project Name",
+                    "value": "${{ github.event.repository.name }}",
+                    "inline": false
+                  },
+                  {
+                    "name": "Branch",
+                    "value": "${{ github.ref_name }}",
+                    "inline": true
+                  },
+                  {
+                    "name": "Time",
+                    "value": "${{ github.event.repository.updated_at}}",
+                    "inline": true
+                  },
+                  {
+                    "name": "Status",
+                    "value": "Success",
+                    "inline": true
+                  }
+                ]
+              }
+            ]
+          }' https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
+        
         
