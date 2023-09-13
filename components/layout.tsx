@@ -15,7 +15,7 @@ const Layout: FC<props> = ({ children }) => {
   const Navigator = [
     { path: "/scholarship", lebel: "ทุนการศึกษา" },
     { path: "/history", lebel: "ประวัตินักศึกษา" },
-    { path: "/historyscholarship", lebel: "ประวัติทุนการศึกษา" },
+    { path: "/historyscholarship", lebel: "ประวัติทุนการศึกษา" },    
     { path: "/", lebel: "ออกจากระบบ" }
   ];     
   return (
