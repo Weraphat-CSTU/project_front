@@ -27,6 +27,7 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
+          formatted_date=$(date -u -d "${{ github.event.repository.updated_at }}" +'%d-%m-%Y %H:%M')
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
@@ -44,7 +45,7 @@ jobs:
                   },
                   {
                     "name": "Time",
-                    "value": "${{ github.event.repository.updated_at}}",
+                    "value": "${{ formatted_date }}",
                     "inline": true
                   },
                   {
