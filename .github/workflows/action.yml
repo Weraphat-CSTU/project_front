@@ -26,7 +26,7 @@ jobs:
       
        - name: Assign variable
         id: secret
-        run: echo '::set-output name=secret::$(date -u -d "${{ github.event.repository.updated_at }}" +'%d-%m-%Y %H:%M')'
+        run: echo '::set-output name=secret::$(date -u -d github.event.repository.updated_at  +'%d-%m-%Y %H:%M')'
 
       - name: Send Discord notification on failure
         if: ${{ failure() }}
