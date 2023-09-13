@@ -6,8 +6,9 @@ import Index from "@/pages";
 type props = {
   children?: React.ReactNode;
 };
-     
-  asdasdasdasds
+
+  
+
 const Layout: FC<props> = ({ children }) => {  
   const router = useRouter();
 
@@ -15,7 +16,7 @@ const Layout: FC<props> = ({ children }) => {
   const Navigator = [
     { path: "/scholarship", lebel: "ทุนการศึกษา" },
     { path: "/history", lebel: "ประวัตินักศึกษา" },
-    { path: "/historyscholarship", lebel: "ประวัติทุนการศึกษา" },    
+    { path: "/historyscholarship", lebel: "ประวัติทุนการศึกษา" },
     { path: "/", lebel: "ออกจากระบบ" }
   ];     
   return (
