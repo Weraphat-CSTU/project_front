@@ -59,7 +59,7 @@ jobs:
                   },
                   {
                     "name": "Status",
-                    "value": "Success",
+                    "value": "failed",
                     "inline": true
                   }
                 ]
