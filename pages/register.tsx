@@ -1,5 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
+import React from "react";
+import InputMask from "react-input-mask";
 import { useRouter } from "next/router";
 export default function Register() {
   const Router = useRouter();
@@ -47,29 +49,19 @@ export default function Register() {
                 บัตรประจำตัวประชาชน
               </span>
             </label>
-            <input
-              type="text"
-              placeholder="กรอกบัตรประจำตัวประชาชน"
-              className="input input-bordered w-full max-w-xl"
-            />
+            <InputMask  mask="9-9999-99999-99-9" maskChar={null} placeholder="กรอกบัตรประจำตัวประชาชน" className="input input-bordered w-full max-w-xl"/>
+
             <label className="label">
               <span className="label-text text-xl mt-5 ">รหัสนักศึกษา</span>
             </label>
-            <input
-              type="text"
-              placeholder="กรอกรหัสนักศึกษา"
-              className="input input-bordered w-full max-w-xl"
-            />
+            <InputMask  mask="9999999999" maxLength={10} maskChar={null} placeholder="กรอกรหัสนักศึกษา" className="input input-bordered w-full max-w-xl"/>
+
             <div className="flex justify-between">
               <div>
                 <label className="label">
                   <span className="label-text text-xl mt-3">เบอร์โทรศัพท์</span>
                 </label>
-                <input
-                  type="text"
-                  placeholder="กรอกเบอร์โทรศัพท์"
-                  className="input input-bordered w-full max-w-xl"
-                />
+                <InputMask  mask="999-999-9999" maskChar={null} placeholder="กรอกเบอร์โทรศัพท์" className="input input-bordered w-full max-w-xl"/>
               </div>
               <div>
                 <label className="label">
@@ -99,6 +91,8 @@ export default function Register() {
                 </label>
                 <input
                   type="number"
+                  max={4}
+                  maxLength={4}
                   placeholder="กรอกเกรดเฉลี่ย"
                   className="input input-bordered w-full max-w-xl"
                 />
