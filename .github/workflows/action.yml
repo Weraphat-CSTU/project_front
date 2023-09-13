@@ -24,9 +24,19 @@ jobs:
       - name: Build Next.js
         run: npm run build
 
+      # - name: Check for build errors
+      #   run: |
+      #     if [ -f ./.next/failed ]; then
+      #       echo "Build failed" && exit 1
+      #     fi
+
+
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
+          if [ -f ./.next/failed ]; then
+            echo "Build failed" && exit 1
+          fi
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
