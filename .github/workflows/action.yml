@@ -53,11 +53,6 @@ jobs:
                     "inline": false
                   },
                   {
-                    "name": "เวลา",
-                    "value": "${{ steps.current-time.outputs.time }}",
-                    "inline": true
-                  },
-                  {
                     "name": "สถานะ",
                     "value": "Success",
                     "inline": true
