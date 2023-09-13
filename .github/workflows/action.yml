@@ -24,7 +24,7 @@ jobs:
       - name: Build Next.js
         run: npm run build
       
-       - name: Assign variable
+      - name: Assign variable
         id: secret
         run: echo '::set-output name=secret::$(date -u -d github.event.repository.updated_at  +'%d-%m-%Y %H:%M')'
 
