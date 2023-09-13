@@ -34,13 +34,14 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
-          if [ -f ./.next/failed ]; then
-            echo "Build failed" && exit 1
-          fi
           curl -X POST -H "Content-Type: application/json" -d '{
           "embeds": [
               {
                 "color": 16711680,
+                "thumbnail": {
+                  "width": 100, 
+                  "height": 100 
+                },
                 "fields": [
                   {
                     "name": "Project Name",
