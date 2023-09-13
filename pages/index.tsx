@@ -66,6 +66,31 @@ export default function Index() {
         </div>
       </div>
 
+      <div className="w-full bg-white pt-10">
+        <div className="mx-auto max-w-3xl lg:max-w-7xl flex">
+          <div className="w-1/2  bg-blue-300">
+            ทุนการศึกษาที่กำลังดำเนินการ
+            <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
+              <div className="flex justify-center">
+                <Image
+                  src="/โลก.png"
+                  width={150}
+                  height={50}
+                  alt="Picture of the author"
+                />
+              </div>
+              <div className=" pt-5 space-y-3">
+                <div className="font-bold text-xl text-center">หน่วยงาน</div>
+                <div className="text-center">
+                  ทุนจากหน่วยงาน องค์กร ในประเทศไทย
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="w-1/2  bg-red-300">ปฏิทันกำหนดการ</div>
+        </div>
+      </div>
+
       <div className="w-full h-[500px] bg-white ">
         <div className="mx-auto max-w-3xl lg:max-w-7xl pt-20">
           <div className=" pt-12 pr-2 md:flex lg:flex lg:space-x-3 ">
