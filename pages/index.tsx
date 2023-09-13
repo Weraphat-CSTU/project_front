@@ -9,6 +9,58 @@ import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 export default function Index() {
   const useSwiperRef = useRef<SwiperClass>();
   const Router = useRouter();
+  const Scholarship = [
+    {
+      sctype: "ทุนภายใน",
+      scname: "เรียนดี",
+      scyear: "2566",
+      std: "2023-09-11",
+      edd: "2023-09-29",
+    },
+    {
+      sctype: "ทุนภายนอก",
+      scname: "กยศ.",
+      scyear: "2566",
+      std: "2023-09-15",
+      edd: "2023-09-22",
+    },
+    {
+      sctype: "ทุนภายนอก",
+      scname: "สนับสนุนเรียนต่อต่างประเทศ",
+      scyear: "2566",
+      std: "2023-09-15",
+      edd: "2023-09-29",
+    },
+  ];
+  function showTimeline(std: string, edd: string): string {
+    var months_th = [
+      "มกราคม",
+      "กุมภาพันธ์",
+      "มีนาคม",
+      "เมษายน",
+      "พฤษภาคม",
+      "มิถุนายน",
+      "กรกฎาคม",
+      "สิงหาคม",
+      "กันยายน",
+      "ตุลาคม",
+      "พฤศจิกายน",
+      "ธันวาคม",
+    ];
+    return (
+      new Date(std).getDate().toString() +
+      " " +
+      months_th[new Date(std).getMonth()] +
+      " " +
+      [new Date(std).getFullYear() + 543].toString() +
+      " - " +
+      new Date(edd).getDate().toString() +
+      " " +
+      months_th[new Date(edd).getMonth()] +
+      " " +
+      [new Date(edd).getFullYear() + 543].toString()
+    );
+  }
   return (
     <div className="w-full min-h-screen bg-[#EFF1FE]">
       <div className=" sticky top-0 bg-[#EFF1FE] z-50">
@@ -68,26 +120,32 @@ export default function Index() {
 
       <div className="w-full bg-white pt-10">
         <div className="mx-auto max-w-3xl lg:max-w-7xl flex">
-          <div className="w-1/2  bg-blue-300">
-            ทุนการศึกษาที่กำลังดำเนินการ
-            <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
-              <div className="flex justify-center">
-                <Image
-                  src="/โลก.png"
-                  width={150}
-                  height={50}
-                  alt="Picture of the author"
-                />
+          <div className="w-1/2 pr-5">
+            <div className="flex justify-between items-center">
+              <div className=" font-medium text-xl">
+                ทุนการศึกษาที่กำลังดำเนินการ
               </div>
-              <div className=" pt-5 space-y-3">
-                <div className="font-bold text-xl text-center">หน่วยงาน</div>
-                <div className="text-center">
-                  ทุนจากหน่วยงาน องค์กร ในประเทศไทย
-                </div>
-              </div>
+              <div className="text-blue-500 font-medium text-lg hover:underline cursor-pointer"
+              onClick={()=>Router.push("/scholarship-all")}>ทั้งหมด</div>
             </div>
+
+            {Scholarship.map((item, Index) => {
+              return (
+                <div
+                  key={Index}
+                  className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50"
+                  onClick={()=>Router.push(`/scholarship-detail/${Index}`)}
+                >
+                  <div className="font-semibold text-xl">{item.scname}</div>
+                  <div className="font-normal text-[17px]">
+                    {item.sctype} ({item.scyear})
+                  </div>
+                  <div>{showTimeline(item.std, item.edd)}</div>
+                </div>
+              );
+            })}
           </div>
-          <div className="w-1/2  bg-red-300">ปฏิทันกำหนดการ</div>
+          <div className="w-1/2 pl-5 bg-red-300">ปฏิทันกำหนดการ</div>
         </div>
       </div>
 
