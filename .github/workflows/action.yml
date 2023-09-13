@@ -33,28 +33,27 @@ jobs:
       - name: Send Discord notification on failure
         if: ${{ failure() }}
         run: |
-           curl -X POST -H "Content-Type: application/json" -d '{
-          "embeds": [
-              {
-                "title": "แจ้งเตือนการอัพเดต Project-Frontend",
-                "description": "${{ github.event.repository.name }}",
-                "color": 16711680,
-                "fields": [
-                  {
-                    "name": "branch",
-                    "value": "${{ github.ref_name }}",
-                    "inline": false
-                  },
-                  {
-                    "name": "สถานะ",
-                    "value": "Failure",
-                    "inline": true
-                  }
-                ]
-              }
-            ]
-          }' https://discord.com/api/webhooks/1151015294958059520/fYLxarw6ipGstsqLTB2klyouUe_z2WHxQUF-SNgAF0mUsdEbUEp2Np0JENaiMvYzY22R
-
+          curl -X POST -H "Content-Type: application/json" -d '{
+           "embeds": [
+               {
+                 "title": "แจ้งเตือนการอัพเดต Project-Frontend",
+                 "description": "${{ github.event.repository.name }}",
+                 "color": 16711680,
+                 "fields": [
+                   {
+                     "name": "branch",
+                     "value": "${{ github.ref_name }}",
+                     "inline": false
+                   },
+                   {
+                     "name": "สถานะ",
+                     "value": "Failure",
+                     "inline": true
+                   }
+                 ]
+               }
+             ]
+           } ' https://discord.com/api/webhooks/1151015294958059520/fYLxarw6ipGstsqLTB2klyouUe_z2WHxQUF-SNgAF0mUsdEbUEp2Np0JENaiMvYzY22R
 
       - name: Send Discord notification on success
         if: ${{ success() }}
