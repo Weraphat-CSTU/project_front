@@ -27,7 +27,7 @@ jobs:
       - name: Assign variable
         id: secret
         run: |
-          formatted_date=$(node -e "console.log(new Date('${{ github.event.repository.updated_at }}').toLocaleString('th-TH', { timeZone: 'UTC', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }))")
+          formatted_date=$(node -e "console.log(new Date('${{ github.event.repository.updated_at }}').toLocaleString('th-TH', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }))")
           echo "::set-output name=secret::$formatted_date"
 
       - name: Send Discord notification on failure
