@@ -29,8 +29,6 @@ jobs:
 
       - name: Build Next.js
         run: npm run build
-      
-
 
       - name: Send Discord notification on failure
         if: ${{ failure() }}
@@ -57,7 +55,7 @@ jobs:
                   },
                   {
                     "name": "Status",
-                    "value": "failed",
+                    "value": "failure",
                     "inline": true
                   }
                 ]
@@ -90,7 +88,7 @@ jobs:
                   },
                   {
                     "name": "Status",
-                    "value": "Success",
+                    "value": "success",
                     "inline": true
                   }
                 ]
