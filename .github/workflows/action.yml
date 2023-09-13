@@ -45,7 +45,7 @@ jobs:
               {
                 "title": "แจ้งเตือน",
                 "description": "${{ github.event.repository.name }}",
-                "color": 16711680,
+                "color": 65280,
                 "fields": [
                   {
                     "name": "branch",
