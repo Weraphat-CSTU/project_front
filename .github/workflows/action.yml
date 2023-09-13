@@ -83,7 +83,7 @@ jobs:
                   },
                   {
                     "name": "Time",
-                    "value": "${{ date -d github.event.repository.updated_at +'%d-%m-%Y %H:%M'}}",
+                    "value": "${{ steps.secret.outputs.secret }}",
                     "inline": true
                   },
                   {
