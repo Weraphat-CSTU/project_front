@@ -6,6 +6,8 @@ import "swiper/css";
 import { useRef } from "react";
 import { useRouter } from "next/router";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import FullCalendar from "@fullcalendar/react";
+import dayGridPlugin from "@fullcalendar/daygrid";
 export default function Index() {
   const useSwiperRef = useRef<SwiperClass>();
   const Router = useRouter();
@@ -61,6 +63,18 @@ export default function Index() {
       [new Date(edd).getFullYear() + 543].toString()
     );
   }
+  const customButtons = {
+    myCustomButton: {
+      text: "วันนี้",
+      // click: () => {
+      //   const calendar = document.querySelector('.fc');
+      //   if (calendar) {
+      //     const calendarApi = calendar.getApi();
+      //     calendarApi.today();
+      //   }
+      // },
+    },
+  };
   return (
     <div className="w-full min-h-screen bg-[#EFF1FE]">
       <div className=" sticky top-0 bg-[#EFF1FE] z-50">
@@ -125,8 +139,12 @@ export default function Index() {
               <div className=" font-medium text-xl">
                 ทุนการศึกษาที่กำลังดำเนินการ
               </div>
-              <div className="text-blue-500 font-medium text-lg hover:underline cursor-pointer"
-              onClick={()=>Router.push("/scholarship-all")}>ทั้งหมด</div>
+              <div
+                className="text-blue-500 font-medium text-lg hover:underline cursor-pointer"
+                onClick={() => Router.push("/scholarship-all")}
+              >
+                ทั้งหมด
+              </div>
             </div>
 
             {Scholarship.map((item, Index) => {
@@ -134,7 +152,7 @@ export default function Index() {
                 <div
                   key={Index}
                   className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50"
-                  onClick={()=>Router.push(`/scholarship-detail/${Index}`)}
+                  onClick={() => Router.push(`/scholarship-detail/${Index}`)}
                 >
                   <div className="font-semibold text-xl">{item.scname}</div>
                   <div className="font-normal text-[17px]">
@@ -145,7 +163,51 @@ export default function Index() {
               );
             })}
           </div>
-          <div className="w-1/2 pl-5 bg-red-300">ปฏิทันกำหนดการ</div>
+          <div className="w-1/2  pl-5">
+            <div className="text-medium text-xl pb-5">ปฏิทันกำหนดการ</div>
+            <FullCalendar
+              plugins={[dayGridPlugin]}
+              locale={"th"}
+              initialView="dayGridMonth"
+              customButtons={customButtons}
+              dayMaxEventRows={3}
+              events={[
+                {
+                  textColor:'black',
+                  title: "ทดสอบ",
+                  start: "2023-09-14",
+                  end: "2023-09-20",
+                  color: "red"
+                
+                },
+                {
+                  textColor:'black',
+                  title: "event 2",
+                  start: "2023-09-14",
+                  end: "2023-09-25",
+                  color: "green"
+                },
+                {
+                  textColor:'black',
+                  title: "event 3",
+                  start: "2023-09-14",
+                  end: "2023-09-25",
+                  color: "yellow"
+                },
+                {
+                  title: "event 4",
+                  start: "2023-09-14",
+                  end: "2023-09-25"
+                },
+                {
+                  title: "event 5",
+                  start: "2023-09-14",
+                  end: "2023-09-25",
+                  color: "pink"
+                },
+              ]}
+            />
+          </div>
         </div>
       </div>
 
