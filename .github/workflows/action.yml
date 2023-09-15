@@ -6,7 +6,7 @@ on:
       - main 
 
 jobs:
-  build:
+  build_and_notify:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,55 +21,25 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Assign variable
-        id: secret
-        run: |
-          formatted_date=$(node -e "console.log(new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }))")
-          echo "::set-output name=secret::$formatted_date"
-
       - name: Build Next.js
         run: npm run build
 
-      - name: Send Discord notification on failure
-        if: ${{ failure() }}
+      - name: Send Discord notification
+        if: ${{ always() }}
         run: |
-          curl -X POST -H "Content-Type: application/json" -d '{
-          "embeds": [
-              {
-                "color": 16711680,
-                "fields": [
-                  {
-                    "name": "Project Name",
-                    "value": "${{ github.event.repository.name }}",
-                    "inline": false
-                  },
-                  {
-                    "name": "Branch",
-                    "value": "${{ github.ref_name }}",
-                    "inline": true
-                  },
-                  {
-                    "name": "Time",
-                    "value": "${{ steps.secret.outputs.secret }}",
-                    "inline": true
-                  },
-                  {
-                    "name": "Status",
-                    "value": "failure",
-                    "inline": true
-                  }
-                ]
-              }
-            ]
-          }' https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
+          STATUS="success"
+          COLOR=65280
+          if [[ ${{ failure() }} == 'true' ]]; then
+            STATUS="failure"
+            COLOR=16711680
+          fi
 
-      - name: Send Discord notification on success
-        if: ${{ success() }}
-        run: |
+          formatted_date=$(node -e "console.log(new Date().toLocaleString('th-TH', { timeZone: 'Asia/Bangkok', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit' }))")
+
           curl -X POST -H "Content-Type: application/json" -d '{
-          "embeds": [
+            "embeds": [
               {
-                "color": 65280,
+                "color": '"$COLOR"',
                 "fields": [
                   {
                     "name": "Project Name",
@@ -83,17 +53,15 @@ jobs:
                   },
                   {
                     "name": "Time",
-                    "value": "${{ steps.secret.outputs.secret }}",
+                    "value": "'"$formatted_date"'",
                     "inline": true
                   },
                   {
                     "name": "Status",
-                    "value": "success",
+                    "value": "'"$STATUS"'",
                     "inline": true
                   }
                 ]
               }
             ]
           }' https://discord.com/api/webhooks/1138334232217923685/CTbqDRcQn6TwXGyaAqxbSuU1-M8erA3iopU5EHYamxF3C5eXDbUyxMXWkTYBR8s9GKfx
-        
-        
