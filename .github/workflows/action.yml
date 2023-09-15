@@ -25,7 +25,6 @@ jobs:
         run: npm run build
 
       - name: Send Discord notification
-        if: ${{ always() }}
         run: |
           STATUS="success"
           COLOR=65280
