@@ -6,8 +6,6 @@ import Index from "@/pages";
 type props = {
   children?: React.ReactNode;
 };
-  sdasds
-
 
 const Layout: FC<props> = ({ children }) => {  
   const router = useRouter();
