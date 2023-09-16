@@ -63,18 +63,6 @@ export default function Index() {
       [new Date(edd).getFullYear() + 543].toString()
     );
   }
-  const customButtons = {
-    myCustomButton: {
-      text: "วันนี้",
-      // click: () => {
-      //   const calendar = document.querySelector('.fc');
-      //   if (calendar) {
-      //     const calendarApi = calendar.getApi();
-      //     calendarApi.today();
-      //   }
-      // },
-    },
-  };
   return (
     <div className="w-full min-h-screen bg-[#EFF1FE]">
       <div className=" sticky top-0 bg-[#EFF1FE] z-50">
@@ -170,7 +158,6 @@ export default function Index() {
               plugins={[dayGridPlugin]}
               locale={"th"}
               initialView="dayGridMonth"
-              customButtons={customButtons}
               dayMaxEventRows={3}
               events={[
                 {
