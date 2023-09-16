@@ -2,7 +2,7 @@ import Layout from "@/components/layout";
 import { useRouter } from "next/router";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
-export default function scholarship() {
+export default function Scholarship() {
   const Router = useRouter();
   const Scholarship = [
     {
