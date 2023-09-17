@@ -188,11 +188,11 @@ export default function Index() {
                     },
                   }}
                 >
-                  {Information.map((item, Index2) => {
+                  {Information.map((item, index) => {
                     return (
-                      <SwiperSlide>
+                      <div key={index}>
+                      <SwiperSlide >
                         <div
-                        key={Index2}
                           // style={{ width: 300, height: 400 }}
                           className="relative bg-gray-300 space-y-5 w-[280px] h-[400px] p-3"
                         >
@@ -210,6 +210,7 @@ export default function Index() {
                           </div>
                         </div>
                       </SwiperSlide>
+                      </div>
                     );
                   })}
                   <div className="swiper-pagination"></div>
