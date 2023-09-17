@@ -19,28 +19,28 @@ export default function Index() {
       desname: "เพิ่มเติม",
     },
     {
-      imname: "ภาพ2",
-      headname: "ข่าวสาร2",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร2",
-      desname: "เพิ่มเติม2",
+      imname: "ภาพ",
+      headname: "ข่าวสาร",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
+      desname: "เพิ่มเติม",
     },
     {
-      imname: "ภาพ3",
-      headname: "ข่าวสาร3",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร3",
-      desname: "เพิ่มเติม3",
+      imname: "ภาพ",
+      headname: "ข่าวสาร",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
+      desname: "เพิ่มเติม",
     },
     {
-      imname: "ภาพ4",
-      headname: "ข่าวสาร4",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร4",
-      desname: "เพิ่มเติม4",
+      imname: "ภาพ",
+      headname: "ข่าวสาร",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
+      desname: "เพิ่มเติม",
     },
     {
-      imname: "ภาพ5",
-      headname: "ข่าวสาร5",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร5",
-      desname: "เพิ่มเติม5",
+      imname: "ภาพ",
+      headname: "ข่าวสาร",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
+      desname: "เพิ่มเติม",
     },
   ];
   const Scholarship = [
@@ -183,24 +183,25 @@ export default function Index() {
                     },
                   }}
                 >
-                  {Information.map((item) => {
+                  {Information.map((item, Index2) => {
                     return (
                       <SwiperSlide>
                         <div
+                        key={Index2}
                           // style={{ width: 300, height: 400 }}
                           className="relative bg-gray-300 space-y-5 w-[280px] h-[400px] p-3"
                         >
                           <div className="w-full h-36 bg-blue-300">
-                            {item.imname}
+                            {item.imname}{Index2}
                           </div>
                           <div className="font-medium text-2xl">
-                            {item.headname}
+                            {item.headname}{Index2}
                           </div>
                           <div className="font-normal text-lg">
-                            {item.infoname}
+                            {item.infoname}{Index2}
                           </div>
                           <div className="font-normal text-lg absolute bottom-0 pb-5 p-3">
-                            {item.desname}
+                            {item.desname}{Index2}
                           </div>
                         </div>
                       </SwiperSlide>
