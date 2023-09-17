@@ -59,7 +59,7 @@ export default function Scholarship() {
   return (
     <Layout>
       <div className="w-full bg-white pt-10">
-        <div className="mx-auto max-w-3xl lg:max-w-7xl pt-3">
+        <div className="mx-auto max-w-3xl lg:max-w-7xl pb-3">
           <h1 className="text-2xl font-extrabold dark:text-white">
             ทุนการศึกษา
             <small className="ml-2 font-semibold text-gray-500 dark:text-gray-400">
