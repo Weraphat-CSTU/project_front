@@ -68,7 +68,7 @@ export default function Scholarship() {
           </h1>
         </div>
         <div className="mx-auto max-w-3xl lg:max-w-7xl flex">
-          <div className="w-1/2 pr-5 ">
+          <div className="w-2/5 pr-5 ">
             <div className="flex justify-between items-center">
               <div className=" font-medium text-xl">
                 ทุนการศึกษาที่กำลังดำเนินการ
@@ -98,7 +98,7 @@ export default function Scholarship() {
               })}
             </div>
           </div>
-          <div className="w-1/2  pl-5">
+          <div className="w-3/5  pl-5">
             <div className="text-medium text-xl pb-5">ปฏิทันกำหนดการ</div>
             <FullCalendar
               plugins={[dayGridPlugin]}
