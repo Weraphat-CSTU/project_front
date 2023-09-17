@@ -13,34 +13,39 @@ export default function Index() {
   const Router = useRouter();
   const Information = [
     {
+      key: 1,
       imname: "ภาพ",
       headname: "ข่าวสาร",
       infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
       desname: "เพิ่มเติม",
     },
     {
-      imname: "ภาพ",
-      headname: "ข่าวสาร",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
-      desname: "เพิ่มเติม",
+      key: 2,
+      imname: "ภาพ2",
+      headname: "ข่าวสาร2",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร2",
+      desname: "เพิ่มเติม2",
     },
     {
-      imname: "ภาพ",
-      headname: "ข่าวสาร",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
-      desname: "เพิ่มเติม",
+      key: 3,
+      imname: "ภาพ3",
+      headname: "ข่าวสาร3",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร3",
+      desname: "เพิ่มเติม3",
     },
     {
-      imname: "ภาพ",
-      headname: "ข่าวสาร",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
-      desname: "เพิ่มเติม",
+      key: 4,
+      imname: "ภาพ4",
+      headname: "ข่าวสาร4",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร4",
+      desname: "เพิ่มเติม4",
     },
     {
-      imname: "ภาพ",
-      headname: "ข่าวสาร",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
-      desname: "เพิ่มเติม",
+      key: 5,
+      imname: "ภาพ5",
+      headname: "ข่าวสาร5",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร5",
+      desname: "เพิ่มเติม5",
     },
   ];
   const Scholarship = [
@@ -192,16 +197,16 @@ export default function Index() {
                           className="relative bg-gray-300 space-y-5 w-[280px] h-[400px] p-3"
                         >
                           <div className="w-full h-36 bg-blue-300">
-                            {item.imname}{Index2}
+                            {item.imname}
                           </div>
                           <div className="font-medium text-2xl">
-                            {item.headname}{Index2}
+                            {item.headname}
                           </div>
                           <div className="font-normal text-lg">
-                            {item.infoname}{Index2}
+                            {item.infoname}
                           </div>
                           <div className="font-normal text-lg absolute bottom-0 pb-5 p-3">
-                            {item.desname}{Index2}
+                            {item.desname}
                           </div>
                         </div>
                       </SwiperSlide>
