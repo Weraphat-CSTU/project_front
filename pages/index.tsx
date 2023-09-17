@@ -183,11 +183,10 @@ export default function Index() {
                     },
                   }}
                 >
-                  {Information.map((item, i) => {
+                  {Information.map((item) => {
                     return (
                       <SwiperSlide>
                         <div
-                        key={'${i}'}
                           // style={{ width: 300, height: 400 }}
                           className="relative bg-gray-300 space-y-5 w-[280px] h-[400px] p-3"
                         >
