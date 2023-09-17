@@ -187,10 +187,11 @@ export default function Index() {
                     return (
                       <SwiperSlide>
                         <div
+                        key={'${i}'}
                           // style={{ width: 300, height: 400 }}
                           className="relative bg-gray-300 space-y-5 w-[280px] h-[400px] p-3"
                         >
-                          <div key={i} className="w-full h-36 bg-blue-300">
+                          <div className="w-full h-36 bg-blue-300">
                             {item.imname}
                           </div>
                           <div className="font-medium text-2xl">
