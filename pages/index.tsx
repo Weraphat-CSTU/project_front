@@ -47,6 +47,13 @@ export default function Index() {
       infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร5",
       desname: "เพิ่มเติม5",
     },
+    {
+      key: 6,
+      imname: "ภาพ6",
+      headname: "ข่าวสาร6",
+      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร5",
+      desname: "เพิ่มเติม6",
+    },
   ];
   const Scholarship = [
     {
@@ -100,9 +107,10 @@ export default function Index() {
       [new Date(edd).getFullYear() + 543].toString()
     );
   }
+
   return (
     <div className="w-full min-h-screen bg-[#EFF1FE]">
-      <div className=" sticky top-0 bg-[#EFF1FE] z-50">
+      <div className="sticky top-0 bg-[#EFF1FE] z-50">
         <div className="mx-auto max-w-3xl lg:max-w-7xl w-full h-16 flex items-center ">
           <Image
             src="/qjg3jmr9-removebg-preview.png"
@@ -110,17 +118,17 @@ export default function Index() {
             height={10}
             alt="Picture of the author"
           />
-          <div className="flex">
+          <div className="flex flex-1 ">
             <div className="font-bold text-xl">Cs</div>
             <div className="text-[#EB9D48] text-xl font-bold ">Scholarship</div>
           </div>
-          <div className="flex-1 flex items-center  justify-center space-x-5">
+          <div className="flex-1 lg:flex items-center justify-center space-x-5 hidden ">
             <div>หน้าแรก</div>
             <div>ข่าวสาร</div>
             <div>ประเภททุน</div>
             <div>ติดต่อ</div>
           </div>
-          <div className="flex justify-end">
+          <div className="hidden lg:flex justify-end">
             <button
               onClick={() => Router.push("/login")}
               className="w-full h-10 hover:bg-[#B89CC9] border border-[#B89CC9] px-5 rounded-lg font-bold hover:text-white"
@@ -128,43 +136,56 @@ export default function Index() {
               เข้าสู่ระบบ
             </button>
           </div>
+          <button className="btn btn-square btn-ghost lg:hidden">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              className="inline-block w-5 h-5 stroke-current"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              ></path>
+            </svg>
+          </button>
         </div>
       </div>
-      <div className=" flex items-center justify-between w-full h-[600px] mx-auto max-w-3xl lg:max-w-7xl ">
-        <div className=" space-y-3 lg:space-y-5">
-          <div className="font-bold text-3xl lg:text-5xl">ทุนการศึกษา</div>
-          <div className="text-[#EB9D48] font-bold text-4xl lg:text-6xl">
+      <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl lg:max-w-7xl ">
+        <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-0 lg:pb-0 lg:pt-0">
+          <div className="font-bold text-xl lg:text-3xl">ทุนการศึกษา</div>
+          <div className="text-[#EB9D48] font-bold text-xl lg:text-3xl">
             สำหรับนักศึกษา
           </div>
-          <div className="font-bold text-md lg:text-xl">
+          <div className="font-bold text-md lg:text-3xl">
             วิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
           </div>
           <button
             onClick={() => Router.push("/register")}
-            className="text-white bg-[#EB9D48]  p-1 lg:p-2 rounded-lg"
+            className="text-white bg-[#EB9D48]  p-1 lg:p-2 rounded-lg w-[150px]"
           >
             ลงทะเบียน
           </button>
         </div>
-        <div className="">
+        <div className="flex justify-center">
           <Image
             src="/หน้าแรก.png"
             width={600}
             height={600}
+            className="flex justify-center"
             alt="Picture of the author"
           />
         </div>
       </div>
-
-      <div className="w-full pb-16 bg-white">
-        <div className="mx-auto max-w-3xl lg:max-w-7xl pt-20">
-          <div className="mx-auto md:max-w-2xl lg:max-w-6xl">
-            <div className="font-bold text-4xl text-black text-center">
-              ข่าวสาร
-            </div>
+      <div className="w-full bg-white pb-10">
+        <div className="mx-auto w-full lg:max-w-7xl pt-20">
+          <div className="font-bold text-4xl text-black text-center">
+            ข่าวสาร
           </div>
-          <div className="pt-12 pr-2 md:flex lg:flex lg:space-x-3 ">
-            <div className=" flex items-center">
+          <div className="pt-12 pr-2 md:flex lg:flex lg:space-x-3 mx-3 lg:mx-0">
+            <div className="hidden lg:flex items-center">
               <button
                 onClick={() => useSwiperRef.current?.slidePrev()}
                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-sky-600 focus:bg-sky-700 my-20"
@@ -172,53 +193,49 @@ export default function Index() {
                 <AiOutlineLeft className="h-5 w-5 text-white" />
               </button>
             </div>
-            <div className="mx-auto md:max-w-2xl lg:max-w-6xl">
-              <Swiper
-                modules={[Pagination]}
-                pagination={true}
-                className="h-full w-full "
-                onSwiper={(swiper) => (useSwiperRef.current = swiper)}
-                breakpoints={{
-                  0: {
-                    slidesPerView: 1,
-                  },
-                  1024: {
-                    slidesPerView: 4,
-                    spaceBetween: 5,
-                  },
-                }}
-              >
-                {Information.map((item, index) => {
-                  return (
-                    <div key={index}>
-                      <SwiperSlide>
-                        <div className="relative bg-gray-300 space-y-5 w-full h-[400px] lg:w-[280px] lg:h-[400px] p-3 rounded-md">
-                          <div className="w-full h-36 bg-blue-300">
-                            {item.imname}
-                          </div>
-                          <div className="font-medium text-2xl">
-                            {item.headname}
-                          </div>
-                          <div className="font-normal text-lg">
-                            {item.infoname}
-                          </div>
-                          <div className="absolute bottom-0 pb-3 cursor-pointer">
-                            <div className="flex justify-center w-full ">
-                              <div className="bg-red-300 font-normal text-lg  text-center w-[100px] rounded-md p-1">
-                                {" "}
-                                {item.desname}
-                              </div>
+            <Swiper
+              modules={[Pagination]}
+              pagination={true}
+              onSwiper={(swiper) => (useSwiperRef.current = swiper)}
+              breakpoints={{
+                0: {
+                  slidesPerView: 1,
+                },
+                1024: {
+                  slidesPerView: 5,
+                  spaceBetween: 5,
+                },
+              }}
+            >
+              {Information.map((item, index) => {
+                return (
+                  <div key={index}>
+                    <SwiperSlide>
+                      <div className="relative bg-gray-300 space-y-5 w-full h-[400px] lg:w-[220px]  lg:h-[400px] p-3 rounded-md px-3">
+                        <div className="w-full h-36 bg-blue-300">
+                          {item.imname}
+                        </div>
+                        <div className="font-medium text-2xl">
+                          {item.headname}
+                        </div>
+                        <div className="font-normal text-lg">
+                          {item.infoname}
+                        </div>
+                        <div className="absolute bottom-0 pb-3 cursor-pointer w-full">
+                          <div className="flex justify-center">
+                            <div className="bg-red-300 font-normal text-lg  text-center w-[100px] rounded-md p-1">
+                              {item.desname}
                             </div>
                           </div>
                         </div>
-                      </SwiperSlide>
-                    </div>
-                  );
-                })}
-                <div className="swiper-pagination"></div>
-              </Swiper>
-            </div>
-            <div className="flex items-center">
+                      </div>
+                    </SwiperSlide>
+                  </div>
+                );
+              })}
+              <div className="swiper-pagination"></div>
+            </Swiper>
+            <div className="hidden lg:flex items-center">
               <button
                 onClick={() => useSwiperRef.current?.slideNext()}
                 className="flex h-10 w-10 cursor-pointer items-center justify-center rounded-full bg-sky-600 focus:bg-sky-700 my-20"
