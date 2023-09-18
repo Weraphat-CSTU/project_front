@@ -111,8 +111,8 @@ export default function Index() {
   return (
     <div className="w-full min-h-screen bg-[#EFF1FE]">
       <div className="sticky top-0 bg-[#EFF1FE] z-50">
-        <div className="mx-auto max-w-3xl lg:max-w-7xl w-full ">
-          <div className="flex justify-between items-center mx-3 lg:mx-2 h-16">
+        <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl w-full ">
+          <div className="flex justify-between items-center mx-3 lg:mx-0 h-16">
             <div className="flex">
               <Image
                 src="/qjg3jmr9-removebg-preview.png"
@@ -141,6 +141,7 @@ export default function Index() {
                 เข้าสู่ระบบ
               </button>
             </div>
+
             <button className="btn btn-square btn-ghost lg:hidden">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -159,7 +160,7 @@ export default function Index() {
           </div>
         </div>
       </div>
-      <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl lg:max-w-7xl ">
+      <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl ">
         <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
           <div className="font-bold text-xl lg:text-2xl">ทุนการศึกษา</div>
           <div className="text-[#EB9D48] font-bold text-xl lg:text-2xl">
@@ -186,8 +187,8 @@ export default function Index() {
         </div>
       </div>
       <div className="w-full bg-white pb-10">
-        <div className="mx-auto w-full lg:max-w-7xl pt-20">
-          <div className="font-bold text-4xl text-black text-center">
+        <div className="mx-auto w-full max-w-3xl md:max-w-5xl lg:max-w-7xl pt-20">
+          <div className="font-semibold lg:font-bold text-2xl lg:text-4xl text-black text-center">
             ข่าวสาร
           </div>
           <div className="pt-12 pr-2 md:flex lg:flex lg:space-x-3 mx-3 lg:mx-0">
@@ -218,19 +219,19 @@ export default function Index() {
                 return (
                   <div key={index}>
                     <SwiperSlide>
-                      <div className="relative bg-gray-300 space-y-5 w-full h-[400px] lg:w-[220px]  lg:h-[400px] p-3 rounded-md px-3">
+                      <div className="relative bg-gray-300 space-y-5 w-[full] h-[350px] lg:w-[220px]  lg:h-[400px] p-3 rounded-md px-3">
                         <div className="w-full h-36 bg-blue-300">
                           {item.imname}
                         </div>
-                        <div className="font-medium text-2xl">
+                        <div className="font-medium md:text-xl lg:text-2xl">
                           {item.headname}
                         </div>
-                        <div className="font-normal text-lg">
+                        <div className="font-normal md:text-lg lg:text-lg">
                           {item.infoname}
                         </div>
                         <div className="absolute bottom-0 pb-3 cursor-pointer w-full">
                           <div className="flex justify-center">
-                            <div className="bg-red-300 font-normal text-lg  text-center w-[100px] rounded-md p-1">
+                            <div className="bg-red-300 font-normal md:text-md lg:text-lg  text-center md:w-[70px] lg:w-[100px] rounded-md p-1">
                               {item.desname}
                             </div>
                           </div>
@@ -254,21 +255,21 @@ export default function Index() {
         </div>
       </div>
 
-      <div className="w-full bg-white pt-10 pb-10">
-        <div className="mx-auto max-w-3xl lg:max-w-7xl flex">
-          <div className="w-2/5 pr-5 ">
-            <div className="flex justify-between items-center">
-              <div className=" font-bold text-xl">
+      <div className="w-full bg-white pt-10 pb-10 ">
+        <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl lg:flex ">
+          <div className=" lg:w-2/5 lg:pr-5 ">
+            <div className="flex justify-between items-center ">
+              <div className=" font-bold text-md md:text-lg lg:text-xl mx-3">
                 ทุนการศึกษาที่กำลังดำเนินการ
               </div>
               <div
-                className="text-blue-500 font-medium text-lg hover:underline cursor-pointer"
+                className="text-blue-500 font-medium text-lg hover:underline cursor-pointer mx-3"
                 onClick={() => Router.push("/scholarship-all")}
               >
                 ทั้งหมด
               </div>
             </div>
-            <div className="pt-5">
+            <div className="pt-5 mx-3">
               {Scholarship.map((item, Index) => {
                 return (
                   <div
@@ -286,8 +287,8 @@ export default function Index() {
               })}
             </div>
           </div>
-          <div className="w-3/5  pl-5 pb-10">
-            <div className="text-medium font-bold text-xl pb-5">
+          <div className=" w-full lg:w-3/5 pt-10 lg:pt-0 pl-7 lg:pl-5 pb-10 -mx-3">
+            <div className="font-bold text-md md:text-lg lg:text-xl pb-5">
               ปฏิทันกำหนดการ
             </div>
             <FullCalendar
@@ -338,7 +339,7 @@ export default function Index() {
         <div className="text-center font-bold text-2xl lg:text-4xl p-10">
           ประเภททุน
         </div>
-        <div className="  grid grid-cols-1 md:grid-cols-3 gap-2">
+        <div className="grid max-md:stack md:grid-cols-3 gap-2 mx-56">
           <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
             <div className="flex justify-center">
               <Image
@@ -387,8 +388,8 @@ export default function Index() {
       </div>
 
       <footer className="w-full h-[200px] bg-[#EB9D48]">
-        <div className="mx-auto max-w-3xl lg:max-w-7xl">
-          <div className="flex justify-between">
+        <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl">
+          <div className="flex justify-between mx-3 lg:mx-0">
             <div>
               <div className="font-bold text-white text-3xl pt-5">ติดต่อ</div>
               <div className="lg:space-y-1 pt-3">
