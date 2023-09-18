@@ -147,7 +147,6 @@ export default function Index() {
           </button>
         </div>
         <div className="">
-          {" "}
           <Image
             src="/หน้าแรก.png"
             width={600}
@@ -157,12 +156,14 @@ export default function Index() {
         </div>
       </div>
 
-      <div className="w-full pb-10 bg-white ">
+      <div className="w-full pb-16 bg-white">
         <div className="mx-auto max-w-3xl lg:max-w-7xl pt-20">
           <div className="mx-auto md:max-w-2xl lg:max-w-6xl">
-            <div className="font-medium text-4xl text-red-300">ข่าวสาร</div>
+            <div className="font-bold text-4xl text-black text-center">
+              ข่าวสาร
+            </div>
           </div>
-          <div className=" pt-12 pr-2 md:flex lg:flex lg:space-x-3 ">
+          <div className="pt-12 pr-2 md:flex lg:flex lg:space-x-3 ">
             <div className=" flex items-center">
               <button
                 onClick={() => useSwiperRef.current?.slidePrev()}
@@ -171,31 +172,27 @@ export default function Index() {
                 <AiOutlineLeft className="h-5 w-5 text-white" />
               </button>
             </div>
-            <div className=" lg:flex-1 ">
-              <div className="mx-auto md:max-w-2xl lg:max-w-6xl">
-                <Swiper
-                  modules={[Pagination]}
-                  pagination={true}
-                  className="h-full w-full "
-                  onSwiper={(swiper) => (useSwiperRef.current = swiper)}
-                  breakpoints={{
-                    0: {
-                      slidesPerView: 1,
-                    },
-                    1024: {
-                      slidesPerView: 4,
-                      spaceBetween: 5,
-                    },
-                  }}
-                >
-                  {Information.map((item, index) => {
-                    return (
-                      <div key={index}>
-                      <SwiperSlide >
-                        <div
-                          // style={{ width: 300, height: 400 }}
-                          className="relative bg-gray-300 space-y-5 w-[280px] h-[400px] p-3"
-                        >
+            <div className="mx-auto md:max-w-2xl lg:max-w-6xl">
+              <Swiper
+                modules={[Pagination]}
+                pagination={true}
+                className="h-full w-full "
+                onSwiper={(swiper) => (useSwiperRef.current = swiper)}
+                breakpoints={{
+                  0: {
+                    slidesPerView: 1,
+                  },
+                  1024: {
+                    slidesPerView: 4,
+                    spaceBetween: 5,
+                  },
+                }}
+              >
+                {Information.map((item, index) => {
+                  return (
+                    <div key={index}>
+                      <SwiperSlide>
+                        <div className="relative bg-gray-300 space-y-5 w-full h-[400px] lg:w-[280px] lg:h-[400px] p-3 rounded-md">
                           <div className="w-full h-36 bg-blue-300">
                             {item.imname}
                           </div>
@@ -205,17 +202,21 @@ export default function Index() {
                           <div className="font-normal text-lg">
                             {item.infoname}
                           </div>
-                          <div className="font-normal text-lg absolute bottom-0 pb-5 p-3">
-                            {item.desname}
+                          <div className="absolute bottom-0 pb-3 cursor-pointer">
+                            <div className="flex justify-center w-full ">
+                              <div className="bg-red-300 font-normal text-lg  text-center w-[100px] rounded-md p-1">
+                                {" "}
+                                {item.desname}
+                              </div>
+                            </div>
                           </div>
                         </div>
                       </SwiperSlide>
-                      </div>
-                    );
-                  })}
-                  <div className="swiper-pagination"></div>
-                </Swiper>
-              </div>
+                    </div>
+                  );
+                })}
+                <div className="swiper-pagination"></div>
+              </Swiper>
             </div>
             <div className="flex items-center">
               <button
@@ -233,7 +234,7 @@ export default function Index() {
         <div className="mx-auto max-w-3xl lg:max-w-7xl flex">
           <div className="w-2/5 pr-5 ">
             <div className="flex justify-between items-center">
-              <div className=" font-medium text-xl">
+              <div className=" font-bold text-xl">
                 ทุนการศึกษาที่กำลังดำเนินการ
               </div>
               <div
@@ -261,8 +262,10 @@ export default function Index() {
               })}
             </div>
           </div>
-          <div className="w-3/5  pl-5">
-            <div className="text-medium text-xl pb-5">ปฏิทันกำหนดการ</div>
+          <div className="w-3/5  pl-5 pb-10">
+            <div className="text-medium font-bold text-xl pb-5">
+              ปฏิทันกำหนดการ
+            </div>
             <FullCalendar
               plugins={[dayGridPlugin]}
               locale={"th"}
