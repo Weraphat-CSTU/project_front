@@ -339,7 +339,7 @@ export default function Index() {
         <div className="text-center font-bold text-2xl lg:text-4xl p-10">
           ประเภททุน
         </div>
-        <div className="grid max-md:stack md:grid-cols-3 gap-2 mx-56">
+        <div className="grid max-md:stack md:grid-cols-3 gap-2 ">
           <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
             <div className="flex justify-center">
               <Image
