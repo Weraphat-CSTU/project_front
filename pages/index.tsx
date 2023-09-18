@@ -111,55 +111,61 @@ export default function Index() {
   return (
     <div className="w-full min-h-screen bg-[#EFF1FE]">
       <div className="sticky top-0 bg-[#EFF1FE] z-50">
-        <div className="mx-auto max-w-3xl lg:max-w-7xl w-full h-16 flex items-center ">
-          <Image
-            src="/qjg3jmr9-removebg-preview.png"
-            width={50}
-            height={10}
-            alt="Picture of the author"
-          />
-          <div className="flex flex-1 ">
-            <div className="font-bold text-xl">Cs</div>
-            <div className="text-[#EB9D48] text-xl font-bold ">Scholarship</div>
-          </div>
-          <div className="flex-1 lg:flex items-center justify-center space-x-5 hidden ">
-            <div>หน้าแรก</div>
-            <div>ข่าวสาร</div>
-            <div>ประเภททุน</div>
-            <div>ติดต่อ</div>
-          </div>
-          <div className="hidden lg:flex justify-end">
-            <button
-              onClick={() => Router.push("/login")}
-              className="w-full h-10 hover:bg-[#B89CC9] border border-[#B89CC9] px-5 rounded-lg font-bold hover:text-white"
-            >
-              เข้าสู่ระบบ
+        <div className="mx-auto max-w-3xl lg:max-w-7xl w-full ">
+          <div className="flex justify-between items-center mx-3 lg:mx-2 h-16">
+            <div className="flex">
+              <Image
+                src="/qjg3jmr9-removebg-preview.png"
+                width={50}
+                height={10}
+                alt="Picture of the author"
+              />
+              <div className="flex items-center">
+                <div className="font-bold text-xl">Cs</div>
+                <div className="text-[#EB9D48] text-xl font-bold ">
+                  Scholarship
+                </div>
+              </div>
+            </div>
+            <div className="space-x-5 hidden lg:flex ">
+              <div>หน้าแรก</div>
+              <div>ข่าวสาร</div>
+              <div>ประเภททุน</div>
+              <div>ติดต่อ</div>
+            </div>
+            <div className="hidden lg:flex justify-end">
+              <button
+                onClick={() => Router.push("/login")}
+                className="w-full h-10 hover:bg-[#B89CC9] border border-[#B89CC9] px-5 rounded-lg font-bold hover:text-white"
+              >
+                เข้าสู่ระบบ
+              </button>
+            </div>
+            <button className="btn btn-square btn-ghost lg:hidden">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                className="inline-block w-5 h-5 stroke-current"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  d="M4 6h16M4 12h16M4 18h16"
+                ></path>
+              </svg>
             </button>
           </div>
-          <button className="btn btn-square btn-ghost lg:hidden">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block w-5 h-5 stroke-current"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 6h16M4 12h16M4 18h16"
-              ></path>
-            </svg>
-          </button>
         </div>
       </div>
       <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl lg:max-w-7xl ">
-        <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-0 lg:pb-0 lg:pt-0">
-          <div className="font-bold text-xl lg:text-3xl">ทุนการศึกษา</div>
-          <div className="text-[#EB9D48] font-bold text-xl lg:text-3xl">
+        <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
+          <div className="font-bold text-xl lg:text-2xl">ทุนการศึกษา</div>
+          <div className="text-[#EB9D48] font-bold text-xl lg:text-2xl">
             สำหรับนักศึกษา
           </div>
-          <div className="font-bold text-md lg:text-3xl">
+          <div className="font-bold text-md lg:text-2xl">
             วิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
           </div>
           <button
@@ -200,6 +206,7 @@ export default function Index() {
               breakpoints={{
                 0: {
                   slidesPerView: 1,
+                  spaceBetween: 5,
                 },
                 1024: {
                   slidesPerView: 5,
