@@ -173,7 +173,7 @@ export default function Index() {
                 >
                   x
                 </div>
-                <div className="space-y-3 ">
+                <div className="space-y-5 ">
                   <div className="text-lg font-medium">หน้าแรก</div>
                   <hr />
                   <div className="text-lg font-medium">ข่าวประชาสัมพันธ์</div>
