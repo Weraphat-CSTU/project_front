@@ -4,13 +4,17 @@ import { Pagination } from "swiper";
 import "swiper/css/pagination";
 import "swiper/css";
 import { useRef } from "react";
+import { useState } from "react";
 import { useRouter } from "next/router";
+import { Button, Modal } from "react-daisyui";
 import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import { Link } from "react-daisyui";
 export default function Index() {
   const useSwiperRef = useRef<SwiperClass>();
   const Router = useRouter();
+  const [isOpen, setisOpen] = useState<boolean>(false);
   const Information = [
     {
       key: 1,
@@ -107,9 +111,11 @@ export default function Index() {
       [new Date(edd).getFullYear() + 543].toString()
     );
   }
-
+  const toggleOpen = () => {
+    setisOpen(!isOpen);
+  };
   return (
-    <div className="w-full min-h-screen bg-[#EFF1FE]">
+    <div className=" relative w-full min-h-screen bg-[#EFF1FE]">
       <div className="sticky top-0 bg-[#EFF1FE] z-50">
         <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl w-full ">
           <div className="flex justify-between items-center mx-3 xl:mx-0 h-16">
@@ -141,8 +147,10 @@ export default function Index() {
                 เข้าสู่ระบบ
               </button>
             </div>
-
-            <button className="btn btn-square btn-ghost lg:hidden">
+            <button
+              className="btn btn-square btn-ghost lg:hidden"
+              onClick={toggleOpen}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -157,6 +165,31 @@ export default function Index() {
                 ></path>
               </svg>
             </button>
+            {isOpen ? (
+              <div className="w-full h-screen bg-white absolute inset-0 px-5 py-3 ">
+                <div
+                  className="font-bold text-3xl text-end cursor-pointer"
+                  onClick={toggleOpen}
+                >
+                  x
+                </div>
+                <div className="space-y-3 ">
+                  <div className="text-lg font-medium">หน้าแรก</div>
+                  <hr />
+                  <div className="text-lg font-medium">ข่าวประชาสัมพันธ์</div>
+                  <hr />
+                  <div className="text-lg font-medium">ประเภททุน</div>
+                  <hr />
+                  <div className="text-lg font-medium">ติดต่อ</div>
+                  <hr />
+                  <div className="text-lg font-medium">
+                    <Link href="/login">เข้าสู่ระบบ</Link>
+                  </div>
+                </div>
+              </div>
+            ) : (
+              <div className="hidden"></div>
+            )}
           </div>
         </div>
       </div>
@@ -193,7 +226,7 @@ export default function Index() {
       <div className="w-full bg-white pb-10">
         <div className="mx-auto w-full max-w-3xl md:max-w-5xl lg:max-w-7xl pt-20">
           <div className="font-semibold lg:font-bold text-2xl lg:text-4xl text-black text-center">
-            ข่าวสาร
+            ข่าวประชาสัมพันธ์
           </div>
           <div className="pt-12 pr-2 md:flex lg:flex lg:space-x-3 mx-3 lg:mx-0">
             <div className="hidden lg:flex items-center">
@@ -381,7 +414,7 @@ export default function Index() {
         </div>
       </div>
 
-      <footer className="w-full h-[200px] bg-[#EB9D48]">
+      <footer className="w-full h-full  bg-[#EB9D48]">
         <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl">
           <div className=" md:flex md:justify-between  mx-3 xl:mx-0">
             <div>
