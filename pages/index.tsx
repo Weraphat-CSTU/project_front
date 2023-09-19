@@ -112,7 +112,7 @@ export default function Index() {
     <div className="w-full min-h-screen bg-[#EFF1FE]">
       <div className="sticky top-0 bg-[#EFF1FE] z-50">
         <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl w-full ">
-          <div className="flex justify-between items-center mx-3 lg:mx-0 h-16">
+          <div className="flex justify-between items-center mx-3 xl:mx-0 h-16">
             <div className="flex">
               <Image
                 src="/qjg3jmr9-removebg-preview.png"
@@ -162,11 +162,15 @@ export default function Index() {
       </div>
       <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl ">
         <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
-          <div className="font-bold text-xl lg:text-2xl">ทุนการศึกษา</div>
-          <div className="text-[#EB9D48] font-bold text-xl lg:text-2xl">
-            สำหรับนักศึกษา
+          <div className="max-lg:flex">
+            <div className="font-bold max-lg:text-[#EB9D48] text-xl lg:text-2xl">
+              ทุนการศึกษา
+            </div>
+            <div className="text-[#EB9D48] font-bold text-xl lg:text-2xl">
+              สำหรับนักศึกษา
+            </div>
           </div>
-          <div className="font-bold text-md lg:text-2xl">
+          <div className="font-semibold lg:font-bold text-md lg:text-2xl">
             วิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
           </div>
           <button
@@ -339,49 +343,39 @@ export default function Index() {
         <div className="text-center font-bold text-2xl lg:text-4xl p-10">
           ประเภททุน
         </div>
-        <div className="grid max-md:stack md:grid-cols-3 gap-2 ">
-          <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
-            <div className="flex justify-center">
-              <Image
-                src="/โลก.png"
-                width={150}
-                height={50}
-                alt="Picture of the author"
-              />
-            </div>
-            <div className=" pt-5 space-y-3">
-              <div className="font-bold text-xl text-center">หน่วยงาน</div>
-              <div className="text-center">
-                ทุนจากหน่วยงาน องค์กร ในประเทศไทย
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ">
+          <div className="h-[150px] md:h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
+            <div className="max-md:flex">
+              <div className="md:flex md:justify-center">
+                <Image
+                  src="/โลก.png"
+                  width={150}
+                  height={50}
+                  alt="Picture of the author"
+                />
+              </div>
+              <div className=" pt-5 space-y-3">
+                <div className="font-bold text-xl text-center">หน่วยงาน</div>
+                <div className="text-center">
+                  ทุนจากหน่วยงาน องค์กร ในประเทศไทย
+                </div>
               </div>
             </div>
           </div>
-          <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in">
-            <div className="flex justify-center">
-              <Image
-                src="/ต่างเทศ.png"
-                width={100}
-                height={50}
-                alt="Picture of the author"
-              />
-            </div>
-            <div className=" pt-8 space-y-3">
-              <div className="font-bold text-xl text-center">ต่างประเทศ</div>
-              <div className="text-center">ทุนต่างประเทศ</div>
-            </div>
-          </div>
-          <div className="h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in">
-            <div className="flex justify-center">
-              <Image
-                src="/มหาลัย.png"
-                width={100}
-                height={50}
-                alt="Picture of the author"
-              />
-            </div>
-            <div className=" pt-8 space-y-3">
-              <div className="font-bold text-xl text-center">มหาวิทยาลัย</div>
-              <div className="text-center">ทุนจากมหาวิทยาลัย ธรรมศาสตร์</div>
+          <div className="h-[150px] md:h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in">
+            <div className="max-md:flex ">
+              <div className="md:flex md:justify-center">
+                <Image
+                  src="/โลก.png"
+                  width={150}
+                  height={50}
+                  alt="Picture of the author"
+                />
+              </div>
+              <div className=" pt-8 space-y-3">
+                <div className="font-bold text-xl text-center">มหาวิทยาลัย</div>
+                <div className="text-center">ทุนจากมหาวิทยาลัย ธรรมศาสตร์</div>
+              </div>
             </div>
           </div>
         </div>
@@ -389,27 +383,37 @@ export default function Index() {
 
       <footer className="w-full h-[200px] bg-[#EB9D48]">
         <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl">
-          <div className="flex justify-between mx-3 lg:mx-0">
+          <div className=" md:flex md:justify-between  mx-3 xl:mx-0">
             <div>
-              <div className="font-bold text-white text-3xl pt-5">ติดต่อ</div>
-              <div className="lg:space-y-1 pt-3">
-                <div className="text-white">
+              <div className="font-semibold md:font-bold text-white text-xl max-md:text-center md:text-3xl pt-1 md:pt-5 ">
+                ติดต่อ
+              </div>
+              <div className="lg:space-y-1 md:pt-3 max-md:text-center">
+                <div className="text-white max-md:text-sm">
                   สาขาวิชาวิทยาการคอมพิวเตอร์ มธ. ศูนย์รังสิต
                 </div>
-                <div className="text-white">อาคารบรรยายรวม 2 </div>
-                <div className="text-white">
+                <div className="text-white max-md:text-sm">
+                  อาคารบรรยายรวม 2{" "}
+                </div>
+                <div className="text-white max-md:text-sm">
                   คณะวิทยาศาสตร์และเทคโนโลยีมหาวิทยาลัยธรรมศาสตร์ ศูนย์รังสิต
                 </div>
-                <div className="text-white">ปทุมธานี 12120</div>
+                <div className="text-white max-md:text-sm">ปทุมธานี 12120</div>
               </div>
             </div>
-            <div className="lg:space-y-1 pt-16">
-              <div className="text-white">
+            <div className="lg:space-y-1 md:pt-16 max-md:text-center">
+              <div className="text-white max-md:text-sm">
                 โทรศัพท์ : 0-2986-9154, 0-2986-9156, 0-2986-9138-39
               </div>
-              <div className="text-white">โทรสาร : 0-2986-9157</div>
-              <div className="text-white">Email: scitu_cs@sci.tu.ac.th</div>
-              <div className="text-white">Facebook: @CSTUadmissioncenter</div>
+              <div className="text-white max-md:text-sm">
+                โทรสาร : 0-2986-9157
+              </div>
+              <div className="text-white max-md:text-sm">
+                Email: scitu_cs@sci.tu.ac.th
+              </div>
+              <div className="text-white max-md:text-sm">
+                Facebook: @CSTUadmissioncenter
+              </div>
             </div>
           </div>
         </div>
