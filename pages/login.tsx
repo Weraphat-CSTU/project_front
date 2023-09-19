@@ -8,14 +8,14 @@ export default function Login() {
       <div className="w-full h-screen">
         <div className="relative">
           <div className="absolute inset-0 z-10 flex items-center justify-center -translate-y-7">
-            <div className="space-y-7">
+            {/* <div className="space-y-7">
               <div className="font-semibold text-6xl text-white">
                 ยินดีต้อนรับสู่
               </div>
               <div className="font-semibold text-6xl text-white">
                 ระบบจัดการทุนนักศึกษา
               </div>
-            </div>
+            </div> */}
           </div>
           <Image
             src="/test2.jpeg"

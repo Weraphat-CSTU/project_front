@@ -6,8 +6,7 @@ import "swiper/css";
 import { useRef } from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
-import { Button, Modal } from "react-daisyui";
-import { AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
+import { AiOutlineClose, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { Link } from "react-daisyui";
@@ -111,9 +110,7 @@ export default function Index() {
       [new Date(edd).getFullYear() + 543].toString()
     );
   }
-  const toggleOpen = () => {
-    setisOpen(!isOpen);
-  };
+
   return (
     <div className=" relative w-full min-h-screen bg-[#EFF1FE]">
       <div className="sticky top-0 bg-[#EFF1FE] z-50">
@@ -149,7 +146,7 @@ export default function Index() {
             </div>
             <button
               className="btn btn-square btn-ghost lg:hidden"
-              onClick={toggleOpen}
+              onClick={()=>setisOpen(!isOpen)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -165,13 +162,11 @@ export default function Index() {
                 ></path>
               </svg>
             </button>
-            {isOpen ? (
-              <div className="w-full h-screen bg-white absolute inset-0 px-5 py-3 ">
+              <div className={isOpen ? `w-full h-screen bg-white absolute inset-0 px-5 py-3 `: `hidden`}>
                 <div
-                  className="font-bold text-3xl text-end cursor-pointer"
-                  onClick={toggleOpen}
+                  className="font-bold text-3xl flex justify-end "
                 >
-                  x
+                  <AiOutlineClose className="cursor-pointer" onClick={()=>setisOpen(!isOpen)}/>
                 </div>
                 <div className="space-y-5 ">
                   <div className="text-lg font-medium">หน้าแรก</div>
@@ -187,9 +182,7 @@ export default function Index() {
                   </div>
                 </div>
               </div>
-            ) : (
-              <div className="hidden"></div>
-            )}
+           
           </div>
         </div>
       </div>
