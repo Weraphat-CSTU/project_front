@@ -2,11 +2,9 @@ import Layout from "@/components/layout";
 import { getuserinfo, userInfoData } from "@/dataService/getuserInfo";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
-import InputMask, { InputState } from "react-input-mask";
 import { useQuery } from "react-query";
-import { Input } from "antd";
-import InputWithFormat from "@/components/input-mask";
-export default function history() {
+
+export default function History() {
   const { register, setValue } = useForm<userInfoData>();
 
   const { data: userinfo } = useQuery({
