@@ -61,7 +61,7 @@ jobs:
                 ]
               }
             ]
-          }' ${{secrets.DISCORD_WEBHOOK}}
+          }' https://discord.com/api/webhooks/1151015294958059520/fYLxarw6ipGstsqLTB2klyouUe_z2WHxQUF-SNgAF0mUsdEbUEp2Np0JENaiMvYzY22R
 
       - name: Send Discord notification on success
         if: ${{ success() }}
