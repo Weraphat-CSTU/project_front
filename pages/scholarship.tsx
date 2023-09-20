@@ -2,31 +2,19 @@ import Layout from "@/components/layout";
 import { useRouter } from "next/router";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
+import { useQuery } from "react-query";
+import { getCalendar } from "@/dataService/getcalendar";
+import { getScholarship } from "@/dataService/getscholarship";
 export default function Scholarship() {
   const Router = useRouter();
-  const Scholarship = [
-    {
-      sctype: "ทุนภายใน",
-      scname: "เรียนดี",
-      scyear: "2566",
-      std: "2023-09-11",
-      edd: "2023-09-29",
-    },
-    {
-      sctype: "ทุนภายนอก",
-      scname: "กยศ.",
-      scyear: "2566",
-      std: "2023-09-15",
-      edd: "2023-09-22",
-    },
-    {
-      sctype: "ทุนภายนอก",
-      scname: "สนับสนุนเรียนต่อต่างประเทศ",
-      scyear: "2566",
-      std: "2023-09-15",
-      edd: "2023-09-29",
-    },
-  ];
+  const { data: Calendar } = useQuery({
+    queryKey: "calendar",
+    queryFn: async () => getCalendar(),
+  });
+  const { data: scholarship } = useQuery({
+    queryKey: "scholarship",
+    queryFn: async () => getScholarship(),
+  });
   function showTimeline(std: string, edd: string): string {
     var months_th = [
       "มกราคม",
@@ -80,7 +68,7 @@ export default function Scholarship() {
                 </div>
               </div>
               <div className="pt-5">
-                {Scholarship.map((item, Index) => {
+                {(scholarship?.scholar.map((item, Index) => {
                   return (
                     <div
                       key={Index}
@@ -96,7 +84,7 @@ export default function Scholarship() {
                       <div>{showTimeline(item.std, item.edd)}</div>
                     </div>
                   );
-                })}
+                }))}
               </div>
             </div>
             <div className="w-3/5  pl-5">
@@ -106,40 +94,7 @@ export default function Scholarship() {
                 locale={"th"}
                 initialView="dayGridMonth"
                 dayMaxEventRows={3}
-                events={[
-                  {
-                    textColor: "black",
-                    title: "ทดสอบ",
-                    start: "2023-09-14",
-                    end: "2023-09-20",
-                    color: "red",
-                  },
-                  {
-                    textColor: "black",
-                    title: "event 2",
-                    start: "2023-09-14",
-                    end: "2023-09-25",
-                    color: "green",
-                  },
-                  {
-                    textColor: "black",
-                    title: "event 3",
-                    start: "2023-09-14",
-                    end: "2023-09-25",
-                    color: "yellow",
-                  },
-                  {
-                    title: "event 4",
-                    start: "2023-09-14",
-                    end: "2023-09-25",
-                  },
-                  {
-                    title: "event 5",
-                    start: "2023-09-14",
-                    end: "2023-09-25",
-                    color: "pink",
-                  },
-                ]}
+                events={Calendar?.calen}
               />
             </div>
           </div>

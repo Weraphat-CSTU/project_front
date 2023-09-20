@@ -3,118 +3,34 @@ import { Swiper, SwiperClass, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper";
 import "swiper/css/pagination";
 import "swiper/css";
-import { useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { AiOutlineClose, AiOutlineLeft, AiOutlineRight } from "react-icons/ai";
 import FullCalendar from "@fullcalendar/react";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import { Link } from "react-daisyui";
+import { useQuery } from "react-query";
+import { getInfomation } from "@/dataService/getinformation";
+import { getCalendar } from "@/dataService/getcalendar";
+import { getScholarship } from "@/dataService/getscholarship";
 export default function Index() {
   const useSwiperRef = useRef<SwiperClass>();
   const Router = useRouter();
   const [isOpen, setisOpen] = useState<boolean>(false);
-  const Information = [
-    {
-      key: 1,
-      imname: "ภาพ",
-      headname: "ข่าวสาร",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร",
-      desname: "เพิ่มเติม",
-    },
-    {
-      key: 2,
-      imname: "ภาพ2",
-      headname: "ข่าวสาร2",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร2",
-      desname: "เพิ่มเติม2",
-    },
-    {
-      key: 3,
-      imname: "ภาพ3",
-      headname: "ข่าวสาร3",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร3",
-      desname: "เพิ่มเติม3",
-    },
-    {
-      key: 4,
-      imname: "ภาพ4",
-      headname: "ข่าวสาร4",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร4",
-      desname: "เพิ่มเติม4",
-    },
-    {
-      key: 5,
-      imname: "ภาพ5",
-      headname: "ข่าวสาร5",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร5",
-      desname: "เพิ่มเติม5",
-    },
-    {
-      key: 6,
-      imname: "ภาพ6",
-      headname: "ข่าวสาร6",
-      infoname: "รายละเอียดต่างๆเกี่ยวกับข่าวสาร5",
-      desname: "เพิ่มเติม6",
-    },
-  ];
-  const Scholarship = [
-    {
-      sctype: "ทุนภายใน",
-      scname: "เรียนดี",
-      scyear: "2566",
-      std: "2023-09-11",
-      edd: "2023-09-29",
-    },
-    {
-      sctype: "ทุนภายนอก",
-      scname: "กยศ.",
-      scyear: "2566",
-      std: "2023-09-15",
-      edd: "2023-09-22",
-    },
-    {
-      sctype: "ทุนภายนอก",
-      scname: "สนับสนุนเรียนต่อต่างประเทศ",
-      scyear: "2566",
-      std: "2023-09-15",
-      edd: "2023-09-29",
-    },
-  ];
-  const Calendar = [
-    {
-      textColor: "black",
-      title: "ทดสอบ",
-      start: "2023-09-14",
-      end: "2023-09-20",
-      color: "red",
-    },
-    {
-      textColor: "black",
-      title: "event 2",
-      start: "2023-09-14",
-      end: "2023-09-25",
-      color: "green",
-    },
-    {
-      textColor: "black",
-      title: "event 3",
-      start: "2023-09-14",
-      end: "2023-09-25",
-      color: "yellow",
-    },
-    {
-      title: "event 4",
-      start: "2023-09-14",
-      end: "2023-09-25",
-    },
-    {
-      title: "event 5",
-      start: "2023-09-14",
-      end: "2023-09-25",
-      color: "pink",
-    },
-  ]
+  const { data: information } = useQuery({
+    queryKey: "information",
+    queryFn: async () => getInfomation(),
+  });
+  const { data: Calendar } = useQuery({
+    queryKey: "calendar",
+    queryFn: async () => getCalendar(),
+  });
+  const { data: scholarship } = useQuery({
+    queryKey: "scholarship",
+    queryFn: async () => getScholarship(),
+  });
+  
   function showTimeline(std: string, edd: string): string {
     var months_th = [
       "มกราคม",
@@ -279,7 +195,7 @@ export default function Index() {
                 },
               }}
             >
-              {Information.map((item, index) => {
+              {(information?.info.map((item, index) => {
                 return (
                   <div key={index}>
                     <SwiperSlide>
@@ -303,8 +219,8 @@ export default function Index() {
                       </div>
                     </SwiperSlide>
                   </div>
-                );
-              })}
+              );
+              }))}
               <div className="swiper-pagination"></div>
             </Swiper>
             <div className="hidden lg:flex items-center">
@@ -334,7 +250,7 @@ export default function Index() {
               </div>
             </div>
             <div className="pt-5 mx-3">
-              {Scholarship.map((item, Index) => {
+              {(scholarship?.scholar.map((item, Index) => {
                 return (
                   <div
                     key={Index}
@@ -348,7 +264,7 @@ export default function Index() {
                     <div>{showTimeline(item.std, item.edd)}</div>
                   </div>
                 );
-              })}
+              }))}
             </div>
           </div>
           <div className=" w-full lg:w-3/5 pt-10 lg:pt-0 pl-7 lg:pl-5 pb-10 -mx-3">
@@ -360,7 +276,7 @@ export default function Index() {
               locale={"th"}
               initialView="dayGridMonth"
               dayMaxEventRows={3}
-              events={Calendar}
+              events={Calendar?.calen}
             />
           </div>
         </div>
