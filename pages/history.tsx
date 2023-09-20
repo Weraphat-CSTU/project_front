@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { useQuery } from "react-query";
 
 export default function History() {
-  const { register, setValue } = useForm<userInfoData>();
+  const { register : Register, setValue } = useForm<userInfoData>();
 
   const { data: userinfo } = useQuery({
     queryKey: "userinfo",
@@ -35,7 +35,7 @@ export default function History() {
                     type="text"
                     placeholder="กรอกชื่อจริง"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("name")}
+                    {...Register("name")}
                   />
                 </div>
                 <div>
@@ -47,7 +47,7 @@ export default function History() {
                     type="text"
                     placeholder="กรอกนามสกุล"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("lastname")}
+                    {...Register("lastname")}
                   />
                 </div>
               </div>
@@ -61,7 +61,7 @@ export default function History() {
                     type="text"
                     placeholder="กรอกบัตรประจำตัวประชาชน"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("cardId")}
+                    {...Register("cardId")}
                   />
 
               <label className="label">
@@ -72,7 +72,7 @@ export default function History() {
                     type="text"
                     placeholder="กรอกรหัสนักศึกษา"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("studentId")}
+                    {...Register("studentId")}
                   />
               
               <div className="flex justify-between">
@@ -87,7 +87,7 @@ export default function History() {
                     type="text"
                     placeholder="กรอกเบอร์โทรศัพท์"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("phone")}
+                    {...Register("phone")}
                   />
                 </div>
                 <div>
@@ -99,7 +99,7 @@ export default function History() {
                     type="email"
                     placeholder="กรอกอีเมล"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("email")}
+                    {...Register("email")}
                   />
                 </div>
               </div>
@@ -113,7 +113,7 @@ export default function History() {
                     type="text"
                     placeholder="กรอกไอดีไลน์"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("lineId")}
+                    {...Register("lineId")}
                   />
                 </div>
                 <div>
@@ -127,7 +127,7 @@ export default function History() {
                     maxLength={4}
                     placeholder="กรอกเกรดเฉลี่ย"
                     className="input input-bordered w-full max-w-xl"
-                    {...register("grade")}
+                    {...Register("grade")}
                   />
                 </div>
               </div>
