@@ -3,7 +3,7 @@ name: Next.js Build and Discord Notification
 on:
   push:
     branches:
-      - main 
+      - main
 
 jobs:
   build:
@@ -16,7 +16,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: 16.13.1 
+          node-version: 16.13.1
 
       - name: Install dependencies
         run: npm install
@@ -94,6 +94,4 @@ jobs:
                 ]
               }
             ]
-          }' ${{secrets.DISCORD_WEBHOOK}}
-        
-        
+          }' https://discord.com/api/webhooks/1151015294958059520/fYLxarw6ipGstsqLTB2klyouUe_z2WHxQUF-SNgAF0mUsdEbUEp2Np0JENaiMvYzY22R
