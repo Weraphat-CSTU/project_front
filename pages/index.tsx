@@ -81,6 +81,40 @@ export default function Index() {
       edd: "2023-09-29",
     },
   ];
+  const Calendar = [
+    {
+      textColor: "black",
+      title: "ทดสอบ",
+      start: "2023-09-14",
+      end: "2023-09-20",
+      color: "red",
+    },
+    {
+      textColor: "black",
+      title: "event 2",
+      start: "2023-09-14",
+      end: "2023-09-25",
+      color: "green",
+    },
+    {
+      textColor: "black",
+      title: "event 3",
+      start: "2023-09-14",
+      end: "2023-09-25",
+      color: "yellow",
+    },
+    {
+      title: "event 4",
+      start: "2023-09-14",
+      end: "2023-09-25",
+    },
+    {
+      title: "event 5",
+      start: "2023-09-14",
+      end: "2023-09-25",
+      color: "pink",
+    },
+  ]
   function showTimeline(std: string, edd: string): string {
     var months_th = [
       "มกราคม",
@@ -188,8 +222,8 @@ export default function Index() {
       </div>
       <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl ">
         <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
-          <div className="max-lg:flex">
-            <div className="font-bold max-lg:text-[#EB9D48] text-xl lg:text-2xl">
+          <div className="flex lg:block space-y-0 lg:space-y-3">
+            <div className="font-bold text-[#EB9D48] lg:text-black text-xl lg:text-2xl">
               ทุนการศึกษา
             </div>
             <div className="text-[#EB9D48] font-bold text-xl lg:text-2xl">
@@ -326,40 +360,7 @@ export default function Index() {
               locale={"th"}
               initialView="dayGridMonth"
               dayMaxEventRows={3}
-              events={[
-                {
-                  textColor: "black",
-                  title: "ทดสอบ",
-                  start: "2023-09-14",
-                  end: "2023-09-20",
-                  color: "red",
-                },
-                {
-                  textColor: "black",
-                  title: "event 2",
-                  start: "2023-09-14",
-                  end: "2023-09-25",
-                  color: "green",
-                },
-                {
-                  textColor: "black",
-                  title: "event 3",
-                  start: "2023-09-14",
-                  end: "2023-09-25",
-                  color: "yellow",
-                },
-                {
-                  title: "event 4",
-                  start: "2023-09-14",
-                  end: "2023-09-25",
-                },
-                {
-                  title: "event 5",
-                  start: "2023-09-14",
-                  end: "2023-09-25",
-                  color: "pink",
-                },
-              ]}
+              events={Calendar}
             />
           </div>
         </div>
