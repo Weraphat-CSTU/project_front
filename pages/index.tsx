@@ -195,7 +195,7 @@ export default function Index() {
                 },
               }}
             >
-              {(information?.info.map((item, index) => {
+              {(information?.result.map((item, index) => {
                 return (
                   <div key={index}>
                     <SwiperSlide>
@@ -250,7 +250,7 @@ export default function Index() {
               </div>
             </div>
             <div className="pt-5 mx-3">
-              {(scholarship?.scholar.map((item, Index) => {
+              {(scholarship?.result.map((item, Index) => {
                 return (
                   <div
                     key={Index}
@@ -276,7 +276,7 @@ export default function Index() {
               locale={"th"}
               initialView="dayGridMonth"
               dayMaxEventRows={3}
-              events={Calendar?.calen}
+              events={Calendar?.result}
             />
           </div>
         </div>

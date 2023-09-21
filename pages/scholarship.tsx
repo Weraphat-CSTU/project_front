@@ -68,7 +68,7 @@ export default function Scholarship() {
                 </div>
               </div>
               <div className="pt-5">
-                {(scholarship?.scholar.map((item, Index) => {
+                {(scholarship?.result.map((item, Index) => {
                   return (
                     <div
                       key={Index}
@@ -94,7 +94,7 @@ export default function Scholarship() {
                 locale={"th"}
                 initialView="dayGridMonth"
                 dayMaxEventRows={3}
-                events={Calendar?.calen}
+                events={Calendar?.result}
               />
             </div>
           </div>

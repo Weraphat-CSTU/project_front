@@ -6,7 +6,7 @@ export type infoMationData = {
 }
 
 export type infoMationDataBody = {
-    info : infoMationData[]
+    result : infoMationData[]
 }
 const mockInformation : infoMationData[] = [
     {
@@ -48,5 +48,5 @@ const mockInformation : infoMationData[] = [
   ]
 
   export function getInfomation() : Promise<infoMationDataBody>{
-    return Promise.resolve({info : mockInformation})
+    return Promise.resolve({result : mockInformation})
 }

@@ -7,7 +7,7 @@ export type scholarshipData = {
 }
 
 export type scholarshipDataBody = {
-    scholar : scholarshipData[]
+    result : scholarshipData[]
 }
 
 const mockscholarship : scholarshipData[] =  [
@@ -35,5 +35,5 @@ const mockscholarship : scholarshipData[] =  [
   ]
 
   export function getScholarship() : Promise<scholarshipDataBody>{
-    return Promise.resolve({scholar : mockscholarship})
+    return Promise.resolve({result : mockscholarship})
 }
