@@ -1,5 +1,4 @@
 export type calendarData = {
-  textColor: string;
   title: string;
   start: string;
   end: string;
@@ -12,35 +11,30 @@ export type calendarpDataBody = {
 
 const mockCalendar: calendarData[] = [
   {
-    textColor: "black",
     title: "ทดสอบ",
     start: "2023-09-14",
     end: "2023-09-20",
     color: "red"
   },
   {
-    textColor: "black",
     title: "event 2",
     start: "2023-09-14",
     end: "2023-09-25",
     color: "green"
   },
   {
-    textColor: "black",
     title: "event 3",
     start: "2023-09-14",
     end: "2023-09-25",
-    color: "blue"
+    color: "sky"
   },
   {
-    textColor: "black",
     title: "event 4",
     start: "2023-09-14",
     end: "2023-09-25",
     color: "yellow"
   },
   {
-    textColor: "black",
     title: "event 5",
     start: "2023-09-14",
     end: "2023-09-25",

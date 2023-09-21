@@ -30,8 +30,8 @@ export default function Index() {
     queryKey: "scholarship",
     queryFn: async () => getScholarship(),
   });
-  
-  function showTimeline(std: string, edd: string): string {
+
+  const showTimeline = (std: string, edd: string): string => {
     var months_th = [
       "มกราคม",
       "กุมภาพันธ์",
@@ -96,7 +96,7 @@ export default function Index() {
             </div>
             <button
               className="btn btn-square btn-ghost lg:hidden"
-              onClick={()=>setisOpen(!isOpen)}
+              onClick={() => setisOpen(!isOpen)}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -112,27 +112,33 @@ export default function Index() {
                 ></path>
               </svg>
             </button>
-              <div className={isOpen ? `w-full h-screen bg-white absolute inset-0 px-5 py-3 `: `hidden`}>
-                <div
-                  className="font-bold text-3xl flex justify-end "
-                >
-                  <AiOutlineClose className="cursor-pointer" onClick={()=>setisOpen(!isOpen)}/>
-                </div>
-                <div className="space-y-5 ">
-                  <div className="text-lg font-medium">หน้าแรก</div>
-                  <hr />
-                  <div className="text-lg font-medium">ข่าวประชาสัมพันธ์</div>
-                  <hr />
-                  <div className="text-lg font-medium">ประเภททุน</div>
-                  <hr />
-                  <div className="text-lg font-medium">ติดต่อ</div>
-                  <hr />
-                  <div className="text-lg font-medium">
-                    <Link href="/login">เข้าสู่ระบบ</Link>
-                  </div>
+            <div
+              className={
+                isOpen
+                  ? `w-full h-screen bg-white absolute inset-0 px-5 py-3 `
+                  : `hidden`
+              }
+            >
+              <div className="font-bold text-3xl flex justify-end ">
+                <AiOutlineClose
+                  className="cursor-pointer"
+                  onClick={() => setisOpen(!isOpen)}
+                />
+              </div>
+              <div className="space-y-5 ">
+                <div className="text-lg font-medium">หน้าแรก</div>
+                <hr />
+                <div className="text-lg font-medium">ข่าวประชาสัมพันธ์</div>
+                <hr />
+                <div className="text-lg font-medium">ประเภททุน</div>
+                <hr />
+                <div className="text-lg font-medium">ติดต่อ</div>
+                <hr />
+                <div className="text-lg font-medium">
+                  <Link href="/login">เข้าสู่ระบบ</Link>
                 </div>
               </div>
-           
+            </div>
           </div>
         </div>
       </div>
@@ -195,7 +201,7 @@ export default function Index() {
                 },
               }}
             >
-              {(information?.result.map((item, index) => {
+              {information?.result.map((item, index) => {
                 return (
                   <div key={index}>
                     <SwiperSlide>
@@ -219,8 +225,8 @@ export default function Index() {
                       </div>
                     </SwiperSlide>
                   </div>
-              );
-              }))}
+                );
+              })}
               <div className="swiper-pagination"></div>
             </Swiper>
             <div className="hidden lg:flex items-center">
@@ -250,7 +256,7 @@ export default function Index() {
               </div>
             </div>
             <div className="pt-5 mx-3">
-              {(scholarship?.result.map((item, Index) => {
+              {scholarship?.result.map((item, Index) => {
                 return (
                   <div
                     key={Index}
@@ -264,7 +270,7 @@ export default function Index() {
                     <div>{showTimeline(item.std, item.edd)}</div>
                   </div>
                 );
-              }))}
+              })}
             </div>
           </div>
           <div className=" w-full lg:w-3/5 pt-10 lg:pt-0 pl-7 lg:pl-5 pb-10 -mx-3">
@@ -276,7 +282,13 @@ export default function Index() {
               locale={"th"}
               initialView="dayGridMonth"
               dayMaxEventRows={3}
-              events={Calendar?.result}
+              events={Calendar?.result.map((items) => ({
+                title: items.title,
+                start: items.start,
+                end: items.end,
+                color: items.color,
+                textColor: "black"
+              }))}
             />
           </div>
         </div>
