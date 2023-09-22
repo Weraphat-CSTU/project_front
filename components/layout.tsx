@@ -9,8 +9,6 @@ type props = {
 
 const Layout: FC<props> = ({ children }) => {  
   const router = useRouter();
-  console.log('test')
-
 
   const Navigator = [
     { path: "/scholarship", lebel: "ทุนการศึกษา" },
