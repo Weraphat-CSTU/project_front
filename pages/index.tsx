@@ -119,9 +119,9 @@ export default function Index() {
                   : `hidden`
               }
             >
-              <div className="font-bold text-3xl flex justify-end ">
+              <div className="flex justify-end ">
                 <AiOutlineClose
-                  className="cursor-pointer"
+                  className="cursor-pointer "
                   onClick={() => setisOpen(!isOpen)}
                 />
               </div>
@@ -196,7 +196,7 @@ export default function Index() {
                   spaceBetween: 5,
                 },
                 1024: {
-                  slidesPerView: 5,
+                  slidesPerView: 4,
                   spaceBetween: 5,
                 },
               }}
@@ -205,7 +205,7 @@ export default function Index() {
                 return (
                   <div key={index}>
                     <SwiperSlide>
-                      <div className="relative bg-gray-300 space-y-5 w-[full] h-[350px] lg:w-[220px]  lg:h-[400px] p-3 rounded-md px-3">
+                      <div className="relative bg-gray-300 space-y-5 w-[full] h-[350px] lg:w-[250px]  lg:h-[400px] p-3 rounded-md px-3">
                         <div className="w-full h-36 bg-blue-300">
                           {item.imname}
                         </div>
