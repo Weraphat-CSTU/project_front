@@ -4,8 +4,9 @@ import { useQuery } from "react-query";
 import { useRouter } from "next/router";
 import getMonth from "@/utils/getMonth";
 
-export default function scholarshipall() {
+export default function Scholarshipall() {
     const Router = useRouter();
+    
     const { data: scholarship } = useQuery({
         queryKey: "scholarship",
         queryFn: async () => getScholarship(),

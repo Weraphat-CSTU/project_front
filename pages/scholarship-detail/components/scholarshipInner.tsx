@@ -3,7 +3,7 @@ import dayGridPlugin from "@fullcalendar/daygrid";
 import { getCalendar } from "@/dataService/getcalendar";
 import { useQuery } from "react-query";
 
-export default function scholarshipDetailInner() {
+export default function ScholarshipDetailInner() {
   const { data: Calendar } = useQuery({
     queryKey: "calendar",
     queryFn: async () => getCalendar(),
