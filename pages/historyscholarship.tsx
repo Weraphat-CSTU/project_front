@@ -5,34 +5,15 @@ import { useQuery } from "react-query";
 import Image from "next/image";
 import { FaLine } from "react-icons/fa";
 import { GrMailOption } from "react-icons/gr";
+import { phoneFormatter, userIdFormatter } from "@/utils/regx";
+import DisplaytItem from "@/components/displayItem";
+
 export default function Historyscholarship() {
   const { data: userinfo } = useQuery({
     queryKey: "userinfo",
     queryFn: async () => getuserinfo(),
   });
 
-  const phoneFormatter = (phonenumber?: string): string => {
-    if (!phonenumber) {
-      return "";
-    } else {
-      let outphonenumber = phonenumber.replace(
-        /^(\d{3})(\d{3})(\d{4})$/,
-        "$1-$2-$3"
-      );
-      return outphonenumber;
-    }
-  };
-  const userIdFormatter = (userId?: string): string => {
-    if (!userId) {
-      return "";
-    } else {
-      let outuserId = userId.replace(
-        /^(\d{1})(\d{4})(\d{5})(\d{2})(\d{1})$/,
-        "$1-$2-$3-$4-$5"
-      );
-      return outuserId;
-    }
-  };
   const items = useMemo(() => userinfo?.result[0], [userinfo]);
   return (
     <Layout>
@@ -58,38 +39,26 @@ export default function Historyscholarship() {
               </div>
               <div className="w-4/6 p-2 ">
                 <div className="border-b flex justify-between h-2/6 items-center p-3 px-5">
-                  <div className="flex space-x-2">
-                    <p className="text-xl font-semibold">ชื่อ-นามสกุล : </p>
-                    <p className="text-lg">
-                      {[items?.name, items?.lastname].join(" ")}
-                    </p>
-                  </div>
-                  <div className="flex space-x-2">
-                    <p className="text-xl font-semibold">เบอร์โทรศัพท์ : </p>
-                    <p className="text-lg text-blue-500">
-                      {phoneFormatter(items?.phone)}
-                    </p>
-                  </div>
+                  <DisplaytItem
+                    title="ชื่อ-นามสกุล"
+                    value={[items?.name, items?.lastname].join(" ")}
+                  />
+                  <DisplaytItem title="รหัสนักศึกษา" value={items?.studentId} />
                 </div>
                 <div className="border-b flex justify-between h-2/6 items-center p-3 px-5">
-                  <div className="flex space-x-2">
-                    <p className="text-xl font-semibold">
-                      บัตรประจำตัวประชาชน :
-                    </p>
-                    <p className="text-lg text-blue-500">
-                      {userIdFormatter(items?.cardId)}
-                    </p>
-                  </div>
-                  <div className="flex space-x-2">
-                    <p className="text-xl font-semibold">รหัสนักศึกษา : </p>
-                    <p className="text-lg">{items?.studentId}</p>
-                  </div>
+                  <DisplaytItem
+                    title="บัตรประจำตัวประชาชน"
+                    value={userIdFormatter(items?.cardId)}
+                    color="text-blue-600"
+                  />
+                  <DisplaytItem title="เกรดเฉลี่ย" value={items?.grade} />
                 </div>
                 <div className=" flex h-2/6  p-3 px-5 justify-between items-center">
-                  <div className="flex space-x-2">
-                    <p className="text-xl font-semibold">เกรดเฉลี่ย : </p>
-                    <p className="text-lg">{items?.grade}</p>
-                  </div>
+                  <DisplaytItem
+                    title="เบอร์โทรศัพท์"
+                    value={phoneFormatter(items?.phone)}
+                    color="text-blue-600"
+                  />
                   <div className="flex space-x-2 items-center">
                     <p className="text-xl font-semibold">
                       <GrMailOption />

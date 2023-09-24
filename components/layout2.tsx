@@ -94,7 +94,9 @@ const Layout2: FC<props> = ({ children }) => {
           </div>
         </div>
       </div>
+      <div className="flex flex-none w-full">{children}</div>
     </div>
+    
   );
 };
 export default Layout2;
