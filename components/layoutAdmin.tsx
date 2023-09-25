@@ -7,14 +7,16 @@ type props = {
     children?: React.ReactNode;
 };
 
-const Layout: FC<props> = ({ children }) => {
+const LayoutAdmin: FC<props> = ({ children }) => {
     const router = useRouter();
     const logout = () => {
         sessionStorage.setItem('login', 'false');
     };
     const Navigator = [
-        { path: '/scholarship', lebel: 'ทุนการศึกษา' },
-        { path: '/historyscholarship', lebel: 'ข้อมูลผู้ใช้' },
+        { path: '/admin', lebel: 'หน้าแรก' },
+        { path: '/', lebel: 'เพิ่มทุน' },
+        { path: '/', lebel: 'ประวัติทุน' },
+        { path: '/', lebel: 'จัดการทุน' },
         { path: '/', lebel: 'ออกจากระบบ' },
     ];
     return (
@@ -61,4 +63,4 @@ const Layout: FC<props> = ({ children }) => {
         </div>
     );
 };
-export default Layout;
+export default LayoutAdmin;

@@ -57,7 +57,10 @@ export default function Login() {
                         />
                         <button
                             className="py-3 rounded-md bg-[#EB9D48] label-text text-xl text-white mt-10"
-                            onClick={() => Router.push('/scholarship')}
+                            onClick={() => {
+                                Router.push('/scholarship');
+                                sessionStorage.setItem('login', 'true');
+                            }}
                         >
                             เข้าสู่ระบบ
                         </button>
