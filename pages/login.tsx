@@ -7,6 +7,7 @@ import { useMutation } from 'react-query';
 
 export default function Login() {
     const Router = useRouter();
+    const Swal = require('sweetalert2')
     const { mutate, isLoading } = useMutation({
         mutationKey: ['login'],
         mutationFn: async (value: loginPlayload) => {
@@ -18,7 +19,13 @@ export default function Login() {
             Router.push('/scholarship');
         },
         onError: () => {
-            console.log('error');
+            Swal.fire({
+                title: 'เข้าสู่ระบบล้มเหลว',
+                text: "กรุณากรอกข้อมูลให้ถูกต้อง",
+                icon: 'error',
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: 'ตกลง'
+              })
         },
     });
 
