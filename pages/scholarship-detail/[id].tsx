@@ -14,14 +14,14 @@ export default function scholarshipDetail() {
   }
   if (authorize) {
     return (
-      <Layout2>
+      <Layout>
         <ScholarshipDetailInner />
-      </Layout2>
+      </Layout>
     );
   }
   return (
-    <Layout>
+    <Layout2>
       <ScholarshipDetailInner />
-    </Layout>
+    </Layout2>
   );
 }
