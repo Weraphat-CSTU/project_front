@@ -27,7 +27,9 @@ export default function Register() {
             }).then((result : any) => {
               if (result.isConfirmed) {
                 Swal.fire(
-                  'ลงทะเบียนสำเร็จ'
+                  'ลงทะเบียน',
+                  'คุณลงทะเบียนสำเร็จ',
+                  'success'
                 )
                 Router.push('/login');
               }
