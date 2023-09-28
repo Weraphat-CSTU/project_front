@@ -7,6 +7,7 @@ export type registerPlayload = {
     phone: string;
     line_id: string;
     grade: number;
+    password: string; 
 };
 
 export type registerPlayloadRespone = {
