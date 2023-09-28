@@ -3,7 +3,7 @@ import Link from 'next/link';
 import React from 'react';
 import InputMask from 'react-input-mask';
 import { useRouter } from 'next/router';
-import { useForm} from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { postRegister, registerPlayload } from '@/dataService/postRegister';
 import { useMutation } from 'react-query';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -74,6 +74,7 @@ export default function Register() {
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
             confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
         }).then((result: any) => {
             if (result.isConfirmed) {
                 mutate(normalResult);

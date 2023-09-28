@@ -35,7 +35,7 @@ const Layout: FC<props> = ({ children }) => {
             setnarMolmenu([
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1 },
                 { path: '/historyscholarship', lebel: 'ข้อมูลผู้ใช้', id: 2 },
-                { path: '/', lebel: 'เพิ่มทุน', id: 3 },
+                { path: '/addscholarship', lebel: 'เพิ่มทุน', id: 3 },
                 { path: '/', lebel: 'จัดการนักศึกษา', id: 4 },
                 { path: '/', lebel: 'จัดการทุน', id: 5 },
                 { path: '/', lebel: 'ประวัติทุน', id: 6 },
