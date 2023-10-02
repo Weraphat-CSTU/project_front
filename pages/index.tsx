@@ -20,23 +20,23 @@ export default function Index() {
 
     const Router = useRouter();
 
-    const { data: information } = useQuery({
+    const { data: information, isLoading: isLoadingInfo } = useQuery({
         queryKey: 'information',
         queryFn: async () => getInfomation(),
     });
 
-    const { data: Calendar } = useQuery({
+    const { data: Calendar, isLoading: isLoadingCalen } = useQuery({
         queryKey: 'calendar',
         queryFn: async () => getCalendar(),
     });
 
-    const { data: scholarship } = useQuery({
+    const { data: scholarship, isLoading: isLoadingScholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
 
     return (
-        <Layout2>
+        <Layout2 isLoading={isLoadingInfo && isLoadingCalen && isLoadingScholarship}>
             <div className=" w-full min-h-screen bg-[#EFF1FE]">
                 <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl ">
                     <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
@@ -146,7 +146,7 @@ export default function Index() {
                                 </div>
                                 <div
                                     className="text-blue-500 font-medium text-lg hover:underline cursor-pointer mx-3"
-                                    onClick={() => Router.push('/scholarship-all')}
+                                    onClick={() => Router.push('/scholarshipAll')}
                                 >
                                     ทั้งหมด
                                 </div>
