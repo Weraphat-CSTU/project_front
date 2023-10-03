@@ -1,7 +1,6 @@
 import Layout from '@/components/layout';
 import { getScholarship } from '@/dataService/getscholarship';
 import dayjs from 'dayjs';
-import Swal from 'sweetalert2';
 import { FiEdit } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
@@ -11,7 +10,7 @@ import { useQuery } from 'react-query';
 dayjs.extend(buddhistEra);
 
 export default function manageScholarship() {
-    const { data: schoarship } = useQuery({
+    const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
@@ -33,7 +32,7 @@ export default function manageScholarship() {
                                 </tr>
                             </thead>
                             <tbody>
-                                {schoarship?.result.map((item, index) => {
+                                {scholarship?.result.map((item, index) => {
                                     return (
                                         <>
                                             {/* row 1 */}
