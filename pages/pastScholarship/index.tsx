@@ -1,6 +1,6 @@
 import Layout from '@/components/layout';
 
-export default function HistoryScholarship() {
+export default function PastScholarship() {
     return (
         <Layout>
             <div className="w-full min-h-screen ">

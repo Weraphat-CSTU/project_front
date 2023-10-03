@@ -40,7 +40,7 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                 { path: '/addscholarship', lebel: 'เพิ่มทุน', id: 3 },
                 { path: '/manageStudent', lebel: 'จัดการนักศึกษา', id: 4 },
                 { path: '/manageScholarship', lebel: 'จัดการทุนการศึกษา', id: 5 },
-                { path: '/historyScholarship', lebel: 'ประวัติทุน', id: 6 },
+                { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 6 },
                 { path: '/', lebel: 'ออกจากระบบ', id: 7 },
             ]);
         } else if (user_id === '2') {
