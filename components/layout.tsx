@@ -6,6 +6,7 @@ import Index from '@/pages';
 type props = {
     children?: React.ReactNode;
     isLoading?: boolean;
+    title?: string;
 };
 
 type menu = {
@@ -35,17 +36,17 @@ const Layout: FC<props> = ({ children, isLoading }) => {
         if (user_id === '1') {
             setnarMolmenu([
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1 },
-                { path: '/historyscholarship', lebel: 'ข้อมูลผู้ใช้', id: 2 },
+                { path: '/userInformation', lebel: 'ข้อมูลผู้ใช้', id: 2 },
                 { path: '/addscholarship', lebel: 'เพิ่มทุน', id: 3 },
                 { path: '/manageStudent', lebel: 'จัดการนักศึกษา', id: 4 },
-                { path: '/', lebel: 'จัดการทุน', id: 5 },
-                { path: '/', lebel: 'ประวัติทุน', id: 6 },
+                { path: '/manageScholarship', lebel: 'จัดการทุนการศึกษา', id: 5 },
+                { path: '/historyScholarship', lebel: 'ประวัติทุน', id: 6 },
                 { path: '/', lebel: 'ออกจากระบบ', id: 7 },
             ]);
         } else if (user_id === '2') {
             setnarMolmenu([
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1 },
-                { path: '/historyscholarship', lebel: 'ข้อมูลผู้ใช้', id: 2 },
+                { path: '/userInformation', lebel: 'ข้อมูลผู้ใช้', id: 2 },
                 { path: '/', lebel: 'ออกจากระบบ', id: 7 },
             ]);
         }

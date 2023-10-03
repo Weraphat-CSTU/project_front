@@ -9,7 +9,10 @@ import { useEffect, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 import dayjs from 'dayjs';
+import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
+
+dayjs.extend(buddhistEra);
 
 export default function ManageStudent() {
     const [userdata, setUserdata] = useState<userInfoData[]>();
@@ -57,7 +60,7 @@ export default function ManageStudent() {
         <Layout>
             <div className="w-full min-h-screen ">
                 <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                    <p className="font-semibold text-2xl mb-5">จัดการนักศึกษา</p>
+                    <p className="font-semibold text-xl mb-5">จัดการนักศึกษา</p>
                     <div className="overflow-x-auto">
                         <table className="table table-zebra table-lg w-full">
                             {/* head */}
@@ -87,8 +90,7 @@ export default function ManageStudent() {
                                                     <td>
                                                         {dayjs(item.create_date)
                                                             .locale('th')
-                                                            .add(543, 'year')
-                                                            .format('DD MMMM YYYY')}
+                                                            .format('DD MMMM BBBB')}
                                                     </td>
                                                     <td>
                                                         <label className="relative inline-flex items-center mr-5 cursor-pointer">
