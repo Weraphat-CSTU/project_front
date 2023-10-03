@@ -1,18 +1,11 @@
-export type userInfoData = {
+import { userInfoData } from './getuserInfo';
+
+export type updateUserStatusParam = {
     userId: string;
-    name: string;
-    lastname: string;
-    email: string;
-    cardId: string;
-    phone: string;
-    studentId: string;
-    grade: number;
-    is_active: 'Y'|'N';
-    lineId: string;
-    create_date:string;
+    is_active: 'Y' | 'N';
 };
 
-export type userInfoDataBody = {
+export type updateUserStatusRespone = {
     result: userInfoData[];
 };
 
@@ -26,7 +19,7 @@ const mockData: userInfoData[] = [
         phone: '092-939-3939',
         studentId: '6109650140',
         grade: 3.75,
-        is_active: "N",
+        is_active: 'N',
         lineId: 'pM2.5',
         create_date:'2023-09-17'
     },
@@ -39,12 +32,16 @@ const mockData: userInfoData[] = [
         phone: '092-939-2897',
         studentId: '6109650124',
         grade: 3.0,
-        is_active: "Y",
+        is_active: 'Y',
         lineId: 'parkM2.5',
         create_date:'2023-10-2'
     },
 ];
 
-export function getuserinfo(): Promise<userInfoDataBody> {
+export function updateUserStatus(data: updateUserStatusParam): Promise<updateUserStatusRespone> {
+
+    const objIndex = mockData.findIndex((obj) => obj.userId === data.userId);
+    mockData[objIndex].is_active = data.is_active;
+
     return Promise.resolve({ result: mockData });
 }
