@@ -5,8 +5,8 @@ export type registerPlayload = {
     card_id: string;
     student_id: string;
     phone: string;
-    line_id: string;
-    grade: number;
+    line_id: string|null;
+    grade: number|null;
     password: string; 
 };
 

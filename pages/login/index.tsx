@@ -7,7 +7,7 @@ import { useMutation } from 'react-query';
 
 export default function Login() {
     const Router = useRouter();
-    const Swal = require('sweetalert2')
+    const Swal = require('sweetalert2');
     const { mutate, isLoading } = useMutation({
         mutationKey: ['login'],
         mutationFn: async (value: loginPlayload) => {
@@ -15,17 +15,17 @@ export default function Login() {
         },
         onSuccess: (data) => {
             sessionStorage.setItem('login', 'true');
-            sessionStorage.setItem('user_id', data.result.accessToken);
+            sessionStorage.setItem('role_id', data.result.accessToken);
             Router.push('/scholarship');
         },
         onError: () => {
             Swal.fire({
                 title: 'เข้าสู่ระบบล้มเหลว',
-                text: "กรุณากรอกข้อมูลให้ถูกต้อง",
+                text: 'กรุณากรอกข้อมูลให้ถูกต้อง',
                 icon: 'error',
                 confirmButtonColor: '#3085d6',
-                confirmButtonText: 'ตกลง'
-              })
+                confirmButtonText: 'ตกลง',
+            });
         },
     });
 
@@ -96,7 +96,7 @@ export default function Login() {
                                 {...register('password')}
                             />
                             <button
-                                type='submit'
+                                type="submit"
                                 className="py-3 rounded-md bg-[#EB9D48] label-text text-xl text-white mt-10"
                             >
                                 เข้าสู่ระบบ

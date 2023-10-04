@@ -32,8 +32,8 @@ const Layout: FC<props> = ({ children, isLoading }) => {
             router.push('/login');
         }
 
-        const user_id = sessionStorage.getItem('user_id');
-        if (user_id === '1') {
+        const role_id = sessionStorage.getItem('role_id');
+        if (role_id === '1') {
             setnarMolmenu([
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1 },
                 { path: '/userInformation', lebel: 'ข้อมูลผู้ใช้', id: 2 },
@@ -43,7 +43,7 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 6 },
                 { path: '/', lebel: 'ออกจากระบบ', id: 7 },
             ]);
-        } else if (user_id === '2') {
+        } else if (role_id === '2') {
             setnarMolmenu([
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1 },
                 { path: '/userInformation', lebel: 'ข้อมูลผู้ใช้', id: 2 },

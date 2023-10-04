@@ -59,14 +59,15 @@ export default function Register() {
         const normalResult: registerPlayload = {
             name: events.name,
             lastname: events.lastname,
-            card_id: events.card_id,
+            card_id: events.card_id.replaceAll('-', ''),
             email: events.email,
             student_id: events.student_id,
-            phone: events.phone,
-            grade: events.grade,
-            line_id: events.line_id,
+            phone: events.phone.replaceAll('-', ''),
+            grade: events.grade || null,
+            line_id: events.line_id || null,
             password: events.password,
         };
+        console.log(normalResult);
         Swal.fire({
             title: 'ยืนยันลงทะเบียนใช่หรือไม่?',
             icon: 'warning',

@@ -23,11 +23,11 @@ export default function Scholarshipall() {
                                 className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50"
                                 onClick={() => Router.push(`/scholarship-detail/${index}`)}
                             >
-                                <div className="font-semibold text-xl">{item.scname}</div>
+                                <div className="font-semibold text-xl">{item.scholarship_name}</div>
                                 <div className="font-normal text-[17px]">
-                                    {item.sctype} ({item.scyear})
+                                    {item.scholarship_type_name} ({item.scholarship_year})
                                 </div>
-                                <div>{getMonth(item.std, item.edd)}</div>
+                                <div>{getMonth(item.start_date, item.end_date)}</div>
                             </div>
                         );
                     })}

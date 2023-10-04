@@ -25,10 +25,12 @@ export default function manageScholarship() {
                             {/* head */}
                             <thead>
                                 <tr className="bg-gray-200 ">
-                                    <th className="w-2/6 pl-10">ชื่อทุนการศึกษา</th>
-                                    <th className="w-2/6">ช่วงเวลาเปิด-ปิดรับสมัคร</th>
-                                    <th className="w-1/6">แก้ไข</th>
-                                    <th className="w-1/6">ลบ</th>
+                                    <th className="w-7/12">ชื่อทุนการศึกษา</th>
+                                    <th className="w-1/12">ปีการศึกษา</th>
+                                    <th className="w-1/12">วันที่สิ้นสุดโครงการ</th>
+                                    <th className="w-1/12">ระดับ</th>
+                                    <th className="w-1/12 text-center">แก้ไข</th>
+                                    <th className="w-1/12 ">ลบ</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -37,25 +39,26 @@ export default function manageScholarship() {
                                         <>
                                             {/* row 1 */}
                                             <tr key={index}>
-                                                <td className="pl-10">{item.scname}</td>
-                                                <td>
-                                                    {dayjs(item.std)
-                                                        .locale('th')
-                                                        .format('DD MMMM BBBB') +
-                                                        ' - ' +
-                                                        dayjs(item.edd)
-                                                            .locale('th')
-                                                            .format('DD MMMM BBBB')}
+                                                <td className="text-blue-700">
+                                                    {item.scholarship_name}
                                                 </td>
-                                                <td className="text-xl">
+                                                <td>{item.scholarship_year}</td>
+                                                <td>
+                                                    {dayjs(item.end_date)
+                                                        .locale('th')
+                                                        .format('DD MMMM BBBB')}
+                                                </td>
+                                                <td>{item.scholarship_type_name}</td>
+                                                <td className="text-xl flex justify-center">
                                                     <FiEdit
                                                         onClick={() => {
                                                             console.log();
                                                         }}
                                                     />
                                                 </td>
-                                                <td className="text-xl">
+                                                <td className="text-xl  ">
                                                     <MdDeleteOutline
+                                                        className="text-red-600 "
                                                         onClick={() => {
                                                             console.log();
                                                         }}

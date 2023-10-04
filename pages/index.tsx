@@ -162,12 +162,13 @@ export default function Index() {
                                             }
                                         >
                                             <div className="font-semibold text-xl">
-                                                {item.scname}
+                                                {item.scholarship_name}
                                             </div>
                                             <div className="font-normal text-[17px]">
-                                                {item.sctype} ({item.scyear})
+                                                {item.scholarship_type_name} (
+                                                {item.scholarship_year})
                                             </div>
-                                            <div>{getMonth(item.std, item.edd)}</div>
+                                            <div>{getMonth(item.start_date, item.end_date)}</div>
                                         </div>
                                     );
                                 })}
