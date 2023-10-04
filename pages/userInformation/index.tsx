@@ -21,7 +21,7 @@ export default function userInformation() {
             <div className="w-full min-h-screen bg-[#EFF1FE]">
                 <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
                     <div className="flex">
-                        <p className="font-semibold text-2xl mb-5">ประวัตินักศึกษา</p>
+                        <p className="font-semibold text-xl mb-5">ประวัตินักศึกษา</p>
                         <hr />
                     </div>
                     <div className=" border rounded-lg shadow-lg mb-3 mt-3 space-y-3 bg-white">
@@ -77,7 +77,7 @@ export default function userInformation() {
                         </div>
                     </div>
 
-                    <div className="font-bold text-2xl">
+                    <div className="font-bold text-xl">
                         <p>ประวัติทุนการศึกษา</p>
                         <div className=" border rounded-md shadow-lg mb-3  mt-3 space-y-3 "></div>
                     </div>

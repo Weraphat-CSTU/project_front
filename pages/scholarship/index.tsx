@@ -25,8 +25,8 @@ export default function Scholarship() {
             <div className="w-full h-screen ">
                 <div className="mx-auto max-w-3xl lg:max-w-7xl pt-10">
                     <div className="flex items-center">
-                        <h1 className="text-2xl font-extrabold">ทุนการศึกษา</h1>
-                        <h2 className="ml-2 font-semibold text-gray-500 dark:text-gray-400 text-lg pt-1">
+                        <h1 className="text-xl font-extrabold">ทุนการศึกษา</h1>
+                        <h2 className="ml-2 font-semibold text-gray-500 dark:text-gray-400 text-base pt-1">
                             สาขาวิชาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
                         </h2>
                     </div>
