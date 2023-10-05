@@ -1,7 +1,15 @@
 import Layout from '@/components/layout';
+import { useState } from 'react';
 import SimpleMDE from 'react-simplemde-editor';
+import { FileUploader } from 'react-drag-drop-files';
 
 export default function Addscholarship() {
+    const fileTypes = ['PDF'];
+
+    const [file, setFile] = useState(null);
+    const handleChange = (file: any): void => {
+        setFile(file);
+    };
     return (
         <Layout>
             <div className="w-full h-screen">
@@ -90,6 +98,7 @@ export default function Addscholarship() {
                                 ยกเลิก
                             </button>
                         </div>
+                        <FileUploader handleChange={handleChange} name="file" types={fileTypes} />
                     </div>
                 </div>
             </div>

@@ -42,6 +42,7 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                 { path: '/manageScholarship', lebel: 'จัดการทุนการศึกษา', id: 5 },
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 6 },
                 { path: '/', lebel: 'ออกจากระบบ', id: 7 },
+                { path: '/demoApp', lebel: 'ทดสอบปฏิทิน', id: 8 },
             ]);
         } else if (role_id === '2') {
             setnarMolmenu([

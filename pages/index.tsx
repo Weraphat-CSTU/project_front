@@ -8,6 +8,8 @@ import { useRouter } from 'next/router';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
 import { useQuery } from 'react-query';
 import { getInfomation } from '@/dataService/getinformation';
 import { getCalendar } from '@/dataService/getcalendar';
@@ -179,15 +181,19 @@ export default function Index() {
                                 ปฏิทันกำหนดการ
                             </div>
                             <FullCalendar
-                                plugins={[dayGridPlugin]}
-                                locale={'th'}
+                                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                                headerToolbar={{
+                                    left: 'title',
+                                    center: 'dayGridMonth,timeGridWeek,timeGridDay',
+                                    right: 'today prev,next',
+                                }}
                                 initialView="dayGridMonth"
+                                locale={'th'}
                                 dayMaxEventRows={3}
-                                events={Calendar?.result.map((items) => ({
-                                    title: items.title,
-                                    start: items.start,
-                                    end: items.end,
-                                    color: items.color,
+                                events={scholarship?.result.map((items) => ({
+                                    title: items.scholarship_name,
+                                    start: items.start_date,
+                                    end: items.end_date,
                                     textColor: 'black',
                                 }))}
                             />
