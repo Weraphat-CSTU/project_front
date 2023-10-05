@@ -2,7 +2,7 @@ import Layout2 from '@/components/layout2';
 import { getScholarship } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
-import getMonth from '@/utils/getMonth';
+import { getDate } from '@/utils/getDate';
 
 export default function Scholarshipall() {
     const Router = useRouter();
@@ -27,7 +27,7 @@ export default function Scholarshipall() {
                                 <div className="font-normal text-[17px]">
                                     {item.scholarship_type_name} ({item.scholarship_year})
                                 </div>
-                                <div>{getMonth(item.start_date, item.end_date)}</div>
+                                <div>{getDate(item.start_date, item.end_date)}</div>
                             </div>
                         );
                     })}

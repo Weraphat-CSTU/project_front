@@ -13,7 +13,7 @@ import { getInfomation } from '@/dataService/getinformation';
 import { getCalendar } from '@/dataService/getcalendar';
 import { getScholarship } from '@/dataService/getscholarship';
 import Layout2 from '@/components/layout2';
-import getMonth from '@/utils/getMonth';
+import { getDate } from '@/utils/getDate';
 
 export default function Index() {
     const useSwiperRef = useRef<SwiperClass>();
@@ -168,7 +168,7 @@ export default function Index() {
                                                 {item.scholarship_type_name} (
                                                 {item.scholarship_year})
                                             </div>
-                                            <div>{getMonth(item.start_date, item.end_date)}</div>
+                                            <div>{getDate(item.start_date, item.end_date)}</div>
                                         </div>
                                     );
                                 })}

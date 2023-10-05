@@ -5,7 +5,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import { useQuery } from 'react-query';
 import { getCalendar } from '@/dataService/getcalendar';
 import { getScholarship } from '@/dataService/getscholarship';
-import getMonth from '@/utils/getMonth';
+import { getDate } from '@/utils/getDate';
 
 export default function Scholarship() {
     const Router = useRouter();
@@ -60,7 +60,7 @@ export default function Scholarship() {
                                                 {item.scholarship_type_name} (
                                                 {item.scholarship_year})
                                             </div>
-                                            <div>{getMonth(item.start_date, item.end_date)}</div>
+                                            <div>{getDate(item.start_date, item.end_date)}</div>
                                         </div>
                                     );
                                 })}

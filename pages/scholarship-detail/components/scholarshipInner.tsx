@@ -5,7 +5,7 @@ import { useQuery } from 'react-query';
 import { getScholarship } from '@/dataService/getscholarship';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
-import getDate from '@/utils/getDate';
+import { getDate } from '@/utils/getDate';
 
 export default function ScholarshipDetailInner() {
     const router = useRouter();
