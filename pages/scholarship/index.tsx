@@ -1,19 +1,12 @@
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
 import { useQuery } from 'react-query';
-import { getCalendar } from '@/dataService/getcalendar';
 import { getScholarship } from '@/dataService/getscholarship';
 import { getDate } from '@/utils/getDate';
+import Fullcalendar from '@/components/fullcalendar';
 
 export default function Scholarship() {
     const Router = useRouter();
-
-    const { data: Calendar } = useQuery({
-        queryKey: 'calendar',
-        queryFn: async () => getCalendar(),
-    });
 
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
@@ -68,13 +61,7 @@ export default function Scholarship() {
                         </div>
                         <div className="w-full lg:w-3/5  pl-5">
                             <div className="text-medium text-xl pb-5">ปฏิทันกำหนดการ</div>
-                            <FullCalendar
-                                plugins={[dayGridPlugin]}
-                                locale={'th'}
-                                initialView="dayGridMonth"
-                                dayMaxEventRows={3}
-                                events={Calendar?.result}
-                            />
+                            <Fullcalendar />
                         </div>
                     </div>
                 </div>

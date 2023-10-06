@@ -12,7 +12,7 @@ export default function Scholarshipall() {
         queryFn: async () => getScholarship(),
     });
     return (
-        <div className="w-full min-h-screen bg-[#EFF1FE]">
+        <div className="w-full min-h-screen bg-[#f5f7fb]">
             <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
                 <p className="font-semibold text-2xl mb-5">ทุนการศึกษาที่กำลังดำเนินการ</p>
                 <div className=" border rounded-lg shadow-lg mb-3 mt-3 space-y-3 bg-white p-5">

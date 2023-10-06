@@ -6,16 +6,12 @@ import 'swiper/css';
 import { useRef } from 'react';
 import { useRouter } from 'next/router';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import interactionPlugin from '@fullcalendar/interaction';
 import { useQuery } from 'react-query';
 import { getInfomation } from '@/dataService/getinformation';
-import { getCalendar } from '@/dataService/getcalendar';
 import { getScholarship } from '@/dataService/getscholarship';
 import Layout2 from '@/components/layout2';
 import { getDate } from '@/utils/getDate';
+import Fullcalendar from '@/components/fullcalendar';
 
 export default function Index() {
     const useSwiperRef = useRef<SwiperClass>();
@@ -27,18 +23,13 @@ export default function Index() {
         queryFn: async () => getInfomation(),
     });
 
-    const { data: Calendar, isLoading: isLoadingCalen } = useQuery({
-        queryKey: 'calendar',
-        queryFn: async () => getCalendar(),
-    });
-
     const { data: scholarship, isLoading: isLoadingScholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
 
     return (
-        <Layout2 isLoading={isLoadingInfo && isLoadingCalen && isLoadingScholarship}>
+        <Layout2 isLoading={isLoadingInfo && isLoadingScholarship}>
             <div className=" w-full min-h-screen bg-[#EFF1FE]">
                 <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl ">
                     <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
@@ -180,23 +171,7 @@ export default function Index() {
                             <div className="font-bold text-md md:text-lg lg:text-xl pb-5">
                                 ปฏิทันกำหนดการ
                             </div>
-                            <FullCalendar
-                                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-                                headerToolbar={{
-                                    left: 'title',
-                                    center: 'dayGridMonth,timeGridWeek,timeGridDay',
-                                    right: 'today prev,next',
-                                }}
-                                initialView="dayGridMonth"
-                                locale={'th'}
-                                dayMaxEventRows={3}
-                                events={scholarship?.result.map((items) => ({
-                                    title: items.scholarship_name,
-                                    start: items.start_date,
-                                    end: items.end_date,
-                                    textColor: 'black',
-                                }))}
-                            />
+                            <Fullcalendar />
                         </div>
                     </div>
                 </div>

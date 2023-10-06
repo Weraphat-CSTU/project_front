@@ -18,7 +18,7 @@ export default function userInformation() {
 
     return (
         <Layout isLoading={isLoading}>
-            <div className="w-full min-h-screen bg-[#EFF1FE]">
+            <div className="w-full min-h-screen bg-[#f5f7fb]">
                 <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
                     <div className="flex">
                         <p className="font-semibold text-xl mb-5">ประวัตินักศึกษา</p>
@@ -28,7 +28,7 @@ export default function userInformation() {
                         <div className="flex flex-wrap ">
                             <div className="w-2/6 h-96 border-r p-2 text-center flex items-center justify-center">
                                 <div className="space-y-5">
-                                    <p className="text-xl font-semibold">ข้อมูลบัญชีผู้ใช้</p>
+                                    <p className="text-lg font-medium">โปรไฟล์</p>
                                     <Image
                                         src="/น้องพี.jfif"
                                         width={150}
@@ -75,11 +75,6 @@ export default function userInformation() {
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div className="font-bold text-xl">
-                        <p>ประวัติทุนการศึกษา</p>
-                        <div className=" border rounded-md shadow-lg mb-3  mt-3 space-y-3 "></div>
                     </div>
                 </div>
             </div>

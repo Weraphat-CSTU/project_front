@@ -13,7 +13,8 @@ export type scholarshipData = {
     scholarship_condition_name:string,
     scholarship_qualification_name:string,
     scholarship_type_name: string,
-    class_type_name: string
+    class_type_name: string,
+    tag_color:string,
 }
 
 export type scholarshipDataParam ={
@@ -40,7 +41,8 @@ const mockscholarship : scholarshipData[] =  [
       scholarship_grade:3.00,
       scholarship_id:"0",
       scholarship_qualification_name:"มีจิตอาสา",
-      class_type_name: "ทุกชั้นปี"
+      class_type_name: "ทุกชั้นปี",
+      tag_color:"#87D57C"
     },
     {
       scholarship_type_id:2,
@@ -57,7 +59,8 @@ const mockscholarship : scholarshipData[] =  [
       scholarship_grade:3.00,
       scholarship_id:"1",
       scholarship_qualification_name:"มีจิตอาสา",
-      class_type_name: "ทุกชั้นปี"
+      class_type_name: "ทุกชั้นปี",
+      tag_color:"#0250E3"
     },
     {
       scholarship_type_id:2,
@@ -74,7 +77,8 @@ const mockscholarship : scholarshipData[] =  [
       scholarship_grade:3.00,
       scholarship_id:"2",
       scholarship_qualification_name:"มีจิตอาสา",
-      class_type_name: "ทุกชั้นปี"
+      class_type_name: "ทุกชั้นปี",
+      tag_color:"#F5A01E"
     },
   ]
 

@@ -6,6 +6,7 @@ import { getScholarship } from '@/dataService/getscholarship';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { getDate } from '@/utils/getDate';
+import Fullcalendar from '@/components/fullcalendar';
 
 export default function ScholarshipDetailInner() {
     const router = useRouter();
@@ -52,19 +53,13 @@ export default function ScholarshipDetailInner() {
                     </div>
                 </div>
                 <div className="w-full h-2/5 flex justify-between ">
-                    <div className="w-2/4  border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
+                    <div className="w-2/4  border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 lg:mr-5">
                         <div className="text-2xl font-extrabold dark:text-white">
                             รายละเอียดเพิ่มเติม
                         </div>
                     </div>
-                    <div className="w-full  lg:w-2/4  pl-5 border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
-                        <FullCalendar
-                            plugins={[dayGridPlugin]}
-                            locale={'th'}
-                            initialView="dayGridMonth"
-                            dayMaxEventRows={3}
-                            events={Calendar?.result}
-                        />
+                    <div className="w-full  lg:w-2/4  lg:ml-5 border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
+                        <Fullcalendar />
                     </div>
                 </div>
             </div>
