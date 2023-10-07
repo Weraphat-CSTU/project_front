@@ -25,7 +25,7 @@ export default function PastScholarship() {
                                     <th className="w-7/12">ชื่อทุนการศึกษา</th>
                                     <th className="w-1/12">ปีการศึกษา</th>
                                     <th className="w-1/12">วันที่สิ้นสุดโครงการ</th>
-                                    <th className="w-1/12 text-center">ระดับ</th>
+                                    <th className="w-1/12 text-center">ประเภท</th>
                                 </tr>
                             </thead>
                             <tbody>

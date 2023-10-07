@@ -57,7 +57,7 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                     icons: <IoSettingsOutline />,
                 },
                 {
-                    path: '/manageScholarship',
+                    path: '/announcements',
                     lebel: 'ข่าวประชาสัมพันธ์',
                     id: 5,
                     icons: <TfiAnnouncement />,
@@ -68,12 +68,12 @@ const Layout: FC<props> = ({ children, isLoading }) => {
             setnarMolmenu([
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1, icons: <IoIosSchool /> },
                 {
-                    path: '/userInformation',
+                    path: '/announcements',
                     lebel: 'ข่าวประชาสัมพันธ์',
                     id: 2,
-                    icons: <IoIosSchool />,
+                    icons: <TfiAnnouncement />,
                 },
-                { path: '/userInformation', lebel: 'ประวัติทุน', id: 3, icons: <IoIosSchool /> },
+                { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 3, icons: <GrHistory /> },
             ]);
         }
     }, []);

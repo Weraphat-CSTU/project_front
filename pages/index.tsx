@@ -209,7 +209,7 @@ export default function Index() {
                                 </div>
                                 <div className=" pt-8 space-y-3">
                                     <div className="font-bold text-xl text-center">มหาวิทยาลัย</div>
-                                    <div className="text-center">ทุนจากมหาวิทยาลัย ธรรมศาสตร์</div>
+                                    <div className="text-center">ทุนจากมหาวิทยาลัยธรรมศาสตร์</div>
                                 </div>
                             </div>
                         </div>
