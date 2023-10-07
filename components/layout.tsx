@@ -63,7 +63,6 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                     icons: <TfiAnnouncement />,
                 },
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 6, icons: <GrHistory /> },
-                { path: '/demoApp', lebel: 'ทดสอบปฏิทิน', id: 7, icons: <IoIosSchool /> },
             ]);
         } else if (role_id === '2') {
             setnarMolmenu([
@@ -107,7 +106,7 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         {/* <SlUser className="w-8 h-8" /> */}
                                         <Image
-                                            src="/น้องพี.jfif"
+                                            src="/น้อนปาร์ค.jpg"
                                             width={100}
                                             height={30}
                                             alt="Picture of the author"

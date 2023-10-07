@@ -30,7 +30,7 @@ export default function userInformation() {
                                 <div className="space-y-5">
                                     <p className="text-lg font-medium">โปรไฟล์</p>
                                     <Image
-                                        src="/น้องพี.jfif"
+                                        src="/น้อนปาร์ค.jpg"
                                         width={150}
                                         height={50}
                                         alt="Picture of the author"

@@ -1,5 +1,3 @@
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
 import { getCalendar } from '@/dataService/getcalendar';
 import { useQuery } from 'react-query';
 import { getScholarship } from '@/dataService/getscholarship';
@@ -59,7 +57,7 @@ export default function ScholarshipDetailInner() {
                         </div>
                     </div>
                     <div className="w-full  lg:w-2/4  lg:ml-5 border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
-                        <Fullcalendar />
+                        {/* <Fullcalendar /> */}
                     </div>
                 </div>
             </div>
