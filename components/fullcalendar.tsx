@@ -10,8 +10,9 @@ import { getScholarship } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
 
 export default function Fullcalendar() {
-    const obj = Reflect.get(router.query, 'id') as string | null;
     const Router = useRouter();
+    const obj = Reflect.get(Router.query, 'id') as string | null;
+
     const { data: scholarship, isLoading: isLoadingScholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => (obj ? getScholarship({ scholarship_id: obj }) : getScholarship()),
