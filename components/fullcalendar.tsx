@@ -1,7 +1,7 @@
 import thLocale from '@fullcalendar/core/locales/th';
 import dayjs from 'dayjs';
 import { getCalendar } from '@/dataService/getcalendar';
-import { useRouter } from 'next/router';
+import router, { useRouter } from 'next/router';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -10,15 +10,13 @@ import { getScholarship } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
 
 export default function Fullcalendar() {
+    const obj = Reflect.get(router.query, 'id') as string | null;
     const Router = useRouter();
     const { data: scholarship, isLoading: isLoadingScholarship } = useQuery({
         queryKey: 'scholarship',
-        queryFn: async () => getScholarship(),
+        queryFn: async () => (obj ? getScholarship({ scholarship_id: obj }) : getScholarship()),
     });
-    const { data: calendar, isLoading: isLoadingCalendar } = useQuery({
-        queryKey: 'scholarship',
-        queryFn: async () => getCalendar(),
-    });
+
     return (
         <div>
             <FullCalendar

@@ -7,23 +7,7 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
     'node_modules/react-daisyui/dist/**/*.js'
   ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-    },
-  },
-  daisyui: {
-    themes: [],
-    base:true,
-    utils:true,
-    logs:true,
-    rtl:false,
-    darkThemes:"light",
-  },
+
   plugins: [require("daisyui")],
   daisyui: {
     themes: [],

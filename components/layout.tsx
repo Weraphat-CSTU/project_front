@@ -13,6 +13,7 @@ type props = {
     children?: React.ReactNode;
     isLoading?: boolean;
     title?: string;
+    subTitle?: string;
 };
 
 type menu = {
@@ -22,7 +23,7 @@ type menu = {
     icons: React.ReactElement;
 };
 
-const Layout: FC<props> = ({ children, isLoading }) => {
+const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
     const router = useRouter();
     const [authorize, setauthorize] = useState<boolean | undefined>(undefined);
     const [norMalmenu, setnarMolmenu] = useState<menu[]>();
@@ -42,8 +43,14 @@ const Layout: FC<props> = ({ children, isLoading }) => {
         const role_id = sessionStorage.getItem('role_id');
         if (role_id === '1') {
             setnarMolmenu([
+                {
+                    path: '/announcements',
+                    lebel: 'ข่าวประชาสัมพันธ์',
+                    id: 5,
+                    icons: <TfiAnnouncement />,
+                },
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1, icons: <IoIosSchool /> },
-                { path: '/addscholarship', lebel: 'เพิ่มทุน', id: 2, icons: <BiCalendarPlus /> },
+
                 {
                     path: '/manageStudent',
                     lebel: 'จัดการนักศึกษา',
@@ -56,24 +63,22 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                     id: 4,
                     icons: <IoSettingsOutline />,
                 },
-                {
-                    path: '/announcements',
-                    lebel: 'ข่าวประชาสัมพันธ์',
-                    id: 5,
-                    icons: <TfiAnnouncement />,
-                },
-                { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 6, icons: <GrHistory /> },
+
+                { path: '/followscholarship', lebel: 'ติดตามทุน', id: 6, icons: <IoIosSchool /> },
+                { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 7, icons: <GrHistory /> },
             ]);
         } else if (role_id === '2') {
             setnarMolmenu([
-                { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1, icons: <IoIosSchool /> },
                 {
                     path: '/announcements',
                     lebel: 'ข่าวประชาสัมพันธ์',
                     id: 2,
                     icons: <TfiAnnouncement />,
                 },
-                { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 3, icons: <GrHistory /> },
+                { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1, icons: <IoIosSchool /> },
+                { path: '/followscholarship', lebel: 'ติดตามทุน', id: 3, icons: <IoIosSchool /> },
+
+                { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 4, icons: <GrHistory /> },
             ]);
         }
     }, []);
@@ -94,6 +99,7 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                                 <div className="flex items-center">
                                     <Image
                                         src="/qjg3jmr9-removebg-preview.png"
+                                        className="w-auto h-auto"
                                         width={50}
                                         height={10}
                                         alt="Picture of the author"
@@ -163,7 +169,15 @@ const Layout: FC<props> = ({ children, isLoading }) => {
                             })}
                         </div>
                     </div>
-                    <div>{children}</div>
+                    <div className="mx-auto w-full lg:max-w-7xl pt-10 ">
+                        <div className="flex items-center">
+                            <h1 className="text-xl font-semibold">{title}</h1>
+                            <h2 className="ml-2 font-semibold text-gray-500 dark:text-gray-400 text-base pt-1">
+                                {subTitle}
+                            </h2>
+                        </div>
+                    </div>
+                    <div className="w-full h-screen ">{children}</div>
                 </div>
             )}
         </>

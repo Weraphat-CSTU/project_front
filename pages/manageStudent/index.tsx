@@ -57,29 +57,27 @@ export default function ManageStudent() {
     }, [userinfo]);
 
     return (
-        <Layout>
-            <div className="w-full min-h-screen ">
+        <Layout title="จัดการนักศึกษา">
+            <div className="">
                 <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                    <p className="font-semibold text-xl mb-5">จัดการนักศึกษา</p>
-                    <div className="overflow-x-auto">
-                        <table className="table table-zebra table-lg w-full">
-                            {/* head */}
-                            <thead>
-                                <tr className="bg-gray-200">
-                                    <th>ลำดับที่</th>
-                                    <th>ชื่อ-นามสกุล</th>
-                                    <th>รหัสนักศึกษา</th>
-                                    <th>เบอร์โทรศัพท์</th>
-                                    <th>วันที่สมัคร</th>
-                                    <th>สถานะ</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {userdata &&
-                                    userdata?.map((item, index) => {
-                                        return (
-                                            <>
-                                                {/* row 1 */}
+                    <div className="border shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer bg-white">
+                        <div className="overflow-x-auto">
+                            <table className="table table-zebra table-lg w-full mt-3">
+                                {/* head */}
+                                <thead>
+                                    <tr className="bg-gray-200">
+                                        <th>ลำดับที่</th>
+                                        <th>ชื่อ-นามสกุล</th>
+                                        <th>รหัสนักศึกษา</th>
+                                        <th>เบอร์โทรศัพท์</th>
+                                        <th>วันที่สมัคร</th>
+                                        <th>สถานะ</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {userdata &&
+                                        userdata?.map((item, index) => {
+                                            return (
                                                 <tr key={index}>
                                                     <td>{index + 1}</td>
                                                     <td>
@@ -123,11 +121,11 @@ export default function ManageStudent() {
                                                         </label>
                                                     </td>
                                                 </tr>
-                                            </>
-                                        );
-                                    })}
-                            </tbody>
-                        </table>
+                                            );
+                                        })}
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
             </div>

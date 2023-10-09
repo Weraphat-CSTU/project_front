@@ -14,16 +14,10 @@ export default function Scholarship() {
     });
 
     return (
-        <Layout>
-            <div className="w-full h-screen ">
+        <Layout title="ทุนการศึกษา" subTitle="สาขาวิชาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์">
+            <div className="">
                 <div className="mx-auto max-w-3xl lg:max-w-7xl pt-10">
-                    <div className="flex items-center">
-                        <h1 className="text-xl font-extrabold">ทุนการศึกษา</h1>
-                        <h2 className="ml-2 font-semibold text-gray-500 dark:text-gray-400 text-base pt-1">
-                            สาขาวิชาวิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
-                        </h2>
-                    </div>
-                    <div className="flex pt-10">
+                    <div className="flex ">
                         <div className="w-full lg:w-2/5 pr-5 ">
                             <div className="flex justify-between items-center">
                                 <div className=" font-medium text-xl">
@@ -36,7 +30,7 @@ export default function Scholarship() {
                                     ทั้งหมด
                                 </div>
                             </div>
-                            <div className="w-full pt-5">
+                            <div className="w-full pt-5 ">
                                 {scholarship?.result.map((item, index) => {
                                     return (
                                         <div
@@ -59,7 +53,7 @@ export default function Scholarship() {
                                 })}
                             </div>
                         </div>
-                        <div className="w-full lg:w-3/5  pl-5">
+                        <div className="w-full lg:w-3/5 pl-5 ">
                             <div className="text-medium text-xl pb-5">ปฏิทันกำหนดการ</div>
                             <Fullcalendar />
                         </div>

@@ -11,11 +11,10 @@ export default function Addscholarship() {
         setFile(file);
     };
     return (
-        <Layout>
-            <div className="w-full h-screen">
+        <Layout title="จัดการทุกการศึกษา" subTitle="เพิ่มทุนการศึกษา">
+            <div className="">
                 <div className="mx-auto max-w-3xl lg:max-w-7xl pt-10">
-                    <h1 className="font-bold text-xl">เพิ่มทุนการศึกษา</h1>
-                    <div className="w-full h-3/5 border rounded-md shadow-lg p-3 mb-3 mt-3 space-y-5 ">
+                    <div className="w-full h-3/5 border rounded-md shadow-lg p-3 mb-3 mt-3 space-y-5 bg-white">
                         <div className="font-semibold text-lg p-10">
                             <label className="label">
                                 <div className="flex items-center mt-3  w-full">

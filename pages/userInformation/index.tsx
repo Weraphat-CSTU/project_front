@@ -31,10 +31,11 @@ export default function userInformation() {
                                     <p className="text-lg font-medium">โปรไฟล์</p>
                                     <Image
                                         src="/น้อนปาร์ค.jpg"
-                                        width={150}
+                                        width={100}
                                         height={50}
                                         alt="Picture of the author"
-                                        className="object-cover"
+                                        className="object-cover w-auto h-auto"
+                                        priority
                                     />
                                 </div>
                             </div>

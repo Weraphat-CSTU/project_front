@@ -23,7 +23,6 @@ export default function ScholarshipDetailInner() {
     return (
         <div className="w-full h-screen">
             <div className="mx-auto max-w-3xl lg:max-w-7xl">
-                <h1 className="font-bold text-2xl mt-10">รายละเอียด</h1>
                 <div className="w-full h-3/5 border rounded-md shadow-lg p-5 mb-3 mt-3 space-y-5">
                     <div className="flex">
                         <div className="w-1/4">ชื่อทุนการศึกษา</div>
@@ -57,7 +56,7 @@ export default function ScholarshipDetailInner() {
                         </div>
                     </div>
                     <div className="w-full  lg:w-2/4  lg:ml-5 border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
-                        {/* <Fullcalendar /> */}
+                        <Fullcalendar />
                     </div>
                 </div>
             </div>

@@ -17,27 +17,10 @@ export default function Scholarshipall() {
     return (
         <div className="w-full min-h-screen bg-[#f5f7fb]">
             <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                <p className="font-medium text-lg mb-5">ทุนการศึกษาที่กำลังดำเนินการ</p>
-                {/* <div className=" border rounded-lg shadow-lg mb-3 mt-3 space-y-3 bg-white p-5">
-                    {scholarship?.result.map((item, index) => {
-                        return (
-                            <div
-                                key={index}
-                                className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50"
-                                onClick={() => Router.push(`/scholarship-detail/${index}`)}
-                            >
-                                <div className="font-semibold text-xl">{item.scholarship_name}</div>
-                                <div className="font-normal text-[17px]">
-                                    {item.scholarship_type_name} ({item.scholarship_year})
-                                </div>
-                                <div></div>
-                            </div>
-                        );
-                    })}
-                </div> */}
-                <div className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer bg-white">
+                <div className="border  shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer bg-white">
+                    <p className="font-medium text-lg mb-5">ทุนการศึกษาที่กำลังดำเนินการ</p>
                     <div className="overflow-x-auto">
-                        <table className="table table-zebra table-lg w-full">
+                        <table className="table table-zebra table-lg w-full mt-3">
                             {/* head */}
                             <thead>
                                 <tr className="bg-gray-200 ">
@@ -81,10 +64,10 @@ export default function Scholarshipall() {
                     </div>
                 </div>
 
-                <div className=" border rounded-lg shadow-lg mb-3 mt-3 space-y-3 bg-white p-5">
+                <div className=" border  shadow-lg mb-3  space-y-3 bg-white p-5 mt-10">
                     <p className="font-medium text-lg mb-5">ทุนการศึกษาที่ผ่านมา</p>
                     <div className="overflow-x-auto">
-                        <table className="table table-zebra table-lg w-full">
+                        <table className="table table-zebra table-lg w-full mt-3">
                             {/* head */}
                             <thead>
                                 <tr className="bg-gray-200 ">
