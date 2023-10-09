@@ -60,16 +60,32 @@ export default function manageScholarship() {
     return (
         <Layout title="จัดการทุนการศึกษา">
             <div className="">
-                <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                    <div className="flex justify-end">
-                        <button
-                            className="btn btn-info bg-cyan-400 border-none hover:bg-cyan-500"
-                            onClick={() => {
-                                router.push('/addscholarship');
-                            }}
-                        >
-                            <BiCalendarPlus /> เพิ่มทุน
-                        </button>
+                <div className=" mx-auto lg:max-w-7xl pt-10 ">
+                    <div className="flex flex-warp items-center">
+                        <div className="w-full">
+                            <div className="form-control w-full max-w-xs pb-5">
+                                <label className="label">
+                                    <span className="label-text">ประเภททุนการศึกษา</span>
+                                </label>
+                                <select className="select select-sm">
+                                    <option disabled selected>
+                                        ทุกประเภท
+                                    </option>
+                                    <option>ทุนภายใน</option>
+                                    <option>ทุนภายนอก</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div className="flex justify-end">
+                            <button
+                                className="btn btn-info bg-cyan-400 border-none hover:bg-cyan-500"
+                                onClick={() => {
+                                    router.push('/addscholarship');
+                                }}
+                            >
+                                <BiCalendarPlus /> เพิ่มทุน
+                            </button>
+                        </div>
                     </div>
                     <div className="border shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer bg-white">
                         <div className="overflow-x-auto">
@@ -101,7 +117,13 @@ export default function manageScholarship() {
                                                     </td>
                                                     <td>{item.scholarship_type_name}</td>
                                                     <td className="text-xl flex justify-center">
-                                                        <FiEdit onClick={() => {}} />
+                                                        <FiEdit
+                                                            onClick={() => {
+                                                                router.push(
+                                                                    `/scholarship-detail/${index}`,
+                                                                );
+                                                            }}
+                                                        />
                                                     </td>
                                                     <td className="text-xl  ">
                                                         <MdDeleteOutline
