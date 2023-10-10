@@ -4,13 +4,19 @@ import { getScholarship } from '@/dataService/getscholarship';
 import dayjs from 'dayjs';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
+import { useState } from 'react';
 
 dayjs.extend(buddhistEra);
+type filterDataType = {
+    scholarship_type_id?: string;
+    schoalrship_year?: string;
+};
 export default function PastScholarship() {
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
+    const [filterData, setfilterData] = useState<filterDataType>();
 
     return (
         <Layout title="ประวัติทุนการศึกษา">
@@ -22,23 +28,41 @@ export default function PastScholarship() {
                                 <label className="label">
                                     <span className="label-text">ประเภททุนการศึกษา</span>
                                 </label>
-                                <select className="select select-sm">
-                                    <option disabled selected>
+                                <select
+                                    className="select select-sm"
+                                    value={filterData?.scholarship_type_id}
+                                    onChange={(e) => {
+                                        setfilterData({
+                                            scholarship_type_id: e.target.value,
+                                            ...filterData,
+                                        });
+                                    }}
+                                >
+                                    <option selected value="alltype">
                                         ทุกประเภท
                                     </option>
-                                    <option>ทุนภายใน</option>
-                                    <option>ทุนภายนอก</option>
+                                    <option value="in">ทุนภายใน</option>
+                                    <option value="out">ทุนภายนอก</option>
                                 </select>
                             </div>
                             <div className="form-control w-full max-w-xs pb-5 lg:pl-5">
                                 <label className="label">
                                     <span className="label-text">ปีการศึกษา</span>
                                 </label>
-                                <select className="select select-sm">
-                                    <option disabled selected>
+                                <select
+                                    className="select select-sm"
+                                    value={filterData?.schoalrship_year}
+                                    onChange={(e) => {
+                                        setfilterData({
+                                            schoalrship_year: e.target.value,
+                                            ...filterData,
+                                        });
+                                    }}
+                                >
+                                    <option selected value="allyear">
                                         ทุกปีการศึกษา
                                     </option>
-                                    <option>ปีการศึกษา 2566</option>
+                                    <option value="2566">ปีการศึกษา 2566</option>
                                 </select>
                             </div>
                         </div>

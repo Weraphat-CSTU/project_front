@@ -2,6 +2,9 @@ import Layout from '@/components/layout';
 import { useState } from 'react';
 import SimpleMDE from 'react-simplemde-editor';
 import { FileUploader } from 'react-drag-drop-files';
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
+import { DateRange } from 'react-date-range';
 
 export default function Addscholarship() {
     const fileTypes = ['PDF'];
@@ -10,6 +13,14 @@ export default function Addscholarship() {
     const handleChange = (file: any): void => {
         setFile(file);
     };
+
+    const [state, setState] = useState([
+        {
+            startDate: new Date(),
+            endDate: null,
+            key: 'selection',
+        },
+    ]);
     return (
         <Layout title="จัดการทุกการศึกษา" subTitle="เพิ่มทุนการศึกษา">
             <div className="">
@@ -43,10 +54,11 @@ export default function Addscholarship() {
                                     <span className="label-text text-xl  w-2/5">
                                         ระยะเวลาเปิดรับสมัคร
                                     </span>
-                                    <input
-                                        type="text"
-                                        placeholder="ระยะเวลาเปิดรับสมัคร"
-                                        className="w-full input input-bordered "
+                                    <DateRange
+                                        editableDateInputs={true}
+                                        //   onChange={item => setState([item.selection])}
+                                        moveRangeOnFirstSelection={false}
+                                        //   ranges={state}
                                     />
                                 </div>
                             </label>
