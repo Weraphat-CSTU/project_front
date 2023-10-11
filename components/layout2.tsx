@@ -12,7 +12,7 @@ type props = {
 const Layout2: FC<props> = ({ children, isLoading }) => {
     const Router = useRouter();
     const [isOpen, setisOpen] = useState<boolean>(false);
-    const Navigator = [{ path: '/', lebel: 'หน้าแรก' }];
+
     return (
         <>
             {isLoading ? (
