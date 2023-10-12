@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import DatePicker from '@/components/date_picker';
+// import DatePicker from '@/components/date_picker';
+import { Button, DatePicker } from 'antd';
 import { RangePickerProps } from 'antd/es/date-picker';
 import dayjs from 'dayjs';
 import { Input } from 'antd';
@@ -47,8 +48,6 @@ export default function Addscholarship() {
                                         ระยะเวลาเปิดรับสมัคร
                                     </span>
                                     <DatePicker.RangePicker
-                                        showTime={{ format: 'HH:mm' }}
-                                        format="YYYY-MM-DD HH:mm"
                                         style={{ width: '100%' }}
                                         size="large"
                                     />
@@ -94,18 +93,12 @@ export default function Addscholarship() {
                             </label>
                         </div>
 
-                        <div className="flex justify-center space-x-5">
+                        <div className="flex justify-center ">
                             <button
                                 type="submit"
-                                className="py-3 rounded-md bg-[#0094FF] label-text text-lg text-white mt-10 w-full lg:w-1/4"
+                                className="text-white bg-[#08a479] px-8 py-2 rounded-lg"
                             >
-                                ยืนยัน
-                            </button>
-                            <button
-                                type="submit"
-                                className="py-3 rounded-md bg-[#ff0000] label-text text-lg text-white mt-10 w-full lg:w-1/4"
-                            >
-                                ยกเลิก
+                                บันทึก
                             </button>
                         </div>
                     </div>
