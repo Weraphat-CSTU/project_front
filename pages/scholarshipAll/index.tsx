@@ -14,7 +14,7 @@ export default function scholarshipAll() {
     }
     if (authorize) {
         return (
-            <Layout>
+            <Layout title="ทุนการศึกษาทั้งหมด">
                 <Scholarshipall />
             </Layout>
         );

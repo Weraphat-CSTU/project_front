@@ -14,7 +14,7 @@ export default function scholarshipDetail() {
     }
     if (authorize) {
         return (
-            <Layout title="รายละเอียด">
+            <Layout title="ทุนการศึกษา" subTitle="รายละเอียด">
                 <ScholarshipDetailInner />
             </Layout>
         );

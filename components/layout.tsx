@@ -99,7 +99,7 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                                 <div className="flex items-center">
                                     <Image
                                         src="/qjg3jmr9-removebg-preview.png"
-                                        className="w-auto h-auto"
+                                        className="w-[50px] h-[50px]"
                                         width={50}
                                         height={10}
                                         alt="Picture of the author"

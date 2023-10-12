@@ -8,6 +8,10 @@ import { Button, DatePicker } from 'antd';
 import { RangePickerProps } from 'antd/es/date-picker';
 import dayjs from 'dayjs';
 import { Input } from 'antd';
+import buddhistEra from 'dayjs/plugin/buddhistEra';
+import 'dayjs/locale/th';
+
+dayjs.extend(buddhistEra);
 
 export default function Addscholarship() {
     const fileTypes = ['PDF'];
@@ -17,10 +21,10 @@ export default function Addscholarship() {
         setFile(file);
     };
 
-    const disabledDate: RangePickerProps['disabledDate'] = (current) => {
-        // Can not select days before today and today
-        return current && current < dayjs().endOf('day');
-    };
+    // const disabledDate: RangePickerProps['disabledDate'] = (current) => {
+    //     // Can not select days before today and today
+    //     return current && current < dayjs().locale('th').endOf('day');
+    // };
 
     return (
         <Layout title="จัดการทุกการศึกษา" subTitle="เพิ่มทุนการศึกษา">
@@ -49,6 +53,7 @@ export default function Addscholarship() {
                                     </span>
                                     <DatePicker.RangePicker
                                         style={{ width: '100%' }}
+                                        format={'DD MMM BBBB'}
                                         size="large"
                                     />
                                 </div>

@@ -15,6 +15,8 @@ import {
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import { BiCalendarPlus } from 'react-icons/bi';
+import { Table, Select, Tag } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 
 dayjs.extend(buddhistEra);
 
@@ -25,7 +27,7 @@ export default function manageScholarship() {
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
-
+    const [filterData, setfilterData] = useState<string>();
     const { mutate } = useMutation({
         mutationKey: 'deletescholarshipdata',
         mutationFn: async (value: deletescholarshipParam) => {
@@ -54,9 +56,74 @@ export default function manageScholarship() {
             }
         });
     };
+
     useEffect(() => {
         setScholarshipdata(scholarship?.result);
-    }, [scholarship]);
+    }, [scholarship]); //ทำงานเมื่อเข้าสู่หน้าเว้บครั้งแรก หรือ จนกว่าจะเกิดการเปลี่ยนแปลง
+
+    const columns: ColumnsType<scholarshipData> = [
+        {
+            title: 'ชื่อทุนการศึกษา',
+            dataIndex: 'scholarship_name',
+            key: 'scholarship_name',
+        },
+        {
+            title: 'ปีการศึกษา',
+            dataIndex: 'scholarship_year',
+            key: 'scholarship_year',
+        },
+        {
+            title: 'วันที่สิ้นสุดโครงการ',
+            dataIndex: 'end_date',
+            key: 'end_date',
+            render: (value: string) => (
+                <div>{dayjs(value).locale('th').format('DD MMMM BBBB')}</div>
+            ),
+        },
+        {
+            title: 'ประเภท',
+            dataIndex: 'scholarship_type_name',
+            key: 'scholarship_type_name',
+            render: (value: string) => {
+                if (value === 'ทุนภายใน') {
+                    return <Tag color="blue">{value}</Tag>;
+                } else {
+                    return <Tag color="red">{value}</Tag>;
+                }
+            },
+        },
+        {
+            title: 'แก้ไข',
+            dataIndex: 'scholarship_id',
+            key: 'scholarship_id',
+            render: (value: string) => (
+                <div>
+                    <FiEdit
+                        className="cursor-pointer"
+                        onClick={() => {
+                            router.push(`/scholarship-detail/${value}`);
+                        }}
+                    />
+                </div>
+            ),
+        },
+        {
+            title: 'ลบ',
+            dataIndex: 'scholarship_id',
+            key: 'scholarship_id',
+            render: (value: string) => (
+                <div>
+                    <MdDeleteOutline
+                        className="text-red-600 text-xl cursor-pointer"
+                        onClick={() => {
+                            removeScholarship(value);
+                        }}
+                    />
+                </div>
+            ),
+        },
+    ];
+
     return (
         <Layout title="จัดการทุนการศึกษา">
             <div className="">
@@ -67,81 +134,36 @@ export default function manageScholarship() {
                                 <label className="label">
                                     <span className="label-text">ประเภททุนการศึกษา</span>
                                 </label>
-                                <select className="select select-sm">
-                                    <option disabled selected>
+                                <Select
+                                    value={filterData}
+                                    onChange={setfilterData}
+                                    placeholder="เลือกประเภททุน"
+                                >
+                                    <Select.Option selected value="alltype">
                                         ทุกประเภท
-                                    </option>
-                                    <option>ทุนภายใน</option>
-                                    <option>ทุนภายนอก</option>
-                                </select>
+                                    </Select.Option>
+                                    <Select.Option value="in">ทุนภายใน</Select.Option>
+                                    <Select.Option value="out">ทุนภายนอก</Select.Option>
+                                </Select>
                             </div>
                         </div>
                         <div className="flex justify-end">
                             <button
-                                className="btn btn-info bg-cyan-400 border-none hover:bg-cyan-500"
+                                className="btn btn-info text-white bg-blue-600 border-none hover:bg-blue-700"
                                 onClick={() => {
                                     router.push('/addscholarship');
                                 }}
                             >
-                                <BiCalendarPlus /> เพิ่มทุน
+                                <BiCalendarPlus className="text-white" /> เพิ่มทุน
                             </button>
                         </div>
                     </div>
-                    <div className="border shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer bg-white">
-                        <div className="overflow-x-auto">
-                            <table className="table table-zebra table-lg w-full mt-3">
-                                {/* head */}
-                                <thead>
-                                    <tr className="bg-gray-200 ">
-                                        <th className="w-7/12">ชื่อทุนการศึกษา</th>
-                                        <th className="w-1/12">ปีการศึกษา</th>
-                                        <th className="w-1/12">วันที่สิ้นสุดโครงการ</th>
-                                        <th className="w-1/12">ระดับ</th>
-                                        <th className="w-1/12 text-center">แก้ไข</th>
-                                        <th className="w-1/12 ">ลบ</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {scholarshipdata &&
-                                        scholarshipdata?.map((item, index) => {
-                                            return (
-                                                <tr key={index}>
-                                                    <td className="text-blue-700">
-                                                        {item.scholarship_name}
-                                                    </td>
-                                                    <td>{item.scholarship_year}</td>
-                                                    <td>
-                                                        {dayjs(item.end_date)
-                                                            .locale('th')
-                                                            .format('DD MMMM BBBB')}
-                                                    </td>
-                                                    <td>{item.scholarship_type_name}</td>
-                                                    <td className="text-xl flex justify-center">
-                                                        <FiEdit
-                                                            onClick={() => {
-                                                                router.push(
-                                                                    `/scholarship-detail/${index}`,
-                                                                );
-                                                            }}
-                                                        />
-                                                    </td>
-                                                    <td className="text-xl  ">
-                                                        <MdDeleteOutline
-                                                            className="text-red-600 "
-                                                            onClick={(e) => {
-                                                                removeScholarship(
-                                                                    item.scholarship_id,
-                                                                );
-                                                            }}
-                                                        />
-                                                    </td>
-                                                </tr>
-                                            );
-                                        })}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
+                    <Table
+                        dataSource={scholarshipdata}
+                        columns={columns}
+                        bordered
+                        pagination={false}
+                    />
                 </div>
             </div>
         </Layout>

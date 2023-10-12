@@ -54,7 +54,7 @@ export default function Scholarship() {
                             </div>
                         </div>
                         <div className="w-full lg:w-3/5 pl-5 ">
-                            <div className="text-medium text-xl pb-5">ปฏิทันกำหนดการ</div>
+                            <div className="text-medium text-xl pb-5">ปฏิทินกำหนดการ</div>
                             <Fullcalendar />
                         </div>
                     </div>
