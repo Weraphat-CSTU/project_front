@@ -3,7 +3,8 @@ import { useState } from 'react';
 import { FileUploader } from 'react-drag-drop-files';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import DatePicker from '@/components/date_picker';
+// import DatePicker from '@/components/date_picker';
+import { DatePicker } from 'antd';
 import { RangePickerProps } from 'antd/es/date-picker';
 import dayjs from 'dayjs';
 import { Input } from 'antd';
