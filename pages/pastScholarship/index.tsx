@@ -5,7 +5,7 @@ import dayjs from 'dayjs';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
 import { useState } from 'react';
-import { Select, Table } from 'antd';
+import { Select, Table, Tag } from 'antd';
 import Column from 'antd/es/table/Column';
 import { ColumnsType } from 'antd/es/table';
 
@@ -43,6 +43,13 @@ export default function PastScholarship() {
             title: 'ประเภท',
             dataIndex: 'scholarship_type_name',
             key: 'scholarship_type_name',
+            render: (value: string) => {
+                if (value === 'ทุนภายใน') {
+                    return <Tag color="blue">{value}</Tag>;
+                } else {
+                    return <Tag color="red">{value}</Tag>;
+                }
+            },
         },
     ];
 

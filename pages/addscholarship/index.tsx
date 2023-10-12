@@ -4,23 +4,31 @@ import { FileUploader } from 'react-drag-drop-files';
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 // import DatePicker from '@/components/date_picker';
-import { Button, DatePicker } from 'antd';
+import { Button, DatePicker, Select } from 'antd';
 import { RangePickerProps } from 'antd/es/date-picker';
 import dayjs from 'dayjs';
 import { Input } from 'antd';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
+import { getScholarship } from '@/dataService/getscholarship';
+import { useQuery } from 'react-query';
 
 dayjs.extend(buddhistEra);
-
+type filterDataType = {
+    class_type_name?: string;
+    schoalrship_year?: string;
+};
 export default function Addscholarship() {
     const fileTypes = ['PDF'];
-
+    const [filterData, setfilterData] = useState<filterDataType>();
     const [file, setFile] = useState(null);
     const handleChange = (file: any): void => {
         setFile(file);
     };
-
+    const { data: scholarship } = useQuery({
+        queryKey: 'scholarship',
+        queryFn: async () => getScholarship(),
+    });
     // const disabledDate: RangePickerProps['disabledDate'] = (current) => {
     //     // Can not select days before today and today
     //     return current && current < dayjs().locale('th').endOf('day');
@@ -43,7 +51,23 @@ export default function Addscholarship() {
                             <label className="lebel">
                                 <div className="flex items-center mt-3  w-full">
                                     <span className="label-text text-lg w-2/5 ">ปีการศึกษา</span>
-                                    <Input type="text" placeholder="ปีการศึกษา" size="large" />
+                                    <Select
+                                        value={filterData?.schoalrship_year}
+                                        onChange={(value) => {
+                                            setfilterData({
+                                                ...filterData,
+                                                schoalrship_year: value,
+                                            });
+                                        }}
+                                        placeholder="เลือกปีการศึกษา"
+                                        size="large"
+                                        className="w-full"
+                                    >
+                                        <Select.Option selected value="alltype">
+                                            ทุกปีการศึกษา
+                                        </Select.Option>
+                                        <Select.Option value="2566">ปีการศึกษา 2566</Select.Option>
+                                    </Select>
                                 </div>
                             </label>
                             <label className="lebel">
@@ -73,7 +97,24 @@ export default function Addscholarship() {
                             <label className="lebel">
                                 <div className="flex items-center mt-3 w-full">
                                     <span className="label-text text-lg  w-2/5">ชั้นปี</span>
-                                    <Input type="text" placeholder="ชั้นปี" size="large" />
+                                    <Select
+                                        value={filterData?.schoalrship_year}
+                                        onChange={(value) => {
+                                            setfilterData({
+                                                ...filterData,
+                                                schoalrship_year: value,
+                                            });
+                                        }}
+                                        placeholder="เลือกชั้นปี"
+                                        size="large"
+                                        className="w-full"
+                                    >
+                                        <Select.Option selected value="alltype">
+                                            ทุกชั้นปี
+                                        </Select.Option>
+                                        <Select.Option value="in">เฉพาะชั้นปีที่ 1</Select.Option>
+                                        <Select.Option value="out">เฉพาะชั้นปีที่ 2</Select.Option>
+                                    </Select>
                                 </div>
                             </label>
                             <label className="lebel">

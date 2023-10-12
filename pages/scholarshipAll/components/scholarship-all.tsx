@@ -77,6 +77,11 @@ export default function Scholarshipall() {
                     pagination={false}
                 />
 
+                <p className="font-medium text-lg mb-5 pt-5">
+                    ทุนการศึกษาที่จะเปิดรับสมัครเร็ว ๆ นี้
+                </p>
+                <Table columns={columns} bordered pagination={false} />
+
                 <p className="font-medium text-lg mb-5 pt-5">ทุนการศึกษาที่ผ่านมา</p>
                 <Table
                     dataSource={scholarship?.result}

@@ -6,6 +6,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
+import listPlugin from '@fullcalendar/list';
 import { getScholarship } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
 
@@ -21,10 +22,10 @@ export default function Fullcalendar() {
     return (
         <div>
             <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+                plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
                 headerToolbar={{
                     left: 'title',
-                    center: 'dayGridMonth,timeGridWeek,timeGridDay',
+                    center: 'dayGridMonth,timeGridWeek,listWeek',
                     right: 'today prev,next',
                 }}
                 locale={thLocale}
