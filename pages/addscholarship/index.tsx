@@ -48,8 +48,6 @@ export default function Addscholarship() {
                                         ระยะเวลาเปิดรับสมัคร
                                     </span>
                                     <DatePicker.RangePicker
-                                        showTime={{ format: 'HH:mm' }}
-                                        format="YYYY-MM-DD HH:mm"
                                         style={{ width: '100%' }}
                                         size="large"
                                     />
