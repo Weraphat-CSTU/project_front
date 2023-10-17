@@ -76,7 +76,7 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                     icons: <TfiAnnouncement />,
                 },
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1, icons: <IoIosSchool /> },
-                { path: '/followscholarship', lebel: 'ติดตามทุน', id: 3, icons: <IoIosSchool /> },
+                { path: '/studentfollow', lebel: 'ติดตามทุน', id: 3, icons: <IoIosSchool /> },
 
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 4, icons: <GrHistory /> },
             ]);

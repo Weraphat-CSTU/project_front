@@ -8,10 +8,6 @@ import Fullcalendar from '@/components/fullcalendar';
 
 export default function ScholarshipDetailInner() {
     const router = useRouter();
-    const { data: Calendar } = useQuery({
-        queryKey: 'calendar',
-        queryFn: async () => getCalendar(),
-    });
 
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',

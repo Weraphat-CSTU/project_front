@@ -92,7 +92,7 @@ export default function PastScholarship() {
                                             schoalrship_year: value,
                                         });
                                     }}
-                                    placeholder="เลือกประเภททุน"
+                                    placeholder="เลือกปีการศึกษา"
                                 >
                                     <Select.Option selected value="alltype">
                                         ทุกปีการศึกษา

@@ -101,7 +101,7 @@ export default function manageScholarship() {
                     <FiEdit
                         className="cursor-pointer"
                         onClick={() => {
-                            router.push(`/scholarship-detail/${value}`);
+                            router.push(`/editscholarship/${value}`);
                         }}
                     />
                 </div>

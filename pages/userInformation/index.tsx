@@ -17,13 +17,9 @@ export default function userInformation() {
     const items = useMemo(() => userinfo?.result[0], [userinfo]);
 
     return (
-        <Layout isLoading={isLoading}>
-            <div className="w-full min-h-screen bg-[#f5f7fb]">
+        <Layout isLoading={isLoading} title="ประวัตินักศึกษา">
+            <div className="w-full min-h-screen ">
                 <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                    <div className="flex">
-                        <p className="font-semibold text-xl mb-5">ประวัตินักศึกษา</p>
-                        <hr />
-                    </div>
                     <div className=" border rounded-lg shadow-lg mb-3 mt-3 space-y-3 bg-white">
                         <div className="flex flex-wrap ">
                             <div className="w-2/6 h-96 border-r p-2 text-center flex items-center justify-center">
