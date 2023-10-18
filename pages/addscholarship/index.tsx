@@ -23,6 +23,7 @@ import * as Yup from 'yup';
 import { HexColorPicker } from 'react-colorful';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
+import { IoColorPaletteOutline } from 'react-icons/io5';
 
 dayjs.extend(buddhistEra);
 type filterDataType = {
@@ -58,49 +59,10 @@ export default function Addscholarship() {
         onError: () => {
             Swal.fire('เพิ่มทุนการศึกษา', 'คุณเพิ่มทุนการศึกษาไม่สำเร็จ', 'error');
         },
-        //5.เขียน create_scholarship()=>{}
-        //6. ถ้า success ให้กลับมาหน้าจัดการทุน
-        //7. ถ้า fail ไม่ไป
     });
 
-    // const onSubmit = (result: createScholarshipPlayload) => {
-    //     const normalResult: createScholarshipPlayload = {
-    //         scholarship_name: result.scholarship_name,
-    //         scholarship_year: result.scholarship_year,
-    //         start_date: result.start_date,
-    //         end_date: result.end_date,
-    //         scholarship_grade: result.scholarship_grade,
-    //         class_type_name: result.class_type_name,
-    //         scholarship_condition_name: result.scholarship_condition_name,
-    //         tag_color: result.tag_color,
-    //     };
-    //     console.log(normalResult);
-    //     Swal.fire({
-    //         title: 'ยืนยันเพิ่มทุนการศึกษาใช่หรือไม่?',
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'ยืนยัน',
-    //         cancelButtonText: 'ยกเลิก',
-    //     }).then((result: any) => {
-    //         if (result.isConfirmed) {
-    //             mutate(normalResult);
-    //         }
-    //     });
-    //     //3.เรียกใช้ swal
-    //     //4.เรียกใช้งาน usemutate โดยทำข้อมูลให้อยู่ใน type ที่ต้องการ
-    //     //2.ต้องเขียนเงื่อนไข(กรอกข้อมูลให้ครบยกเว้น pdf)ก่อน submit
-    // };
-    // const { data: scholarship } = useQuery({
-    //     queryKey: 'scholarship',
-    //     queryFn: async () => getScholarship(),
-    // });
-    // const disabledDate: RangePickerProps['disabledDate'] = (current) => {
-    //     // Can not select days before today and today
-    //     return current && current < dayjs().locale('th').endOf('day');
-    // };
     const [color, setColor] = useState<string>();
+    const [showcolor, setShowcolor] = useState<string>();
 
     const [form] = Form.useForm<createScholarshipForm>();
 
@@ -326,41 +288,61 @@ export default function Addscholarship() {
                                 <label className="lebel">
                                     <div className="flex items-center mt-3 w-full">
                                         <span className="label-text text-lg  w-2/5">แท็กสี</span>
-                                        <div className="w-full">
-                                            <Form.Item
-                                                name={'tag_color'}
-                                                rules={[
-                                                    {
-                                                        required: true,
-                                                        message: 'กรุณาเลือกแท็กสี!',
-                                                    },
-                                                ]}
-                                            >
-                                                <Input
-                                                    placeholder="เลือกแท็กสี"
-                                                    onClick={showModal}
-                                                />
-                                            </Form.Item>
-
-                                            <Modal open={open} footer={null}>
-                                                <div>
-                                                    <HexColorPicker
-                                                        color={color}
-                                                        onChange={setColor}
-                                                        style={{ width: 300, height: 200 }}
-                                                        defaultValue={'#ffffff'}
+                                        <div className="flex w-full space-x-5 ">
+                                            <div>
+                                                <Form.Item
+                                                    name={'tag_color'}
+                                                    rules={[
+                                                        {
+                                                            required: true,
+                                                            message: 'กรุณาเลือกแท็กสี!',
+                                                        },
+                                                    ]}
+                                                >
+                                                    <Input
+                                                        placeholder="กรอกแท็กสี เช่น #e85ff8"
+                                                        size="large"
+                                                        onChange={(event) => {
+                                                            setShowcolor(event.target.value);
+                                                        }}
                                                     />
+                                                </Form.Item>
+                                                <a className="text-blue-600" onClick={showModal}>
+                                                    คลิกเพื่อเลือกแท็กสี
+                                                </a>
+                                            </div>
+                                            <div
+                                                className={
+                                                    showcolor
+                                                        ? 'w-7 h-7 rounded-md mt-[5px]'
+                                                        : 'hidden'
+                                                }
+                                                style={{ backgroundColor: showcolor }}
+                                            ></div>
+                                        </div>
+                                        <Modal
+                                            open={open}
+                                            footer={null}
+                                            onCancel={handleCancel}
+                                            centered
+                                        >
+                                            <div className="mt-10">
+                                                <HexColorPicker
+                                                    color={color}
+                                                    onChange={setColor}
+                                                    style={{ width: '100%', height: 200 }}
+                                                    defaultValue={'#ffffff'}
+                                                />
+                                                <div className="flex justify-center">
                                                     <div
-                                                        className="value mt-3 inline-block"
+                                                        className=" mt-3 inline-block text-white px-3 rounded-md"
                                                         style={{ backgroundColor: color }}
                                                     >
-                                                        Current color is {color}
+                                                        กรุณาคัดลอกหมายเลขสี = {color}
                                                     </div>
-                                                    <Button onClick={handleOk}>ตกลง</Button>
-                                                    <Button onClick={handleCancel}>ยกเลิก</Button>
                                                 </div>
-                                            </Modal>
-                                        </div>
+                                            </div>
+                                        </Modal>
                                     </div>
                                 </label>
                                 <label className="lebel">

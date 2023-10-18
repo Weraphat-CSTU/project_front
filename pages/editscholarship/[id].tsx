@@ -13,7 +13,7 @@ export default function Editscholarship() {
     }
     if (authorize) {
         return (
-            <Layout title="ทุนการศึกษา" subTitle="รายละเอียด">
+            <Layout title="ทุนการศึกษา" subTitle="แก้ไขทุนการศึกษา">
                 <EditscholarshipInner />
             </Layout>
         );

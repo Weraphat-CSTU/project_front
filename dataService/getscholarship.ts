@@ -15,6 +15,7 @@ export type scholarshipData = {
     scholarship_type_name: string,
     class_type_name: string,
     tag_color:string,
+    scholarship_year_id:number
 }
 
 export type scholarshipDataParam ={
@@ -31,6 +32,7 @@ const mockscholarship : scholarshipData[] =  [
       scholarship_type_name: "ทุนภายใน",
       scholarship_name: "เรียนดี",
       scholarship_year: "2566",
+      scholarship_year_id:0,
       start_date: "2023-09-27",
       end_date: "2023-10-15",
       class_type_id:0,
@@ -49,6 +51,7 @@ const mockscholarship : scholarshipData[] =  [
       scholarship_type_name: "ทุนภายนอก",
       scholarship_name: "กยศ.",
       scholarship_year: "2566",
+      scholarship_year_id:0,
       start_date: "2023-09-29",
       end_date: "2023-10-20",
       class_type_id:0,
@@ -67,6 +70,7 @@ const mockscholarship : scholarshipData[] =  [
       scholarship_type_name: "ทุนภายนอก",
       scholarship_name: "สนับสนุนเรียนต่อต่างประเทศ",
       scholarship_year: "2566",
+      scholarship_year_id:0,
       start_date: "2023-09-29",
       end_date: "2023-10-20",
       class_type_id:0,

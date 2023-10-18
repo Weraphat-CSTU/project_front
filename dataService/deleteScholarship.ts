@@ -26,7 +26,8 @@ export type deletescholarshipParam = {
         scholarship_id:"0",
         scholarship_qualification_name:"มีจิตอาสา",
         class_type_name: "ทุกชั้นปี",
-        tag_color:"#87D57C"
+        tag_color:"#87D57C",
+        scholarship_year_id:0
       },
       {
         scholarship_type_id:2,
@@ -44,7 +45,8 @@ export type deletescholarshipParam = {
         scholarship_id:"1",
         scholarship_qualification_name:"มีจิตอาสา",
         class_type_name: "ทุกชั้นปี",
-        tag_color:"#0250E3"
+        tag_color:"#0250E3",
+        scholarship_year_id:0
       },
       {
         scholarship_type_id:2,
@@ -62,7 +64,8 @@ export type deletescholarshipParam = {
         scholarship_id:"2",
         scholarship_qualification_name:"มีจิตอาสา",
         class_type_name: "ทุกชั้นปี",
-        tag_color:"#F5A01E"
+        tag_color:"#F5A01E",
+        scholarship_year_id:0
       },
     ]
 
