@@ -4,13 +4,15 @@ import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import dayjs from 'dayjs';
-import { Table, Tag } from 'antd';
+import { Avatar, Card, Table, Tag } from 'antd';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
 import { ColumnsType } from 'antd/es/table';
 import { values } from 'lodash-es';
+import Meta from 'antd/es/card/Meta';
 
 export default function Studentfollow() {
+    const Router = useRouter();
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
@@ -59,7 +61,31 @@ export default function Studentfollow() {
     return (
         <Layout title="ทุนการศึกษาที่กำลังติดตาม">
             <div className="mx-auto max-w-3xl lg:max-w-7xl pt-10">
-                <div>ใส่ข้อมูลส่วนตัวดีมั้ย?</div>
+                <div className="lg:flex w-full space-x-10 ">
+                    {scholarship?.result.map((item, index) => (
+                        <div
+                            key={index}
+                            className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50 w-full max-h-screen"
+                            onClick={() =>
+                                Router.push(`/scholarship-detail/${item.scholarship_id}`)
+                            }
+                        >
+                            <div className="font-semibold text-xl text-blue-500">
+                                {item.scholarship_name}
+                            </div>
+                            <div className="font-normal text-[17px]">
+                                {item.scholarship_type_name === 'ทุนภายใน' ? (
+                                    <Tag color="blue">{item.scholarship_type_name}</Tag>
+                                ) : (
+                                    <Tag color="red">{item.scholarship_type_name}</Tag>
+                                )}
+                                ({item.scholarship_year})
+                            </div>
+                            <div>{getDate(item.start_date, item.end_date)}</div>
+                            <div>{dayjs(item.create_date).locale('th').format('DD MMMM BBBB')}</div>
+                        </div>
+                    ))}
+                </div>
                 <div className="pt-5">
                     <Table
                         dataSource={scholarship?.result}

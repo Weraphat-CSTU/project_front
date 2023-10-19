@@ -92,8 +92,8 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
             {isLoading ? (
                 <div></div>
             ) : (
-                <div>
-                    <div className="w-full h-[60px] bg-[#EB9D48] flex items-center">
+                <div className="relative min-h-screen">
+                    <div className="w-full h-[60px] bg-[#EB9D48] flex items-center ">
                         <div className="mx-auto  lg:max-w-7xl w-full h-full ">
                             <div className="flex justify-between items-center pt-1">
                                 <div className="flex items-center">
@@ -169,15 +169,59 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                             })}
                         </div>
                     </div>
-                    <div className="mx-auto w-full lg:max-w-7xl pt-10 ">
-                        <div className="flex items-center">
-                            <h1 className="text-xl font-semibold">{title}</h1>
-                            <h2 className="ml-2 font-semibold text-gray-500 dark:text-gray-400 text-base pt-1">
-                                {subTitle}
-                            </h2>
+                    {title && (
+                        <div className="mx-auto w-full lg:max-w-7xl pt-10 ">
+                            <div className="flex items-center">
+                                <h1 className="text-xl font-semibold">{title}</h1>
+                                <h2 className="ml-2 font-semibold text-gray-500 dark:text-gray-400 text-base pt-1">
+                                    {subTitle}
+                                </h2>
+                            </div>
                         </div>
+                    )}
+
+                    <div className="w-full  ">
+                        <div className="w-full min-h-screen ">{children}</div>
+
+                        <footer className="w-full h-auto mt-10 pb-10 bg-[#EB9D48]">
+                            <div className=" mx-3 lg:mx-auto  lg:max-w-7xl md:flex ">
+                                <div className="w-full md:w-1/2">
+                                    <div className="font-semibold md:font-bold text-white text-xl text-center md:text-left md:text-3xl pt-1 md:pt-5 ">
+                                        ติดต่อ
+                                    </div>
+                                    <div className="lg:space-y-1 md:pt-3 text-center md:text-left">
+                                        <div className="text-white text-sm md:text-base">
+                                            สาขาวิชาวิทยาการคอมพิวเตอร์ มธ. ศูนย์รังสิต
+                                        </div>
+                                        <div className="text-white text-sm md:text-base">
+                                            อาคารบรรยายรวม 2
+                                        </div>
+                                        <div className="text-white text-sm md:text-base">
+                                            คณะวิทยาศาสตร์และเทคโนโลยีมหาวิทยาลัยธรรมศาสตร์
+                                            ศูนย์รังสิต
+                                        </div>
+                                        <div className="text-white text-sm md:text-base">
+                                            ปทุมธานี 12120
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="w-full md:w-1/2 lg:space-y-1 md:pt-16 max-md:text-center">
+                                    <div className="text-white max-md:text-sm">
+                                        โทรศัพท์ : 0-2986-9154, 0-2986-9156, 0-2986-9138-39
+                                    </div>
+                                    <div className="text-white max-md:text-sm">
+                                        โทรสาร : 0-2986-9157
+                                    </div>
+                                    <div className="text-white max-md:text-sm">
+                                        Email: scitu_cs@sci.tu.ac.th
+                                    </div>
+                                    <div className="text-white max-md:text-sm">
+                                        Facebook: @CSTUadmissioncenter
+                                    </div>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
-                    <div className="w-full h-screen ">{children}</div>
                 </div>
             )}
         </>

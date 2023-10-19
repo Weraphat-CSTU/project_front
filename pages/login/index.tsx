@@ -1,11 +1,17 @@
-import { loginPlayload, postLogin } from '@/dataService/postLogin';
-import Image from 'next/image';
-import Link from 'next/link';
+import React from 'react';
+import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
+import { useMutation, useQuery } from 'react-query';
+import { getScholarship } from '@/dataService/getscholarship';
+import { getDate } from '@/utils/getDate';
+import Fullcalendar from '@/components/fullcalendar';
+import Image from 'next/image';
+import { loginPlayload, postLogin } from '@/dataService/postLogin';
 import { useForm } from 'react-hook-form';
-import { useMutation } from 'react-query';
+import Link from 'next/link';
+import { Form, Input } from 'antd';
 
-export default function Login() {
+export default function login() {
     const Router = useRouter();
     const Swal = require('sweetalert2');
     const { mutate, isLoading } = useMutation({
@@ -29,8 +35,7 @@ export default function Login() {
         },
     });
 
-    const { register, handleSubmit } = useForm<loginPlayload>();
-
+    const [form] = Form.useForm<loginPlayload>();
     const onSubmit = (events: loginPlayload) => {
         const normalResult: loginPlayload = {
             username: events.username,
@@ -38,79 +43,137 @@ export default function Login() {
         };
         mutate(normalResult);
     };
-
     return (
-        <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-warp">
-                <div className="w-full h-screen">
-                    <div className="relative">
-                        <div className="absolute inset-0 z-10 flex items-center justify-center -translate-y-7">
-                            {/* <div className="space-y-7">
-              <div className="font-semibold text-6xl text-white">
-                ยินดีต้อนรับสู่
-              </div>
-              <div className="font-semibold text-6xl text-white">
-                ระบบจัดการทุนนักศึกษา
-              </div>
-            </div> */}
-                        </div>
-                        <Image
-                            src="/test2.jpeg"
-                            width={2000}
-                            height={1000}
-                            alt="Picture of the author"
-                            className="h-screen w-full object-cover brightness-75"
+        <div>
+            <div className="header">
+                <div className="inner-header ">
+                    <svg
+                        version="1.1"
+                        className="logo"
+                        baseProfile="tiny"
+                        id="Layer_1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        x="0px"
+                        y="0px"
+                        viewBox="0 0 500 500"
+                        xmlSpace="preserve"
+                    >
+                        <path
+                            fill="#FFFFFF"
+                            stroke="#000000"
+                            strokeWidth="10"
+                            strokeMiterlimit="10"
+                            d="M57,283"
                         />
-                    </div>
-                </div>
-                <div className="w-full h-screen bg-white ">
-                    <div className="w-full flex justify-center mt-10">
-                        <Image
-                            src="/qjg3jmr9-removebg-preview.png"
-                            width={250}
-                            height={100}
-                            alt="Picture of the author"
-                        />
-                    </div>
-                    <h1 className="font-bold text-4xl mt-3 text-center pr-10">เข้าสู่ระบบ</h1>
-                    <div className="flex justify-center mt-10">
-                        <div className="form-control w-full max-w-xl">
-                            <label className="label">
-                                <span className="label-text text-xl mt-3">
-                                    รหัสนักศึกษา/รหัสผู้ใช้
-                                </span>
-                            </label>
-                            <input
-                                type="text"
-                                placeholder="กรอกรหัสนักศึกษา/รหัสผู้ใช้"
-                                className="input input-bordered w-full max-w-xl"
-                                {...register('username')}
-                            />
-                            <label className="label">
-                                <span className="label-text text-xl mt-5 ">รหัสผ่าน</span>
-                            </label>
-                            <input
-                                type="password"
-                                placeholder="กรอกรหัสผ่าน"
-                                className="input input-bordered w-full max-w-xl"
-                                {...register('password')}
-                            />
-                            <button
-                                type="submit"
-                                className="py-3 rounded-md bg-[#EB9D48] label-text text-xl text-white mt-10"
-                            >
+                    </svg>
+                    <Form form={form} onFinish={onSubmit} layout="vertical">
+                        <div className=" w-full mx-auto max-w-xl h-[650px] p-3 px-10 absolute inset-0 bg-white  shadow-md rounded-lg translate-y-40 waves-park py-10">
+                            <div className="w-full flex justify-center">
+                                <Image
+                                    src="/qjg3jmr9-removebg-preview.png"
+                                    width={120}
+                                    height={70}
+                                    alt="Picture of the author"
+                                />
+                            </div>
+                            <h1 className="font-bold text-2xl mt-3 text-center text-black pr-5">
                                 เข้าสู่ระบบ
-                            </button>
-                            <Link
-                                href={'/'}
-                                className="text-lg font-bold text-blue-500 hover:underline mt-10 text-center"
-                            >
-                                กลับสู่หน้าแรก
-                            </Link>
+                            </h1>
+                            <div className="flex justify-center mt-10">
+                                <div className="form-control w-full max-w-xl">
+                                    <Form.Item
+                                        label="รหัสนักศึกษา/รหัสผู้ใช้"
+                                        name={'username'}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'กรุณากรอกรหัสนักศึกษา/รหัสผู้ใช้!',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            placeholder="กรอกรหัสนักศึกษา/รหัสผู้ใช้"
+                                            style={{ height: 40 }}
+                                            allowClear
+                                        />
+                                    </Form.Item>
+
+                                    <Form.Item
+                                        label="รหัสผ่าน"
+                                        name={'password'}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'กรุณากรอกรหัสผ่าน!',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            type="password"
+                                            placeholder="กรอกรหัสผ่าน"
+                                            style={{ height: 40 }}
+                                            allowClear
+                                        />
+                                    </Form.Item>
+
+                                    <button
+                                        type="submit"
+                                        className="py-3 rounded-md bg-[#EB9D48] label-text text-xl text-white mt-10 hover:bg-[#cf8535]"
+                                    >
+                                        เข้าสู่ระบบ
+                                    </button>
+                                    <Link
+                                        href={'/'}
+                                        className="text-lg font-bold text-blue-500 hover:underline mt-10 text-center"
+                                    >
+                                        กลับสู่หน้าแรก
+                                    </Link>
+                                </div>
+                            </div>
                         </div>
-                    </div>
+                    </Form>
+                </div>
+
+                <div>
+                    <svg
+                        className="waves "
+                        xmlns="http://www.w3.org/2000/svg"
+                        xmlnsXlink="http://www.w3.org/1999/xlink"
+                        viewBox="0 24 150 28"
+                        preserveAspectRatio="none"
+                        shapeRendering="auto"
+                    >
+                        <defs>
+                            <path
+                                id="gentle-wave"
+                                d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z"
+                            />
+                        </defs>
+                        <g className="parallax">
+                            <use
+                                xlinkHref="#gentle-wave"
+                                x="48"
+                                y="0"
+                                fill="rgba(255,255,255,0.7"
+                            />
+                            <use
+                                xlinkHref="#gentle-wave"
+                                x="48"
+                                y="3"
+                                fill="rgba(255,255,255,0.5)"
+                            />
+                            <use
+                                xlinkHref="#gentle-wave"
+                                x="48"
+                                y="5"
+                                fill="rgba(255,255,255,0.3)"
+                            />
+                            <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
+                        </g>
+                    </svg>
                 </div>
             </div>
-        </form>
+        </div>
     );
 }
