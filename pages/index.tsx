@@ -175,7 +175,7 @@ export default function Index() {
                 </div>
 
                 <div className=" w-full h-[500px] mx-auto max-w-3xl lg:max-w-7xl">
-                    <div className="text-center font-bold text-2xl lg:text-4xl p-10">ประเภททุน</div>
+                    <div className="text-center font-bold text-xl lg:text-2xl p-10">ประเภททุน</div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ">
                         <div className="h-[150px] md:h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
                             <div className="max-md:flex">
