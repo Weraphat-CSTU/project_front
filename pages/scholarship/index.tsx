@@ -16,8 +16,8 @@ export default function Scholarship() {
 
     return (
         <Layout>
-            <Image
-                src="/CSTU.png"
+            <img
+                src="https://cdn.discordapp.com/attachments/1153632685407871066/1164511644118949918/CSTU.png?ex=65437afb&is=653105fb&hm=2eacfd2a9fb626ac976c187a4678e84c14bf44154bf9aa530ed53e5ce08236e3&"
                 width={1500}
                 height={1500}
                 className=" w-full object-cover"
