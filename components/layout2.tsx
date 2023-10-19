@@ -19,7 +19,7 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                 <div></div>
             ) : (
                 <div className="relative w-full min-h-screen">
-                    <div className=" sticky top-0 bg-[#EFF1FE] z-50">
+                    <div className=" sticky top-0 bg-[#EB9D48] z-50">
                         <div className="mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl w-full ">
                             <div className="flex justify-between items-center mx-3 xl:mx-0 h-16">
                                 <div className="flex">
@@ -30,27 +30,26 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                         alt="Picture of the author"
                                     />
                                     <div className="flex items-center">
-                                        <div className="font-bold text-xl">Cs</div>
-                                        <div className="text-[#EB9D48] text-xl font-bold ">
-                                            Scholarship
+                                        <div className="text-white text-xl font-bold ">
+                                            CsScholarship
                                         </div>
                                     </div>
                                 </div>
                                 <div className="space-x-5 hidden lg:flex ">
                                     <div
-                                        className="cursor-pointer"
+                                        className="cursor-pointer text-white"
                                         onClick={() => Router.push('/')}
                                     >
                                         หน้าแรก
                                     </div>
-                                    <div>ข่าวสาร</div>
-                                    <div>ประเภททุน</div>
-                                    <div>ติดต่อ</div>
+                                    <div className="text-white">ข่าวสาร</div>
+                                    <div className="text-white">ประเภททุน</div>
+                                    <div className="text-white">ติดต่อ</div>
                                 </div>
                                 <div className="hidden lg:flex justify-end">
                                     <button
                                         onClick={() => Router.push('/login')}
-                                        className="w-full h-10 hover:bg-[#B89CC9] border border-[#B89CC9] px-5 rounded-lg font-bold hover:text-white"
+                                        className="w-full h-10 bg-white  px-5 rounded-lg font-bold text-[#EB9D48]"
                                     >
                                         เข้าสู่ระบบ
                                     </button>

@@ -31,39 +31,37 @@ export default function Index() {
     return (
         <Layout2 isLoading={isLoadingInfo && isLoadingScholarship}>
             <div className=" w-full min-h-screen bg-[#EFF1FE]">
-                <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl ">
-                    <div className="space-y-2 lg:space-y-3 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
-                        <div className="flex lg:block space-y-0 lg:space-y-3">
-                            <div className="font-bold text-[#EB9D48] lg:text-black text-xl lg:text-2xl">
-                                ทุนการศึกษา
+                <div className="relative">
+                    <img
+                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164514618698371182/Dometu-transformed.png?ex=65437dc0&is=653108c0&hm=b607c9fe9bc1b12da67605c675dde9f8ff6fe42bc6fc1cfb0d92c13615d90a91&"
+                        width={600}
+                        height={600}
+                        className="object-cover brightness-50 w-full"
+                        alt="Picture of the author"
+                    />
+
+                    <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0">
+                        <div className="space-y-2 lg:space-y-6 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
+                            <div className="font-bold text-white  text-xl lg:text-4xl">
+                                ทุนการศึกษาสำหรับนักศึกษา
                             </div>
-                            <div className="text-[#EB9D48] font-bold text-xl lg:text-2xl">
-                                สำหรับนักศึกษา
+                            <div className="font-semibold lg:font-bold text-white text-md lg:text-2xl ">
+                                วิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
+                            </div>
+                            <div className="mt-10">
+                                <button
+                                    onClick={() => Router.push('/register')}
+                                    className="text-white bg-[#EB9D48]  p-1 lg:p-2 rounded-lg w-[150px] "
+                                >
+                                    ลงทะเบียน
+                                </button>
                             </div>
                         </div>
-                        <div className="font-semibold lg:font-bold text-md lg:text-2xl">
-                            วิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
-                        </div>
-                        <button
-                            onClick={() => Router.push('/register')}
-                            className="text-white bg-[#EB9D48]  p-1 lg:p-2 rounded-lg w-[150px]"
-                        >
-                            ลงทะเบียน
-                        </button>
-                    </div>
-                    <div className="flex justify-center">
-                        <Image
-                            src="/หน้าแรก.png"
-                            width={600}
-                            height={600}
-                            className="flex justify-center"
-                            alt="Picture of the author"
-                        />
                     </div>
                 </div>
                 <div className="w-full bg-white pb-10">
                     <div className="mx-auto w-full lg:max-w-7xl pt-20">
-                        <div className="font-semibold lg:font-bold text-2xl lg:text-4xl text-black text-center">
+                        <div className="font-semibold lg:font-bold text-xl lg:text-2xl text-black text-center">
                             ข่าวประชาสัมพันธ์
                         </div>
                         <div className="pt-12 pr-2 md:flex lg:flex lg:space-x-3 mx-3 lg:mx-0">
