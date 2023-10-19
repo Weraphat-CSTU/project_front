@@ -77,7 +77,7 @@ export default function login() {
                                     alt="Picture of the author"
                                 />
                             </div>
-                            <h1 className="font-bold text-2xl mt-3 text-center text-black pr-5">
+                            <h1 className="font-semibold text-xl mt-3 text-center text-black pr-5">
                                 เข้าสู่ระบบ
                             </h1>
                             <div className="flex justify-center mt-10">
