@@ -1,6 +1,6 @@
 import '@/styles/globals.css';
 import '@/styles/testCSS.css';
-import styles from './Something.module.css';
+import '@/styles/slide-left.css';
 import type { AppProps } from 'next/app';
 import 'swiper/css';
 import { Sarabun } from 'next/font/google';
