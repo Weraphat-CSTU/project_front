@@ -41,7 +41,7 @@ export default function Index() {
                         alt="Picture of the author"
                     />
 
-                    <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0 slide-left">
+                    <div className="flex lg:items-center w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0 slide-left">
                         <div className="space-y-2 lg:space-y-6 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
                             <div className="font-bold text-white  text-xl lg:text-4xl">
                                 ทุนการศึกษาสำหรับนักศึกษา
