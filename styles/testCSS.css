@@ -23,8 +23,10 @@
 }
 
 .slide-left{
+  margin: 0;
+  padding: 0;
 	margin-left: 50%;
-	transform: translateX(-500%);
+	transform: translateX(-200%);
 	opacity: 0;
 	animation: slide-in-anim 2.5s ease-out forwards;
 }
