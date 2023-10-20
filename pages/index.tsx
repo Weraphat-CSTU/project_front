@@ -12,6 +12,7 @@ import { getScholarship } from '@/dataService/getscholarship';
 import Layout2 from '@/components/layout2';
 import { getDate } from '@/utils/getDate';
 import Fullcalendar from '@/components/fullcalendar';
+import dayjs from 'dayjs';
 
 export default function Index() {
     const useSwiperRef = useRef<SwiperClass>();
@@ -31,7 +32,7 @@ export default function Index() {
     return (
         <Layout2 isLoading={isLoadingInfo && isLoadingScholarship}>
             <div className=" w-full min-h-screen bg-[#EFF1FE]">
-                <div className="relative">
+                <section id="homepage" className="relative">
                     <img
                         src="https://cdn.discordapp.com/attachments/1153632685407871066/1164514618698371182/Dometu-transformed.png?ex=65437dc0&is=653108c0&hm=b607c9fe9bc1b12da67605c675dde9f8ff6fe42bc6fc1cfb0d92c13615d90a91&"
                         width={600}
@@ -40,7 +41,7 @@ export default function Index() {
                         alt="Picture of the author"
                     />
 
-                    <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0">
+                    <div className="flex flex-col-reverse lg:flex-row lg:items-center lg:justify-between w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0 slide-left">
                         <div className="space-y-2 lg:space-y-6 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
                             <div className="font-bold text-white  text-xl lg:text-4xl">
                                 ทุนการศึกษาสำหรับนักศึกษา
@@ -58,8 +59,8 @@ export default function Index() {
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="w-full bg-white pb-10">
+                </section>
+                <section id="information" className="w-full bg-white pb-10">
                     <div className="mx-auto w-full lg:max-w-7xl pt-20">
                         <div className="font-semibold lg:font-bold text-xl lg:text-2xl text-black text-center">
                             ข่าวประชาสัมพันธ์
@@ -92,22 +93,26 @@ export default function Index() {
                                     return (
                                         <div key={index}>
                                             <SwiperSlide>
-                                                <div className="relative bg-gray-300 space-y-5 w-[full] h-[350px] lg:w-[250px]  lg:h-[400px] p-3 rounded-md px-3">
-                                                    <div className="w-full h-36 bg-blue-300">
-                                                        {item.imname}
+                                                <div className="relative border shadow-md space-y-5 w-[full] h-[350px] lg:w-[270px]  lg:h-[430px] p-3 rounded-md px-3">
+                                                    <img
+                                                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164851487273406484/f006018d74046a40.png?ex=6544b77c&is=6532427c&hm=12a74e75f31ca00e112fbb993cef323a5d4c76bc0330e7911178f09019a4f052&"
+                                                        width={100}
+                                                        height={50}
+                                                        className="object-cover  w-full h-36"
+                                                        alt="Picture of the author"
+                                                    />
+
+                                                    <div className="font-medium md:text-lg lg:text-xl">
+                                                        {item.title}
                                                     </div>
-                                                    <div className="font-medium md:text-xl lg:text-2xl">
-                                                        {item.headname}
+                                                    <div className="font-normal md:text-sm lg:text-md">
+                                                        {item.description}
                                                     </div>
-                                                    <div className="font-normal md:text-lg lg:text-lg">
-                                                        {item.infoname}
-                                                    </div>
-                                                    <div className="absolute bottom-0 pb-3 cursor-pointer w-full">
-                                                        <div className="flex justify-center">
-                                                            <div className="bg-red-300 font-normal md:text-md lg:text-lg  text-center md:w-[70px] lg:w-[100px] rounded-md p-1">
-                                                                {item.desname}
-                                                            </div>
-                                                        </div>
+                                                    <div className=" font-normal mt-5 md:text-sm lg:text-md">
+                                                        วันที่ประกาศ :{' '}
+                                                        {dayjs(item.create_date)
+                                                            .locale('th')
+                                                            .format('DD MMMM BBBB')}
                                                     </div>
                                                 </div>
                                             </SwiperSlide>
@@ -126,9 +131,9 @@ export default function Index() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div className="w-full bg-white pt-10 pb-10 ">
+                <section id="calendar" className="w-full bg-white py-24">
                     <div className="mx-auto  lg:max-w-7xl lg:flex ">
                         <div className="w-full lg:w-2/5 lg:pr-5 ">
                             <div className="flex justify-between items-center ">
@@ -172,9 +177,12 @@ export default function Index() {
                             <Fullcalendar />
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <div className=" w-full h-[500px] mx-auto max-w-3xl lg:max-w-7xl">
+                <section
+                    id="scholarship_types"
+                    className=" w-full h-[500px] mx-auto max-w-3xl lg:max-w-7xl"
+                >
                     <div className="text-center font-bold text-xl lg:text-2xl p-10">ประเภททุน</div>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-2 ">
                         <div className="h-[150px] md:h-[300px] p-5 border  duration-300 shadow-md bg-white scale-90 hover:scale-100 ease-in ">
@@ -212,9 +220,9 @@ export default function Index() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </section>
 
-                <footer className="w-full h-auto p-2 bg-[#EB9D48]">
+                <section id="contact" className="w-full h-auto p-2 bg-[#EB9D48]">
                     <div className=" mx-3 lg:mx-auto  lg:max-w-7xl md:flex ">
                         <div className="w-full md:w-1/2">
                             <div className="font-semibold md:font-bold text-white text-xl text-center md:text-left md:text-3xl pt-1 md:pt-5 ">
@@ -248,7 +256,7 @@ export default function Index() {
                             </div>
                         </div>
                     </div>
-                </footer>
+                </section>
             </div>
         </Layout2>
     );

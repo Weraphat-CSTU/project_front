@@ -4,3 +4,6 @@
 .p{
     font-size: 10px;
 }
+html {
+    @apply scroll-smooth;
+  }

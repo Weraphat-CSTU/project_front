@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import { FC, useState } from 'react';
-import { Link } from 'react-daisyui';
+import Link from 'next/link';
 import { AiOutlineClose } from 'react-icons/ai';
 import Image from 'next/image';
 
@@ -12,7 +12,12 @@ type props = {
 const Layout2: FC<props> = ({ children, isLoading }) => {
     const Router = useRouter();
     const [isOpen, setisOpen] = useState<boolean>(false);
-
+    const scrollToTop = (): void => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    };
     return (
         <>
             {isLoading ? (
@@ -36,15 +41,35 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                     </div>
                                 </div>
                                 <div className="space-x-5 hidden lg:flex ">
-                                    <div
+                                    <Link
                                         className="cursor-pointer text-white"
-                                        onClick={() => Router.push('/')}
+                                        onClick={() => scrollToTop()}
+                                        href="/"
+                                        scroll={false}
                                     >
                                         หน้าแรก
-                                    </div>
-                                    <div className="text-white">ข่าวสาร</div>
-                                    <div className="text-white">ประเภททุน</div>
-                                    <div className="text-white">ติดต่อ</div>
+                                    </Link>
+                                    <Link
+                                        className="text-white"
+                                        href="/#information"
+                                        scroll={false}
+                                    >
+                                        ข่าวสาร
+                                    </Link>
+                                    <Link className="text-white" href="/#calendar" scroll={false}>
+                                        ปฏิทิน
+                                    </Link>
+                                    <Link
+                                        className="text-white"
+                                        href="/#scholarship_types"
+                                        scroll={false}
+                                    >
+                                        ประเภททุน
+                                    </Link>
+
+                                    <Link className="text-white" href="/#contact" scroll={false}>
+                                        ติดต่อ
+                                    </Link>
                                 </div>
                                 <div className="hidden lg:flex justify-end">
                                     <button
@@ -86,16 +111,68 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                         />
                                     </div>
                                     <div className="space-y-5 ">
-                                        <div className="text-lg font-medium">หน้าแรก</div>
+                                        <div>
+                                            <Link
+                                                className="cursor-pointer "
+                                                onClick={() => {
+                                                    scrollToTop(), setisOpen(!isOpen);
+                                                }}
+                                                scroll={false}
+                                                href="/"
+                                            >
+                                                หน้าแรก
+                                            </Link>
+                                        </div>
                                         <hr />
-                                        <div className="text-lg font-medium">ข่าวประชาสัมพันธ์</div>
+                                        <div>
+                                            <Link
+                                                className=""
+                                                href="/#information"
+                                                scroll={false}
+                                                onClick={() => setisOpen(!isOpen)}
+                                            >
+                                                ข่าวสาร
+                                            </Link>
+                                        </div>
                                         <hr />
-                                        <div className="text-lg font-medium">ประเภททุน</div>
+                                        <div>
+                                            <Link
+                                                className=""
+                                                href="/#calendar"
+                                                scroll={false}
+                                                onClick={() => setisOpen(!isOpen)}
+                                            >
+                                                ปฏิทิน
+                                            </Link>
+                                        </div>
                                         <hr />
-                                        <div className="text-lg font-medium">ติดต่อ</div>
+                                        <div>
+                                            <Link
+                                                className=""
+                                                href="/#scholarship_types"
+                                                scroll={false}
+                                                onClick={() => setisOpen(!isOpen)}
+                                            >
+                                                ประเภททุน
+                                            </Link>
+                                        </div>
+                                        <hr />
+                                        <div>
+                                            <Link
+                                                className=""
+                                                href="/#contact"
+                                                scroll={false}
+                                                onClick={() => setisOpen(!isOpen)}
+                                            >
+                                                ติดต่อ
+                                            </Link>
+                                        </div>
+
                                         <hr />
                                         <div className="text-lg font-medium">
-                                            <Link href="/login">เข้าสู่ระบบ</Link>
+                                            <Link href="/login" onClick={() => setisOpen(!isOpen)}>
+                                                เข้าสู่ระบบ
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>

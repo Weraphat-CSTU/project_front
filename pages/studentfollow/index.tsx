@@ -4,12 +4,9 @@ import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import dayjs from 'dayjs';
-import { Avatar, Card, Table, Tag } from 'antd';
-import buddhistEra from 'dayjs/plugin/buddhistEra';
+import { Tag } from 'antd';
+
 import 'dayjs/locale/th';
-import { ColumnsType } from 'antd/es/table';
-import { values } from 'lodash-es';
-import Meta from 'antd/es/card/Meta';
 
 export default function Studentfollow() {
     const Router = useRouter();
@@ -17,46 +14,6 @@ export default function Studentfollow() {
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
-    const columns: ColumnsType<scholarshipData> = [
-        {
-            title: 'ชื่อทุนการศึกษา',
-            dataIndex: 'scholarship_name',
-            key: 'scholarship_name',
-        },
-        {
-            title: 'ปีการศึกษา',
-            dataIndex: 'scholarship_year',
-            key: 'scholarship_year',
-        },
-        {
-            title: 'ระยะเวลาเปิดรับสมัคร',
-            dataIndex: 'start_date-end_date',
-            key: 'start_date',
-            render: (_, value: scholarshipData) => (
-                <div>{getDate(value.start_date, value.end_date)}</div>
-            ),
-        },
-        {
-            title: 'ประเภท',
-            dataIndex: 'scholarship_type_name',
-            key: 'scholarship_type_name',
-            render: (value: string) => {
-                if (value === 'ทุนภายใน') {
-                    return <Tag color="blue">{value}</Tag>;
-                } else {
-                    return <Tag color="red">{value}</Tag>;
-                }
-            },
-        },
-        {
-            title: 'วันที่เริ่มติดตาม',
-            dataIndex: 'create_date',
-            key: 'create_date',
-            render: (value: string) => (
-                <div>{dayjs(value).locale('th').format('DD MMMM BBBB')}</div>
-            ),
-        },
-    ];
 
     return (
         <Layout title="ทุนการศึกษาที่กำลังติดตาม">
@@ -81,18 +38,13 @@ export default function Studentfollow() {
                                 )}
                                 ({item.scholarship_year})
                             </div>
-                            <div>{getDate(item.start_date, item.end_date)}</div>
-                            <div>{dayjs(item.create_date).locale('th').format('DD MMMM BBBB')}</div>
+                            <div>เวลาเปิดรับสมัคร : {getDate(item.start_date, item.end_date)}</div>
+                            <div>
+                                วันที่เริ่มติดตาม :{' '}
+                                {dayjs(item.create_date).locale('th').format('DD MMMM BBBB')}
+                            </div>
                         </div>
                     ))}
-                </div>
-                <div className="pt-5">
-                    <Table
-                        dataSource={scholarship?.result}
-                        columns={columns}
-                        bordered
-                        pagination={false}
-                    />
                 </div>
             </div>
         </Layout>
