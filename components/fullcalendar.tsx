@@ -1,7 +1,6 @@
 import thLocale from '@fullcalendar/core/locales/th';
 import dayjs from 'dayjs';
-import { getCalendar } from '@/dataService/getcalendar';
-import router, { useRouter } from 'next/router';
+import { useRouter } from 'next/router';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -33,6 +32,7 @@ export default function Fullcalendar() {
                 eventClick={function (arg) {
                     Router.push(`/scholarship-detail/${arg.event.id}`);
                 }}
+                editable
                 events={scholarship?.result.map((items) => ({
                     title: items.scholarship_name,
                     start: items.start_date,
