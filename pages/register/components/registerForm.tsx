@@ -124,6 +124,7 @@ export default function RegisterForm() {
                             >
                                 <Input
                                     placeholder="กรอกบัตรประจำตัวประชาชน"
+                                    maxLength={13}
                                     style={{ height: 40 }}
                                     allowClear
                                 />
@@ -141,6 +142,7 @@ export default function RegisterForm() {
                             >
                                 <Input
                                     placeholder="กรอกนามสกุล"
+                                    maxLength={10}
                                     style={{ height: 40 }}
                                     allowClear
                                 />
@@ -160,6 +162,7 @@ export default function RegisterForm() {
                                     >
                                         <Input
                                             placeholder="กรอกเบอร์โทรศัพท์"
+                                            maxLength={10}
                                             style={{ height: 40 }}
                                             allowClear
                                         />
