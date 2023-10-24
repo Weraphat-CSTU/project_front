@@ -11,6 +11,7 @@ import { Input } from 'antd';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
 import { getScholarship, scholarshipData } from '@/dataService/getscholarship';
+import { getTypeclassname } from '@/dataService/getTypeClassName';
 import { useMutation, useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 import { Controller, useForm } from 'react-hook-form';
@@ -46,7 +47,10 @@ export default function Addscholarship() {
     const handleChange = (file: any): void => {
         setFile(file);
     };
-
+    const { data: classTypeYearData } = useQuery({
+        queryKey: 'classTypeYearData',
+        queryFn: async () => getTypeclassname(),
+    });
     const { mutate, isLoading } = useMutation({
         mutationKey: 'createscholarship',
         mutationFn: async (result: createScholarshipPlayload) => {
@@ -270,17 +274,13 @@ export default function Addscholarship() {
                                                     placeholder="เลือกชั้นปี"
                                                     size="large"
                                                     className="w-full"
-                                                >
-                                                    <Select.Option selected value="0">
-                                                        ทุกชั้นปี
-                                                    </Select.Option>
-                                                    <Select.Option value="1">
-                                                        เฉพาะชั้นปีที่ 1
-                                                    </Select.Option>
-                                                    <Select.Option value="2">
-                                                        เฉพาะชั้นปีที่ 2
-                                                    </Select.Option>
-                                                </Select>
+                                                    options={classTypeYearData?.result.map(
+                                                        (item) => ({
+                                                            label: item.class_type_name,
+                                                            value: item.class_type_id,
+                                                        }),
+                                                    )}
+                                                />
                                             </Form.Item>
                                         </div>
                                     </div>
