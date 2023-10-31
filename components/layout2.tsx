@@ -104,16 +104,16 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                             : `hidden`
                                     }
                                 >
-                                    <div className="flex justify-end ">
+                                    <div className="flex justify-end mt-2 mr-1">
                                         <AiOutlineClose
-                                            className="cursor-pointer "
+                                            className="cursor-pointer h-6 w-6"
                                             onClick={() => setisOpen(!isOpen)}
                                         />
                                     </div>
                                     <div className="space-y-5 ">
                                         <div>
                                             <Link
-                                                className="cursor-pointer "
+                                                className="cursor-pointer font-bold text-[#EB9D48]"
                                                 onClick={() => {
                                                     scrollToTop(), setisOpen(!isOpen);
                                                 }}
@@ -126,7 +126,7 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                         <hr />
                                         <div>
                                             <Link
-                                                className=""
+                                                className="cursor-pointer font-bold text-[#EB9D48]"
                                                 href="/#information"
                                                 scroll={false}
                                                 onClick={() => setisOpen(!isOpen)}
@@ -137,7 +137,7 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                         <hr />
                                         <div>
                                             <Link
-                                                className=""
+                                                className="cursor-pointer font-bold text-[#EB9D48]"
                                                 href="/#calendar"
                                                 scroll={false}
                                                 onClick={() => setisOpen(!isOpen)}
@@ -148,7 +148,7 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                         <hr />
                                         <div>
                                             <Link
-                                                className=""
+                                                className="cursor-pointer font-bold text-[#EB9D48]"
                                                 href="/#scholarship_types"
                                                 scroll={false}
                                                 onClick={() => setisOpen(!isOpen)}
@@ -159,7 +159,7 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                         <hr />
                                         <div>
                                             <Link
-                                                className=""
+                                                className="cursor-pointer font-bold text-[#EB9D48]"
                                                 href="/#contact"
                                                 scroll={false}
                                                 onClick={() => setisOpen(!isOpen)}
@@ -169,8 +169,8 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                                         </div>
 
                                         <hr />
-                                        <div className="text-lg font-medium">
-                                            <Link href="/login" onClick={() => setisOpen(!isOpen)}>
+                                        <div className="">
+                                            <Link href="/login" onClick={() => setisOpen(!isOpen)} className='cursor-pointer py-2 text-lg font-medium h-10 text-white  px-5 rounded-lg  bg-[#EB9D48]'>
                                                 เข้าสู่ระบบ
                                             </Link>
                                         </div>
