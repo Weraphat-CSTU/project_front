@@ -25,6 +25,8 @@ import { HexColorPicker } from 'react-colorful';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import { IoColorPaletteOutline } from 'react-icons/io5';
+import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
+import { values } from 'lodash-es';
 
 dayjs.extend(buddhistEra);
 type filterDataType = {
@@ -50,6 +52,10 @@ export default function Addscholarship() {
     const { data: classTypeYearData } = useQuery({
         queryKey: 'classTypeYearData',
         queryFn: async () => getTypeclassname(),
+    });
+    const { data: scholarshipTypeData } = useQuery({
+        queryKey: 'scholarshipTypeData',
+        queryFn: async () => getScholarshiptype(),
     });
     const { mutate, isLoading } = useMutation({
         mutationKey: 'createscholarship',
@@ -220,14 +226,13 @@ export default function Addscholarship() {
                                                     placeholder="เลือกประเภททุน"
                                                     size="large"
                                                     className="w-full"
-                                                >
-                                                    <Select.Option selected value="1">
-                                                        ทุนภายใน
-                                                    </Select.Option>
-                                                    <Select.Option value="2">
-                                                        ทุนภายนอก
-                                                    </Select.Option>
-                                                </Select>
+                                                    options={scholarshipTypeData?.result.map(
+                                                        (item) => ({
+                                                            label: item.scholarship_type_name,
+                                                            values: item.scholarship_type_id,
+                                                        }),
+                                                    )}
+                                                />
                                             </Form.Item>
                                         </div>
                                     </div>

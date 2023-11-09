@@ -8,7 +8,7 @@ module.exports = {
     'node_modules/react-daisyui/dist/**/*.js'
   ],
 
-  plugins: [require("daisyui")],
+  plugins: [require("daisyui"),require('flowbite/plugin')],
   daisyui: {
     themes: [],
   },
