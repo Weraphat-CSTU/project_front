@@ -37,16 +37,16 @@ export default function Index() {
                         src="https://cdn.discordapp.com/attachments/1153632685407871066/1164514618698371182/Dometu-transformed.png?ex=65437dc0&is=653108c0&hm=b607c9fe9bc1b12da67605c675dde9f8ff6fe42bc6fc1cfb0d92c13615d90a91&"
                         width={600}
                         height={600}
-                        className="object-cover brightness-50 w-full"
+                        className="object-cover brightness-50 w-full min-h-screen lg:min-h-0"
                         alt="Picture of the author"
                     />
 
-                    <div className="flex lg:items-center w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0 slide-left">
-                        <div className="space-y-2 lg:space-y-6 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
-                            <div className="font-bold text-white  text-xl lg:text-4xl">
+                    <div className="flex items-center  w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0 slide-left">
+                        <div className="space-y-3 -translate-y-20 lg:translate-y-0  lg:space-y-6 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
+                            <div className="font-bold text-white  text-2xl md:text-4xl">
                                 ทุนการศึกษาสำหรับนักศึกษา
                             </div>
-                            <div className="font-semibold lg:font-bold text-white text-md lg:text-2xl ">
+                            <div className="font-semibold lg:font-bold text-white text-md md:text-2xl ">
                                 วิทยาการคอมพิวเตอร์ มหาวิทยาลัยธรรมศาสตร์
                             </div>
                             <div className="mt-10">
@@ -93,7 +93,7 @@ export default function Index() {
                                     return (
                                         <div key={index}>
                                             <SwiperSlide>
-                                                <div className="relative border shadow-md space-y-5 w-[full] h-[350px] lg:w-[270px]  lg:h-[430px] p-3 rounded-md px-3">
+                                                <div className="relative border shadow-md space-y-5 w-[full] h-[350px] lg:w-[270px]  h-[450px] lg:h-[430px] p-3 rounded-md px-3">
                                                     <img
                                                         src="https://cdn.discordapp.com/attachments/1153632685407871066/1164851487273406484/f006018d74046a40.png?ex=6544b77c&is=6532427c&hm=12a74e75f31ca00e112fbb993cef323a5d4c76bc0330e7911178f09019a4f052&"
                                                         width={100}
@@ -132,7 +132,6 @@ export default function Index() {
                         </div>
                     </div>
                 </section>
-
                 <section id="calendar" className="w-full bg-white py-24">
                     <div className="mx-auto  lg:max-w-7xl lg:flex ">
                         <div className="w-full lg:w-2/5 lg:pr-5 ">

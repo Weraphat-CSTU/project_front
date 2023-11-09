@@ -8,8 +8,10 @@ import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
 import { getScholarship } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
+import { Grid } from 'antd';
 
 export default function Fullcalendar() {
+    const screens = Grid.useBreakpoint();
     const Router = useRouter();
     const obj = Reflect.get(Router.query, 'id') as string | null;
 
@@ -22,11 +24,16 @@ export default function Fullcalendar() {
         <div>
             <FullCalendar
                 plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin, listPlugin]}
-                headerToolbar={{
-                    left: 'title',
-                    center: 'dayGridMonth,timeGridWeek,listWeek',
-                    right: 'today prev,next',
-                }}
+                headerToolbar={
+                    screens.lg
+                        ? {
+                              left: 'title',
+                              center: 'dayGridMonth,timeGridWeek,listWeek',
+                              right: 'today prev,next',
+                          }
+                        : undefined
+                }
+                fixedWeekCount
                 locale={thLocale}
                 dayMaxEventRows={3}
                 eventClick={function (arg) {
