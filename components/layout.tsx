@@ -2,7 +2,7 @@ import Image from 'next/image';
 import React, { useEffect, type FC, useState } from 'react';
 import Link from 'next/link';
 import { IoIosSchool } from 'react-icons/io';
-import { BiCalendarPlus } from 'react-icons/bi';
+import { BiCalendarPlus, BiMessageError } from 'react-icons/bi';
 import { MdManageAccounts } from 'react-icons/md';
 import { IoSettingsOutline } from 'react-icons/io5';
 import { TfiAnnouncement } from 'react-icons/tfi';
@@ -65,6 +65,12 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                 },
 
                 { path: '/followscholarship', lebel: 'ติดตามทุน', id: 6, icons: <IoIosSchool /> },
+                {
+                    path: '/createalert',
+                    lebel: 'รายการแจ้งเตือน',
+                    id: 2,
+                    icons: <BiMessageError />,
+                },
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 7, icons: <GrHistory /> },
             ]);
         } else if (role_id === '2') {

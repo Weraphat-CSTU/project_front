@@ -58,7 +58,7 @@ export default function RegisterForm() {
     return (
         <div>
             <Form form={form} onFinish={onSubmit} layout="vertical">
-                <div className="w-full mx-auto max-w-xl h-screen bg-white p-3 px-10 absolute inset-0 opacity-95 shadow-md rounded-lg  waves-park py-10">
+                <div className="w-full mx-auto max-w-xl  bg-white p-3 px-10 absolute inset-0 opacity-95 shadow-md rounded-lg  waves-park py-10">
                     <div className="w-full flex justify-center">
                         <Image
                             src="/qjg3jmr9-removebg-preview.png"

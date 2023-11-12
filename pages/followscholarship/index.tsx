@@ -6,7 +6,7 @@ import dayjs from 'dayjs';
 import { Table } from 'antd';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import { useEffect, useState } from 'react';
-import { BiCalendarPlus } from 'react-icons/bi';
+import { BiCalendarPlus, BiMessageError } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 import 'dayjs/locale/th';
 
@@ -72,7 +72,8 @@ export default function Followscholarship() {
                             rounter.push('/studentfollow');
                         }}
                     >
-                        <BiCalendarPlus className="text-white" /> ทุนการศึกษาที่กำลังติดตาม
+                        <BiCalendarPlus className="text-white" />{' '}
+                        <div className="pl-3">ทุนการศึกษาที่กำลังติดตาม</div>
                     </button>
                 );
             },
@@ -80,7 +81,7 @@ export default function Followscholarship() {
     ];
     return (
         <Layout title="นักศึกษาที่กำลังติดตามทุนการศึกษา">
-            <div className="mx-auto max-w-3xl lg:max-w-7xl pt-10">
+            <div className="mx-auto lg:max-w-7xl pt-10">
                 <div>
                     <Table dataSource={userdata} columns={columns} bordered pagination={false} />
                 </div>
