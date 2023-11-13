@@ -3,7 +3,7 @@ import { getMessageAlert } from '@/dataService/getMessageAlert';
 import { getScholarship } from '@/dataService/getscholarship';
 import { createMessagePlayload, postMessageAlert } from '@/dataService/postMessageAlert';
 import type { CollapseProps } from 'antd';
-import { Button, Collapse, Form, Input, Modal, Select } from 'antd';
+import { Button, Collapse, Form, Input, Modal, Select, Tag } from 'antd';
 import { useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import { useMutation, useQuery } from 'react-query';
@@ -35,14 +35,22 @@ export default function createAlert() {
             Swal.fire('สร้างข้อความ', 'คุณเสร้างข้อความแจ้งเตือนไม่สำเร็จ', 'error');
         },
     });
-
-    const items: CollapseProps['items'] = [
-        {
-            key: '1',
-            label: <p>{scholarship?.result.map((value) => value.scholarship_name)}</p>,
-            children: <p>{messagealert?.result.map((value) => value.description)}</p>,
-        },
-    ];
+    const items: CollapseProps['items'] =
+        scholarship?.result && messagealert?.result
+            ? scholarship.result.map((value, index) => ({
+                  key: index.toString(), // ให้ key เป็น string หรือ number ที่ไม่ซ้ำกัน
+                  label: <div key={index}>{value.scholarship_name}</div>,
+                  children: (
+                      <div key={index}>
+                          {messagealert.result.map((message) => (
+                              <div className="mt-3">
+                                  <Tag color="cyan">{message.description}</Tag>
+                              </div>
+                          ))}
+                      </div>
+                  ),
+              }))
+            : [];
 
     const onHandleSubmit = (value: createMessagePlayload): void => {
         const normalResult: createMessagePlayload = {
@@ -88,18 +96,22 @@ export default function createAlert() {
                             <div className="pl-3">เขียน</div>
                         </button>
 
-                        <Modal open={open} footer={null} onCancel={handleCancel} centered>
-                            <Form form={form} onFinish={onHandleSubmit}>
+                        <Modal
+                            open={open}
+                            footer={null}
+                            onCancel={handleCancel}
+                            centered
+                            width={700}
+                        >
+                            <Form form={form} onFinish={onHandleSubmit} layout="vertical">
                                 <div className="w-full font-medium ">
                                     <div className="text-lg">ข้อความแจ้งเตือน</div>
                                     <label className="lebel">
                                         <div className="flex items-center mt-3  w-full">
-                                            <span className="label-text text-lg  w-3/5">
-                                                ทุนการศึกษา
-                                            </span>
                                             <div className="w-full">
                                                 <Form.Item
-                                                    name="scholarship_id"
+                                                    label="ทุนการศึกษา"
+                                                    name={'scholarship_id'}
                                                     rules={[
                                                         {
                                                             required: true,
@@ -144,11 +156,11 @@ export default function createAlert() {
                                     </label>
                                     <label className="lebel">
                                         <div className="flex items-center mt-3  w-full">
-                                            <span className="label-text text-lg  w-3/5">
-                                                รายละเอียดเพิ่มเติม
-                                            </span>
                                             <div className="w-full">
-                                                <Form.Item name="description">
+                                                <Form.Item
+                                                    label="รายละเอียดเพิ่มเติม"
+                                                    name={'description'}
+                                                >
                                                     <Input
                                                         placeholder="รายละเอียดเพิ่มเติม"
                                                         size="large"
@@ -175,7 +187,7 @@ export default function createAlert() {
                         </Modal>
                     </div>
                 </div>
-                <Collapse items={items} defaultActiveKey={['1']} onChange={onChange} />
+                <Collapse items={items} defaultActiveKey={['0']} onChange={onChange} />
             </div>
         </Layout>
     );

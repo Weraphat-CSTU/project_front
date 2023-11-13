@@ -41,7 +41,7 @@ export default function loginForm() {
     return (
         <div>
             <Form form={form} onFinish={onSubmit} layout="vertical">
-                <div className=" w-full mx-auto max-w-xl h-[650px] p-3 px-10 absolute inset-0 bg-white opacity-95 shadow-md rounded-lg  waves-park py-10">
+                <div className=" w-full mx-auto max-w-xl h-[650px] p-3 px-10 absolute inset-0 bg-white opacity-95 shadow-md rounded-lg  waves-park py-10 translate-y-24">
                     <div className="w-full flex justify-center">
                         <Image
                             src="/qjg3jmr9-removebg-preview.png"
