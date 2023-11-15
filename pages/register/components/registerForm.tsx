@@ -16,8 +16,8 @@ export default function RegisterForm() {
     const [form] = Form.useForm<registerForm>();
     const { mutate, isLoading } = useMutation({
         mutationKey: 'register',
-        mutationFn: async (value: registerPlayload) => {
-            return postRegister(value);
+        mutationFn: async (data: registerPlayload) => {
+            return postRegister({ data: data });
         },
         onSuccess: () => {
             Swal.fire('ลงทะเบียน', 'คุณลงทะเบียนสำเร็จ', 'success');
@@ -30,15 +30,15 @@ export default function RegisterForm() {
 
     const onSubmit = (result: registerForm) => {
         const normalResult: registerPlayload = {
-            name: result.name,
+            firstname: result.firstname,
             lastname: result.lastname,
-            card_id: result.card_id.replaceAll('-', ''),
             email: result.email,
-            student_id: result.student_id,
-            phone: result.phone.replaceAll('-', ''),
-            grade: result.grade || null,
-            line_id: result.line_id || null,
+            login_id: result.login_id,
             password: result.password,
+            card_id: result.card_id.replaceAll('-', ''),
+            line_id: result.line_id || null,
+            grade: result.grade || null,
+            phone: result.phone.replaceAll('-', ''),
         };
         console.log(normalResult);
         Swal.fire({
@@ -76,7 +76,7 @@ export default function RegisterForm() {
                                 <div className="w-full lg:w-1/2">
                                     <Form.Item
                                         label="ชื่อจริง"
-                                        name={'name'}
+                                        name={'firstname'}
                                         rules={[
                                             {
                                                 required: true,
@@ -132,7 +132,7 @@ export default function RegisterForm() {
 
                             <Form.Item
                                 label="รหัสนักศึกษา"
-                                name={'student_id'}
+                                name={'login_id'}
                                 rules={[
                                     {
                                         required: true,

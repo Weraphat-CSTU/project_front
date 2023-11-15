@@ -2,6 +2,7 @@ import { loginPlayload, postLogin } from '@/dataService/postLogin';
 import { Form, Input } from 'antd';
 import { useRouter } from 'next/router';
 import React from 'react';
+import { useAtom } from 'jotai';
 import { useMutation } from 'react-query';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -9,14 +10,19 @@ import Link from 'next/link';
 export default function loginForm() {
     const Router = useRouter();
     const Swal = require('sweetalert2');
+
     const { mutate, isLoading } = useMutation({
         mutationKey: ['login'],
         mutationFn: async (value: loginPlayload) => {
-            return postLogin({ username: value.username, password: value.password });
+            return postLogin({ data: value });
         },
         onSuccess: (data) => {
-            sessionStorage.setItem('login', 'true');
-            sessionStorage.setItem('role_id', data.result.accessToken);
+            const base64Url = data.result.accessToken.split('.')[1];
+            const base64 = base64Url.replace('-', '+').replace('_', '/');
+            const decoded = Buffer.from(base64, 'base64').toString('utf-8');
+            const token = JSON.parse(decoded);
+            sessionStorage.setItem('accessToken', data.result.accessToken);
+            sessionStorage.setItem('role_id', Reflect.get(token, 'role_id'));
             Router.push('/scholarship');
         },
         onError: () => {

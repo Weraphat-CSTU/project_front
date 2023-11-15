@@ -1,4 +1,3 @@
-import got from 'got';
 import axios from "axios";
 import 'dotenv'
 

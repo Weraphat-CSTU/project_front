@@ -28,12 +28,8 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
     const [authorize, setauthorize] = useState<boolean | undefined>(undefined);
     const [norMalmenu, setnarMolmenu] = useState<menu[]>();
 
-    const logout = () => {
-        sessionStorage.setItem('login', 'false');
-    };
-
     useEffect(() => {
-        const login = sessionStorage.getItem('login') == 'true' ? true : false;
+        const login = sessionStorage.getItem('accessToken') ? true : false;
         setauthorize(login);
 
         if (!login) {
@@ -83,7 +79,6 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                 },
                 { path: '/scholarship', lebel: 'ทุนการศึกษา', id: 1, icons: <IoIosSchool /> },
                 { path: '/studentfollow', lebel: 'ติดตามทุน', id: 3, icons: <IoIosSchool /> },
-
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 4, icons: <GrHistory /> },
             ]);
         }
@@ -138,7 +133,7 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                                             <a
                                                 href="/"
                                                 onClick={() => {
-                                                    sessionStorage.setItem('login', 'false');
+                                                    sessionStorage.clear();
                                                 }}
                                             >
                                                 ออกจากระบบ
@@ -156,11 +151,6 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                                     <div key={Index} className="flex space-x-1 items-center">
                                         <div className="text-[#354052]">{item.icons}</div>
                                         <Link
-                                            onClick={() => {
-                                                if (item.lebel == 'ออกจากระบบ') {
-                                                    logout();
-                                                }
-                                            }}
                                             href={item.path}
                                             className={
                                                 item.path === router.asPath

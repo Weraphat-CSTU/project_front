@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export type loginPlayload = {
     username: string;
     password: string;
@@ -7,11 +9,13 @@ export type loginPlayloadResponse = {
     result: { accessToken: string };
 };
 
-export function postLogin({ username, password }: loginPlayload): Promise<loginPlayloadResponse> {
-    if (username === 'student' && password === '12345') {
-        return Promise.resolve({ result: { accessToken: '2' } });
-    } else if (username === 'admin' && password === '12345') {
-        return Promise.resolve({ result: { accessToken: '1' } });
-    }
-    return Promise.reject({ result: { accessToken: 'error' } });
+type Prop = {
+    data : loginPlayload;
+}
+export async function postLogin({ data }: Prop): Promise<loginPlayloadResponse> {
+    const respone = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/login`,{
+        username: data.username,
+        password:data.password
+    })
+    return Promise.resolve({ result: { accessToken: respone.data.result.accessToken } });
 }
