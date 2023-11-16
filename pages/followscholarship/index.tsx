@@ -35,7 +35,7 @@ export default function Followscholarship() {
             key: 'name',
             render: (_, value: userInfoData) => (
                 <div>
-                    {value.name} {value.lastname}
+                    {value.firstname} {value.lastname}
                 </div>
             ),
         },
