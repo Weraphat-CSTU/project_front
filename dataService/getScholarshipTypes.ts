@@ -4,6 +4,7 @@ import 'dotenv'
 export type scholarshipTypeData={
     scholarship_type_id:number,
     scholarship_type_name:string,
+    is_active: 'Y' | 'N';
     create_date:string
 }
 

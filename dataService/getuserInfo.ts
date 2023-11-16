@@ -1,51 +1,30 @@
+import axios from "axios";
+
 export type userInfoData = {
-    userId: string;
-    name: string;
+    is_active: string;
+    user_id: string;
+    firstname: string;
     lastname: string;
     email: string;
-    cardId: string;
+    card_id: string;
     phone: string;
-    studentId: string;
+    login_id: string;
     grade: number;
-    is_active: 'Y'|'N';
-    lineId: string;
-    create_date:string;
+    line_id: string;
 };
 
 export type userInfoDataBody = {
     result: userInfoData[];
 };
 
-const mockData: userInfoData[] = [
-    {
-        userId: '1',
-        name: 'วีรภัทร์',
-        lastname: 'ชัยพงศ์เกษม',
-        email: 'park@mad.com',
-        cardId: '1-5564-66784-53-6',
-        phone: '092-939-2897',
-        studentId: '6109650124',
-        grade: 2.42,
-        is_active: "Y",
-        lineId: 'parkM2.5',
-        create_date:'2023-10-2'
-    },
-    {
-        userId: '2',
-        name: 'พีรวิชญ์',
-        lastname: 'วิบูลย์ธนากุล',
-        email: 'p@mad.com',
-        cardId: '1-5464-64664-53-3',
-        phone: '092-939-3939',
-        studentId: '6109650140',
-        grade: 3.75,
-        is_active: "N",
-        lineId: 'pM2.5',
-        create_date:'2023-09-17'
-    },
-    
-];
+export async function getuserinfo(): Promise<userInfoDataBody> {
+     const getToken = sessionStorage.getItem('accessToken');
 
-export function getuserinfo(): Promise<userInfoDataBody> {
-    return Promise.resolve({ result: mockData });
+     const respone = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/getUserProfile`,
+     {
+        headers: {
+            Authorization: `Bearer ${getToken}`,
+          },
+     })
+    return Promise.resolve({ result: respone.data.result });
 }

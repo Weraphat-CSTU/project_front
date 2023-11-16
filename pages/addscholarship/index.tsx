@@ -40,15 +40,26 @@ interface createScholarshipForm extends createScholarshipPlayload {
 //1.สร้าง type สำหรับข้อมูลในพร้อม
 export default function Addscholarship() {
     const Router = useRouter();
+    const [color, setColor] = useState<string>();
+    const [showcolor, setShowcolor] = useState<string>();
 
-    const fileTypes = ['PDF'];
+    const [form] = Form.useForm<createScholarshipForm>();
+    const [open, setOpen] = useState(false);
 
-    const [filterData, setfilterData] = useState<filterDataType>();
-
-    const [file, setFile] = useState(null);
-    const handleChange = (file: any): void => {
-        setFile(file);
+    const showModal = () => {
+        setOpen(true);
     };
+    const handleCancel = () => {
+        setOpen(false);
+    };
+    // const fileTypes = ['PDF'];
+
+    // const [filterData, setfilterData] = useState<filterDataType>();
+
+    // const [file, setFile] = useState(null);
+    // const handleChange = (file: any): void => {
+    //     setFile(file);
+    // };
     const { data: classTypeYearData } = useQuery({
         queryKey: 'classTypeYearData',
         queryFn: async () => getTypeclassname(),
@@ -59,8 +70,8 @@ export default function Addscholarship() {
     });
     const { mutate, isLoading } = useMutation({
         mutationKey: 'createscholarship',
-        mutationFn: async (result: createScholarshipPlayload) => {
-            return postCreateScholarship(result);
+        mutationFn: async (data: createScholarshipPlayload) => {
+            return postCreateScholarship({ data: data });
         },
         onSuccess: () => {
             Swal.fire('เพิ่มทุนการศึกษา', 'คุณเพิ่มทุนการศึกษาสำเร็จ', 'success');
@@ -71,25 +82,20 @@ export default function Addscholarship() {
         },
     });
 
-    const [color, setColor] = useState<string>();
-    const [showcolor, setShowcolor] = useState<string>();
-
-    const [form] = Form.useForm<createScholarshipForm>();
-
     const onHandleSubmit = (value: createScholarshipForm): void => {
         const normalResult: createScholarshipPlayload = {
             scholarship_name: value.scholarship_name,
             scholarship_year: value.scholarship_year,
-            start_date: value.date_rang ? value.date_rang[0].toJSON() : undefined,
-            end_date: value.date_rang ? value.date_rang[1].toJSON() : undefined,
             scholarship_grade: value.scholarship_grade,
             class_type_id: value.class_type_id,
+            start_date: value.date_rang ? value.date_rang[0].toJSON() : undefined,
+            end_date: value.date_rang ? value.date_rang[1].toJSON() : undefined,
             scholarship_type_id: value.scholarship_type_id,
-            scholarship_condition_name: value.scholarship_condition_name,
-            scholarship_qualification_name: value.scholarship_qualification_name,
-            tag_color: value.tag_color,
+            color_tag: value.color_tag,
+            scholarship_condition: value.scholarship_condition,
+            scholarship_qualification: value.scholarship_qualification,
         };
-        console.log(normalResult);
+
         Swal.fire({
             title: 'ยืนยันเพิ่มทุนการศึกษาใช่หรือไม่?',
             icon: 'warning',
@@ -104,18 +110,6 @@ export default function Addscholarship() {
             }
         });
     };
-    const [open, setOpen] = useState(false);
-
-    const showModal = () => {
-        setOpen(true);
-    };
-    const handleCancel = () => {
-        setOpen(false);
-    };
-    const handleOk = () => {
-        form.setFieldValue('tag_color', color);
-        setOpen(false);
-    };
 
     return (
         <Layout title="จัดการทุกการศึกษา" subTitle="เพิ่มทุนการศึกษา">
@@ -129,10 +123,9 @@ export default function Addscholarship() {
                                         <span className="label-text text-lg w-2/5 ">
                                             ชื่อทุนการศึกษา
                                         </span>
-
                                         <div className="w-full">
                                             <Form.Item
-                                                name="scholarship_name"
+                                                name={'scholarship_name'}
                                                 rules={[
                                                     {
                                                         required: true,
@@ -156,7 +149,7 @@ export default function Addscholarship() {
                                         </span>
                                         <div className="w-full">
                                             <Form.Item
-                                                name="scholarship_year"
+                                                name={'scholarship_year'}
                                                 rules={[
                                                     {
                                                         required: true,
@@ -207,13 +200,13 @@ export default function Addscholarship() {
                                     </div>
                                 </label>
                                 <label className="lebel">
-                                    <div className="flex items-center mt-3  w-full">
+                                    <div className="flex items-center mt-3 w-full">
                                         <span className="label-text text-lg  w-2/5">
                                             ประเภททุนการศึกษา
                                         </span>
                                         <div className="w-full">
                                             <Form.Item
-                                                name="scholarship_type_id"
+                                                name={'scholarship_type_id'}
                                                 rules={[
                                                     {
                                                         required: true,
@@ -229,7 +222,7 @@ export default function Addscholarship() {
                                                     options={scholarshipTypeData?.result.map(
                                                         (item) => ({
                                                             label: item.scholarship_type_name,
-                                                            values: item.scholarship_type_id,
+                                                            value: item.scholarship_type_id,
                                                         }),
                                                     )}
                                                 />
@@ -244,7 +237,7 @@ export default function Addscholarship() {
                                         </span>
                                         <div className="w-full">
                                             <Form.Item
-                                                name="scholarship_grade"
+                                                name={'scholarship_grade'}
                                                 rules={[
                                                     {
                                                         required: true,
@@ -266,7 +259,7 @@ export default function Addscholarship() {
                                         <span className="label-text text-lg  w-2/5">ชั้นปี</span>
                                         <div className="w-full">
                                             <Form.Item
-                                                name="class_type_id"
+                                                name={'class_type_id'}
                                                 rules={[
                                                     {
                                                         required: true,
@@ -296,7 +289,7 @@ export default function Addscholarship() {
                                         <div className="flex w-full space-x-5 ">
                                             <div>
                                                 <Form.Item
-                                                    name={'tag_color'}
+                                                    name={'color_tag'}
                                                     rules={[
                                                         {
                                                             required: true,
@@ -355,7 +348,7 @@ export default function Addscholarship() {
                                         <span className="label-text text-lg  w-2/5">เงื่อนไข</span>
                                         <div className="w-full">
                                             <Form.Item
-                                                name="scholarship_condition_name"
+                                                name={'scholarship_condition'}
                                                 rules={[
                                                     {
                                                         required: true,
@@ -392,7 +385,7 @@ export default function Addscholarship() {
                                             รายละเอียดเพิ่มเติม
                                         </span>
                                         <div className="w-full">
-                                            <Form.Item name="scholarship_qualification_name">
+                                            <Form.Item name={'scholarship_qualification'}>
                                                 <Input
                                                     placeholder="รายละเอียดเพิ่มเติม"
                                                     size="large"

@@ -39,14 +39,14 @@ export default function userInformation() {
                                 <div className="border-b flex justify-between h-2/6 items-center p-3 px-5">
                                     <DisplaytItem
                                         title="ชื่อ-นามสกุล"
-                                        value={[items?.name, items?.lastname].join(' ')}
+                                        value={[items?.firstname, items?.lastname].join(' ')}
                                     />
-                                    <DisplaytItem title="รหัสนักศึกษา" value={items?.studentId} />
+                                    <DisplaytItem title="รหัสนักศึกษา" value={items?.login_id} />
                                 </div>
                                 <div className="border-b flex justify-between h-2/6 items-center p-3 px-5">
                                     <DisplaytItem
                                         title="บัตรประจำตัวประชาชน"
-                                        value={userIdFormatter(items?.cardId)}
+                                        value={userIdFormatter(items?.card_id)}
                                         color="text-blue-600"
                                     />
                                     <DisplaytItem title="เกรดเฉลี่ย" value={items?.grade} />
@@ -67,7 +67,7 @@ export default function userInformation() {
                                         <p className="text-xl font-semibold">
                                             <FaLine />
                                         </p>
-                                        <p className="text-lg"> : {items?.lineId}</p>
+                                        <p className="text-lg"> : {items?.line_id}</p>
                                     </div>
                                 </div>
                             </div>

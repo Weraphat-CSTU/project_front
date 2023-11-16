@@ -40,7 +40,7 @@ export default function RegisterForm() {
             grade: result.grade || null,
             phone: result.phone.replaceAll('-', ''),
         };
-        console.log(normalResult);
+
         Swal.fire({
             title: 'ยืนยันลงทะเบียนใช่หรือไม่?',
             icon: 'warning',
