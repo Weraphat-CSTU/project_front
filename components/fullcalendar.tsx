@@ -45,7 +45,7 @@ export default function Fullcalendar() {
                     start: items.start_date,
                     end: dayjs(items.end_date).add(1, 'day').format('YYYY-MM-DD'),
                     id: items.scholarship_id,
-                    color: items.tag_color,
+                    color: items.color_tag,
                 }))}
             />
         </div>
