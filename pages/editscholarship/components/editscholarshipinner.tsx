@@ -41,8 +41,8 @@ export default function EditscholarshipInner() {
     const items = useMemo(() => scholarship?.result[0], [scholarship]);
     const { mutate, isLoading } = useMutation({
         mutationKey: 'createscholarship',
-        mutationFn: async (result: createScholarshipPlayload) => {
-            return postCreateScholarship(result);
+        mutationFn: async (data: createScholarshipPlayload) => {
+            return postCreateScholarship({ data: data });
         },
         onSuccess: () => {
             Swal.fire('เพิ่มทุนการศึกษา', 'คุณเพิ่มทุนการศึกษาสำเร็จ', 'success');
@@ -67,9 +67,9 @@ export default function EditscholarshipInner() {
             scholarship_grade: value.scholarship_grade,
             class_type_id: value.class_type_id,
             scholarship_type_id: value.scholarship_type_id,
-            scholarship_condition_name: value.scholarship_condition_name,
-            scholarship_qualification_name: value.scholarship_qualification_name,
-            tag_color: value.tag_color,
+            scholarship_condition: value.scholarship_condition,
+            scholarship_qualification: value.scholarship_qualification,
+            color_tag: value.color_tag,
         };
         console.log(normalResult);
         Swal.fire({
@@ -91,10 +91,10 @@ export default function EditscholarshipInner() {
             scholarship_name: scholarship?.result[0].scholarship_name,
             scholarship_year: scholarship?.result[0].scholarship_year,
             scholarship_grade: scholarship?.result[0].scholarship_grade,
-            scholarship_condition_name: scholarship?.result[0].scholarship_condition_name,
+            scholarship_condition: scholarship?.result[0].scholarship_condition_name,
             scholarship_type_id: scholarship?.result[0].scholarship_type_id,
             class_type_id: scholarship?.result[0].class_type_id,
-            tag_color: scholarship?.result[0].tag_color,
+            color_tag: scholarship?.result[0].color_tag,
         });
     }, [scholarship]);
 

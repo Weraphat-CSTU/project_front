@@ -24,7 +24,7 @@ type Prop = {
 export async function postCreateScholarship({data}: Prop): Promise<createScholarshipPlayloadRespone> {
    
     const getToken = sessionStorage.getItem('accessToken');
-    console.log(data)
+    
     const respone = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/addScholarship`,{
         scholarship_name:data.scholarship_name,
         scholarship_year:data.scholarship_year,

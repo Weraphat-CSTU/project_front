@@ -4,7 +4,7 @@ export type scholarshipData = {
     scholarship_year: string,
     start_date: string,
     end_date: string,
-    scholarship_grade:number,
+    scholarship_grade:string,
     class_type_id:number,
     description:string,
     create_date:string,
@@ -14,7 +14,7 @@ export type scholarshipData = {
     scholarship_qualification_name:string,
     scholarship_type_name: string,
     class_type_name: string,
-    tag_color:string,
+    color_tag:string,
     scholarship_year_id:number
 }
 
@@ -40,11 +40,11 @@ const mockscholarship : scholarshipData[] =  [
       description:"ทุนเพื่อการศึกษา",
       is_active:'Y',
       scholarship_condition_name:"เกรดเฉลี่ย 3.00 ขึ้นไป",
-      scholarship_grade:3.00,
+      scholarship_grade:"3.00",
       scholarship_id:"0",
       scholarship_qualification_name:"มีจิตอาสา",
       class_type_name: "ทุกชั้นปี",
-      tag_color:"#87D57C"
+      color_tag:"#87D57C"
     },
     {
       scholarship_type_id:2,
@@ -59,11 +59,11 @@ const mockscholarship : scholarshipData[] =  [
       description:"ทุนเพื่อการศึกษา",
       is_active:'Y',
       scholarship_condition_name:"เกรดเฉลี่ย 3.00 ขึ้นไป",
-      scholarship_grade:3.00,
+      scholarship_grade:"3.00",
       scholarship_id:"1",
       scholarship_qualification_name:"มีจิตอาสา",
       class_type_name: "ทุกชั้นปี",
-      tag_color:"#0250E3"
+      color_tag:"#0250E3"
     },
     {
       scholarship_type_id:2,
@@ -78,11 +78,11 @@ const mockscholarship : scholarshipData[] =  [
       description:"ทุนเพื่อการศึกษา",
       is_active:'Y',
       scholarship_condition_name:"เกรดเฉลี่ย 3.00 ขึ้นไป",
-      scholarship_grade:3.00,
+      scholarship_grade:"3.00",
       scholarship_id:"2",
       scholarship_qualification_name:"มีจิตอาสา",
       class_type_name: "ทุกชั้นปี",
-      tag_color:"#F5A01E"
+      color_tag:"#F5A01E"
     },
   ]
 
