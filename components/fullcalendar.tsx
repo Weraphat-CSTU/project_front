@@ -6,18 +6,24 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import interactionPlugin from '@fullcalendar/interaction';
 import listPlugin from '@fullcalendar/list';
-import { getScholarship } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
 import { Grid } from 'antd';
+import { getScholarshipID } from '@/dataService/getScholarshipID';
+import { getScholarship } from '@/dataService/getscholarship';
 
 export default function Fullcalendar() {
     const screens = Grid.useBreakpoint();
     const Router = useRouter();
     const obj = Reflect.get(Router.query, 'id') as string | null;
 
-    const { data: scholarship, isLoading: isLoadingScholarship } = useQuery({
+    const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
-        queryFn: async () => (obj ? getScholarship({ scholarship_id: obj }) : getScholarship()),
+        queryFn: async () => getScholarship(),
+    });
+
+    const { data: scholarshipID, isLoading: isLoadingScholarship } = useQuery({
+        queryKey: 'scholarshipID',
+        queryFn: async () => (obj ? getScholarshipID({ scholarship_id: obj }) : getScholarshipID()),
     });
 
     return (
@@ -36,17 +42,17 @@ export default function Fullcalendar() {
                 fixedWeekCount
                 locale={thLocale}
                 dayMaxEventRows={3}
-                eventClick={function (arg) {
-                    Router.push(`/scholarship-detail/${arg.event.id}`);
-                }}
                 editable
                 events={scholarship?.result.map((items) => ({
+                    id: items.scholarship_id,
                     title: items.scholarship_name,
                     start: items.start_date,
                     end: dayjs(items.end_date).add(1, 'day').format('YYYY-MM-DD'),
-                    id: items.scholarship_id,
                     color: items.color_tag,
                 }))}
+                eventClick={function (arg) {
+                    Router.push(`/scholarship-detail/${arg.event.id}`);
+                }}
             />
         </div>
     );

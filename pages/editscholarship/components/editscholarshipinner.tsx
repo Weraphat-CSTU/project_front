@@ -11,6 +11,7 @@ import {
     postCreateScholarship,
 } from '@/dataService/postCreateScholarship';
 import Swal from 'sweetalert2';
+import { getScholarshipID } from '@/dataService/getScholarshipID';
 
 type filterDataType = {
     class_type_name?: string;
@@ -27,10 +28,13 @@ export default function EditscholarshipInner() {
     const fileTypes = ['PDF'];
     const [filterData, setfilterData] = useState<filterDataType>();
 
-    const { data: scholarship } = useQuery({
-        queryKey: 'scholarship',
+    const { data: scholarship, isLoading: isLoadingScholarshipID } = useQuery({
+        queryKey: ['editScholarshipID', Router.query.id],
         queryFn: async () =>
-            getScholarship({ scholarship_id: Reflect.get(Router.query, 'id') as string }),
+            getScholarshipID({
+                scholarship_id: Router.query.id as string,
+                //Reflect.get(router.query, 'id') as string,
+            }),
     });
 
     const [file, setFile] = useState(null);
@@ -91,7 +95,7 @@ export default function EditscholarshipInner() {
             scholarship_name: scholarship?.result[0].scholarship_name,
             scholarship_year: scholarship?.result[0].scholarship_year,
             scholarship_grade: scholarship?.result[0].scholarship_grade,
-            scholarship_condition: scholarship?.result[0].scholarship_condition_name,
+            scholarship_condition: scholarship?.result[0].scholarship_condition,
             scholarship_type_id: scholarship?.result[0].scholarship_type_id,
             class_type_id: scholarship?.result[0].class_type_id,
             color_tag: scholarship?.result[0].color_tag,

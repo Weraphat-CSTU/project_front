@@ -41,7 +41,11 @@ export default function Scholarship() {
                                     <div
                                         key={index}
                                         className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50"
-                                        onClick={() => Router.push(`/scholarship-detail/${index}`)}
+                                        onClick={() =>
+                                            Router.push(
+                                                `/scholarship-detail/${item.scholarship_id}`,
+                                            )
+                                        }
                                     >
                                         <div className="font-semibold text-xl">
                                             {item.scholarship_name}

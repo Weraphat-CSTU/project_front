@@ -19,12 +19,18 @@ export type scholarshipData = {
     scholarship_year_id:number
 }
 
+export type scholarshipDataParam ={
+  scholarship_id?:string,
+}
+
 export type scholarshipDataBody = {
     result : scholarshipData[]
 }
 
-  export async function getScholarship() : Promise<scholarshipDataBody|undefined>{
-    const respone = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/getScholarshipAll`)
+  export async function getScholarshipID(param?:scholarshipDataParam) : Promise<scholarshipDataBody|undefined>{
+    console.log(param?.scholarship_id)
+    const respone = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/getScholarship/${param?.scholarship_id}`)
+    
 
     return Promise.resolve({result : respone.data.result})
 }

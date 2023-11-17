@@ -3,7 +3,7 @@ import { Swiper, SwiperClass, SwiperSlide } from 'swiper/react';
 import { Pagination } from 'swiper';
 import 'swiper/css/pagination';
 import 'swiper/css';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai';
 import { useQuery } from 'react-query';
@@ -25,10 +25,13 @@ export default function Index() {
     });
 
     const { data: scholarship, isLoading: isLoadingScholarship } = useQuery({
-        queryKey: 'scholarship',
+        queryKey: 'scholarshipAll',
         queryFn: async () => getScholarship(),
     });
 
+    useEffect(() => {
+        console.log(scholarship);
+    }, [scholarship]);
     return (
         <Layout2 isLoading={isLoadingInfo && isLoadingScholarship}>
             <div className=" w-full min-h-screen bg-[#EFF1FE]">
@@ -93,7 +96,7 @@ export default function Index() {
                                     return (
                                         <div key={index}>
                                             <SwiperSlide>
-                                                <div className="relative border shadow-md space-y-5 w-[full] h-[350px] lg:w-[270px]  h-[450px] lg:h-[430px] p-3 rounded-md px-3">
+                                                <div className="relative border shadow-md space-y-5 w-[full] h-[350px] lg:w-[270px]  lg:h-[430px] p-3 rounded-md px-3">
                                                     <img
                                                         src="https://cdn.discordapp.com/attachments/1153632685407871066/1164851487273406484/f006018d74046a40.png?ex=6544b77c&is=6532427c&hm=12a74e75f31ca00e112fbb993cef323a5d4c76bc0330e7911178f09019a4f052&"
                                                         width={100}
@@ -153,7 +156,9 @@ export default function Index() {
                                             key={Index}
                                             className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50"
                                             onClick={() =>
-                                                Router.push(`/scholarship-detail/${Index}`)
+                                                Router.push(
+                                                    `/scholarship-detail/${item.scholarship_id}`,
+                                                )
                                             }
                                         >
                                             <div className="font-semibold text-xl">
