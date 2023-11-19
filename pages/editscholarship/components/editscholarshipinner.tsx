@@ -6,19 +6,22 @@ import { getDate } from '@/utils/getDate';
 import { FileUploader } from 'react-drag-drop-files';
 import { Button, DatePicker, Form, Input, Modal, Select } from 'antd';
 import { HexColorPicker } from 'react-colorful';
-import {
-    createScholarshipPlayload,
-    postCreateScholarship,
-} from '@/dataService/postCreateScholarship';
 import Swal from 'sweetalert2';
 import { getScholarshipID } from '@/dataService/getScholarshipID';
+import { editScholarship, updateScholarship } from '@/dataService/putScholarshipID';
+import dayjs from 'dayjs';
+import buddhistEra from 'dayjs/plugin/buddhistEra';
+import { getTypeclassname } from '@/dataService/getTypeClassName';
+import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
+
+dayjs.extend(buddhistEra);
 
 type filterDataType = {
     class_type_name?: string;
     schoalrship_year?: string;
 };
 
-interface createScholarshipForm extends createScholarshipPlayload {
+interface editScholarshipForm extends editScholarship {
     date_rang: Date[];
 }
 
@@ -27,9 +30,16 @@ export default function EditscholarshipInner() {
 
     const fileTypes = ['PDF'];
     const [filterData, setfilterData] = useState<filterDataType>();
-
+    const { data: classTypeYearData } = useQuery({
+        queryKey: 'classTypeYearData',
+        queryFn: async () => getTypeclassname(),
+    });
+    const { data: scholarshipTypeData } = useQuery({
+        queryKey: 'scholarshipTypeData',
+        queryFn: async () => getScholarshiptype(),
+    });
     const { data: scholarship, isLoading: isLoadingScholarshipID } = useQuery({
-        queryKey: ['editScholarshipID', Router.query.id],
+        queryKey: ['scholarshipID', Router.query.id],
         queryFn: async () =>
             getScholarshipID({
                 scholarship_id: Router.query.id as string,
@@ -41,29 +51,43 @@ export default function EditscholarshipInner() {
     const handleChange = (file: any): void => {
         setFile(file);
     };
-
     const items = useMemo(() => scholarship?.result[0], [scholarship]);
+
     const { mutate, isLoading } = useMutation({
         mutationKey: 'createscholarship',
-        mutationFn: async (data: createScholarshipPlayload) => {
-            return postCreateScholarship({ data: data });
+        mutationFn: async (data: editScholarship) => {
+            return updateScholarship({
+                param: { scholarship_id: Router.query.id as string },
+                query: {
+                    scholarship_name: data.scholarship_name,
+                    scholarship_year: data.scholarship_year,
+                    scholarship_grade: data.scholarship_grade,
+                    start_date: data.start_date,
+                    end_date: data.end_date,
+                    class_type_id: data.class_type_id,
+                    scholarship_type_id: data.scholarship_type_id,
+                    scholarship_condition: data.scholarship_condition,
+                    scholarship_qualification: data.scholarship_qualification,
+                    color_tag: data.color_tag,
+                },
+            });
         },
         onSuccess: () => {
-            Swal.fire('เพิ่มทุนการศึกษา', 'คุณเพิ่มทุนการศึกษาสำเร็จ', 'success');
+            Swal.fire('แก้ไขทุนการศึกษา', 'คุณแก้ไขทุนการศึกษาสำเร็จ', 'success');
             Router.push('/manageScholarship');
         },
         onError: () => {
-            Swal.fire('เพิ่มทุนการศึกษา', 'คุณเพิ่มทุนการศึกษาไม่สำเร็จ', 'error');
+            Swal.fire('แก้ไขทุนการศึกษา', 'คุณแก้ไขทุนการศึกษาไม่สำเร็จ', 'error');
         },
     });
 
     const [color, setColor] = useState<string>();
     const [showcolor, setShowcolor] = useState<string>();
 
-    const [form] = Form.useForm<createScholarshipForm>();
+    const [form] = Form.useForm<editScholarshipForm>();
 
-    const onHandleSubmit = (value: createScholarshipForm): void => {
-        const normalResult: createScholarshipPlayload = {
+    const onHandleSubmit = (value: editScholarshipForm): void => {
+        const normalResult: editScholarship = {
             scholarship_name: value.scholarship_name,
             scholarship_year: value.scholarship_year,
             start_date: value.date_rang ? value.date_rang[0].toJSON() : undefined,
@@ -77,7 +101,7 @@ export default function EditscholarshipInner() {
         };
         console.log(normalResult);
         Swal.fire({
-            title: 'ยืนยันเพิ่มทุนการศึกษาใช่หรือไม่?',
+            title: 'ยืนยันแก้ไขทุนการศึกษาใช่หรือไม่?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -96,6 +120,9 @@ export default function EditscholarshipInner() {
             scholarship_year: scholarship?.result[0].scholarship_year,
             scholarship_grade: scholarship?.result[0].scholarship_grade,
             scholarship_condition: scholarship?.result[0].scholarship_condition,
+            start_date: scholarship?.result[0].start_date,
+            end_date: scholarship?.result[0].end_date,
+            scholarship_qualification: scholarship?.result[0].scholarship_qualification,
             scholarship_type_id: scholarship?.result[0].scholarship_type_id,
             class_type_id: scholarship?.result[0].class_type_id,
             color_tag: scholarship?.result[0].color_tag,
@@ -110,10 +137,7 @@ export default function EditscholarshipInner() {
     const handleCancel = () => {
         setOpen(false);
     };
-    const handleOk = () => {
-        form.setFieldValue('tag_color', color);
-        setOpen(false);
-    };
+
     return (
         <div className="w-full h-screen">
             <div className="mx-auto max-w-3xl lg:max-w-7xl">
@@ -201,13 +225,13 @@ export default function EditscholarshipInner() {
                                 </div>
                             </label>
                             <label className="lebel">
-                                <div className="flex items-center mt-3  w-full">
+                                <div className="flex items-center mt-3 w-full">
                                     <span className="label-text text-lg  w-2/5">
                                         ประเภททุนการศึกษา
                                     </span>
                                     <div className="w-full">
                                         <Form.Item
-                                            name="scholarship_type_id"
+                                            name={'scholarship_type_id'}
                                             rules={[
                                                 {
                                                     required: true,
@@ -220,12 +244,13 @@ export default function EditscholarshipInner() {
                                                 placeholder="เลือกประเภททุน"
                                                 size="large"
                                                 className="w-full"
-                                            >
-                                                <Select.Option selected value={1}>
-                                                    ทุนภายใน
-                                                </Select.Option>
-                                                <Select.Option value={2}>ทุนภายนอก</Select.Option>
-                                            </Select>
+                                                options={scholarshipTypeData?.result.map(
+                                                    (item) => ({
+                                                        label: item.scholarship_type_name,
+                                                        value: item.scholarship_type_id,
+                                                    }),
+                                                )}
+                                            />
                                         </Form.Item>
                                     </div>
                                 </div>
@@ -259,7 +284,7 @@ export default function EditscholarshipInner() {
                                     <span className="label-text text-lg  w-2/5">ชั้นปี</span>
                                     <div className="w-full">
                                         <Form.Item
-                                            name="class_type_id"
+                                            name={'class_type_id'}
                                             rules={[
                                                 {
                                                     required: true,
@@ -272,17 +297,11 @@ export default function EditscholarshipInner() {
                                                 placeholder="เลือกชั้นปี"
                                                 size="large"
                                                 className="w-full"
-                                            >
-                                                <Select.Option selected value={0}>
-                                                    ทุกชั้นปี
-                                                </Select.Option>
-                                                <Select.Option value={1}>
-                                                    เฉพาะชั้นปีที่ 1
-                                                </Select.Option>
-                                                <Select.Option value={2}>
-                                                    เฉพาะชั้นปีที่ 2
-                                                </Select.Option>
-                                            </Select>
+                                                options={classTypeYearData?.result.map((item) => ({
+                                                    label: item.class_type_name,
+                                                    value: item.class_type_id,
+                                                }))}
+                                            />
                                         </Form.Item>
                                     </div>
                                 </div>
@@ -293,7 +312,7 @@ export default function EditscholarshipInner() {
                                     <div className="flex w-full space-x-5 ">
                                         <div>
                                             <Form.Item
-                                                name={'tag_color'}
+                                                name={'color_tag'}
                                                 rules={[
                                                     {
                                                         required: true,
@@ -350,7 +369,7 @@ export default function EditscholarshipInner() {
                                     <span className="label-text text-lg  w-2/5">เงื่อนไข</span>
                                     <div className="w-full">
                                         <Form.Item
-                                            name="scholarship_condition_name"
+                                            name="scholarship_condition"
                                             rules={[
                                                 {
                                                     required: true,
@@ -378,6 +397,18 @@ export default function EditscholarshipInner() {
                                     </div>
                                 </label> */}
                         </div>
+                        <div className="w-full h-2/5 flex justify-between ">
+                            <div className="w-2/4  border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 lg:mr-5">
+                                <div className="text-2xl font-extrabold dark:text-white">
+                                    รายละเอียดเพิ่มเติม
+                                </div>
+                                <div className="w-full">
+                                    <Form.Item name="scholarship_qualification">
+                                        <Input placeholder="รายละเอียด" size="large" allowClear />
+                                    </Form.Item>
+                                </div>
+                            </div>
+                        </div>
                         <div className="flex justify-center ">
                             <Button
                                 type="primary"
@@ -388,13 +419,6 @@ export default function EditscholarshipInner() {
                             </Button>
                         </div>
                     </Form>
-                    {/* <div className="w-full h-2/5 flex justify-between ">
-                    <div className="w-2/4  border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 lg:mr-5">
-                        <div className="text-2xl font-extrabold dark:text-white">
-                            รายละเอียดเพิ่มเติม
-                        </div>
-                    </div>
-                </div> */}
                 </div>
             </div>
         </div>

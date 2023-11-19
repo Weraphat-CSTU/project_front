@@ -6,7 +6,7 @@ import { useEffect, useState } from 'react';
 export default function scholarshipDetail() {
     const [authorize, setauthorize] = useState<boolean | undefined>(undefined);
     useEffect(() => {
-        const login = sessionStorage.getItem('login') == 'true' ? true : false;
+        const login = sessionStorage.getItem('accessToken') ? true : false;
         setauthorize(login);
     }, []);
     if (authorize === undefined) {

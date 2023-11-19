@@ -1,4 +1,5 @@
 
+import axios from "axios";
 import { scholarshipData } from "./getscholarship"
 
 export type deletescholarshipParam = {
@@ -9,65 +10,23 @@ export type deletescholarshipParam = {
       result : scholarshipData[]
   }
   
-  const mockscholarship : scholarshipData[] =  [
-      {
-        scholarship_type_id:1,
-        scholarship_type_name: "ทุนภายใน",
-        scholarship_name: "เรียนดี",
-        scholarship_year: "2566",
-        start_date: "2023-09-11",
-        end_date: "2023-09-29",
-        class_type_id:0,
-        create_date:"2023-09-11",
-        is_active:'Y',
-        scholarship_condition:"เกรดเฉลี่ย 3.00 ขึ้นไป",
-        scholarship_grade:"3.00",
-        scholarship_id:"0",
-        scholarship_qualification:"มีจิตอาสา",
-        class_type_name: "ทุกชั้นปี",
-        color_tag:"#87D57C",
-        scholarship_year_id:0
-      },
-      {
-        scholarship_type_id:2,
-        scholarship_type_name: "ทุนภายนอก",
-        scholarship_name: "กยศ.",
-        scholarship_year: "2566",
-        start_date: "2023-09-15",
-        end_date: "2023-09-22",
-        class_type_id:0,
-        create_date:"2023-09-11",
-        is_active:'Y',
-        scholarship_condition:"เกรดเฉลี่ย 3.00 ขึ้นไป",
-        scholarship_grade:"3.00",
-        scholarship_id:"1",
-        scholarship_qualification:"มีจิตอาสา",
-        class_type_name: "ทุกชั้นปี",
-        color_tag:"#0250E3",
-        scholarship_year_id:0
-      },
-      {
-        scholarship_type_id:2,
-        scholarship_type_name: "ทุนภายนอก",
-        scholarship_name: "สนับสนุนเรียนต่อต่างประเทศ",
-        scholarship_year: "2566",
-        start_date: "2023-09-15",
-        end_date: "2023-09-29",
-        class_type_id:0,
-        create_date:"2023-09-11",
-        is_active:'Y',
-        scholarship_condition:"เกรดเฉลี่ย 3.00 ขึ้นไป",
-        scholarship_grade:"3.00",
-        scholarship_id:"2",
-        scholarship_qualification:"มีจิตอาสา",
-        class_type_name: "ทุกชั้นปี",
-        color_tag:"#F5A01E",
-        scholarship_year_id:0
-      },
-    ]
-
-    export function deleteScholarship(data: deletescholarshipParam): Promise<deletescholarshipRespone> {
-        const normalResult = mockscholarship.filter((item)=>item.scholarship_id !== data.scholarship_id)
-
-        return Promise.resolve({ result: normalResult });
-    }
+  export async function deleteScholarship(
+      params: deletescholarshipParam,
+  ): Promise<deletescholarshipRespone> {
+      const getToken = sessionStorage.getItem('accessToken');
+      const respone = await axios.put(
+          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/deleteScholarship`,
+          {
+              scholarship_id: params.scholarship_id,
+          },
+          {
+              headers: {
+                  Authorization: `Bearer ${getToken}`,
+              },
+          },
+      );
+  
+      return Promise.resolve({ result: respone.data.result });
+  }
+  
+ 

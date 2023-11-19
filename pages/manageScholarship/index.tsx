@@ -30,8 +30,8 @@ export default function manageScholarship() {
     const [filterData, setfilterData] = useState<string>();
     const { mutate } = useMutation({
         mutationKey: 'deletescholarshipdata',
-        mutationFn: async (value: deletescholarshipParam) => {
-            return deleteScholarship(value);
+        mutationFn: async (data: deletescholarshipParam) => {
+            return deleteScholarship(data);
         },
         onSuccess: (item: deletescholarshipRespone) => {
             Swal.fire('ลบสำเร็จ', '', 'success');
