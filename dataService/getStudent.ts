@@ -1,13 +1,13 @@
 import axios from "axios";
 
 export type studentInfoData = {
-    is_active: 'Y'|'N';
     user_id: string;
     firstname: string;
     lastname: string;
     email: string;
     card_id: string;
     phone: string;
+    is_active: 'Y'|'N';
     login_id: string;
     grade: number;
     line_id: string;
