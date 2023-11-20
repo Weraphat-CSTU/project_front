@@ -9,17 +9,24 @@ import listPlugin from '@fullcalendar/list';
 import { useQuery } from 'react-query';
 import { Grid } from 'antd';
 import { getScholarshipID } from '@/dataService/getScholarshipID';
-import { getScholarship } from '@/dataService/getscholarship';
+import { Skeleton } from 'antd';
 
-export default function Fullcalendar() {
+export default function FullcalendarID() {
     const screens = Grid.useBreakpoint();
     const Router = useRouter();
+    const obj = Reflect.get(Router.query, 'id') as string | null;
 
-    const { data: scholarship } = useQuery({
-        queryKey: 'scholarship',
-        queryFn: async () => getScholarship(),
+    const { data: scholarshipID, isLoading: isLoadingScholarshipID } = useQuery({
+        queryKey: 'scholarshipID',
+        queryFn: async () => (obj ? getScholarshipID({ scholarship_id: obj }) : getScholarshipID()),
     });
-
+    if (isLoadingScholarshipID) {
+        return (
+            <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                <Skeleton active />
+            </div>
+        );
+    }
     return (
         <div>
             <FullCalendar
@@ -37,7 +44,7 @@ export default function Fullcalendar() {
                 locale={thLocale}
                 dayMaxEventRows={3}
                 editable
-                events={scholarship?.result.map((items) => ({
+                events={scholarshipID?.result.map((items) => ({
                     id: items.scholarship_id,
                     title: items.scholarship_name,
                     start: items.start_date,

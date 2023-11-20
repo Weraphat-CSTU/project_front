@@ -13,6 +13,7 @@ import dayjs from 'dayjs';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import { getTypeclassname } from '@/dataService/getTypeClassName';
 import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
+import { Skeleton } from 'antd';
 
 dayjs.extend(buddhistEra);
 
@@ -137,7 +138,13 @@ export default function EditscholarshipInner() {
     const handleCancel = () => {
         setOpen(false);
     };
-
+    if (isLoadingScholarshipID) {
+        return (
+            <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                <Skeleton active />
+            </div>
+        );
+    }
     return (
         <div className="w-full h-screen">
             <div className="mx-auto max-w-3xl lg:max-w-7xl">

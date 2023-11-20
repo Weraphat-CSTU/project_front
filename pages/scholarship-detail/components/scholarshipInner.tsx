@@ -2,8 +2,9 @@ import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { useMemo } from 'react';
 import { getDate } from '@/utils/getDate';
-import Fullcalendar from '@/components/fullcalendar';
 import { getScholarshipID } from '@/dataService/getScholarshipID';
+import FullcalendarID from '@/components/fullcalendarID';
+import { Skeleton } from 'antd';
 
 export default function ScholarshipDetailInner() {
     const router = useRouter();
@@ -21,7 +22,9 @@ export default function ScholarshipDetailInner() {
     return (
         <>
             {isLoadingScholarshipID ? (
-                <div></div>
+                <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                    <Skeleton active />
+                </div>
             ) : (
                 <div className="w-full h-screen">
                     <div className="mx-auto max-w-3xl lg:max-w-7xl">
@@ -60,7 +63,7 @@ export default function ScholarshipDetailInner() {
                                 </div>
                             </div>
                             <div className="w-full  lg:w-2/4  lg:ml-5 border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
-                                <Fullcalendar />
+                                <FullcalendarID />
                             </div>
                         </div>
                     </div>

@@ -28,7 +28,6 @@ export default function loginForm() {
         onError: () => {
             Swal.fire({
                 title: 'เข้าสู่ระบบล้มเหลว',
-                text: 'กรุณากรอกข้อมูลให้ถูกต้อง',
                 icon: 'error',
                 confirmButtonColor: '#3085d6',
                 confirmButtonText: 'ตกลง',

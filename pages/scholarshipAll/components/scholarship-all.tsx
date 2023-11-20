@@ -8,6 +8,7 @@ import { Table } from 'antd';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
 import { ColumnsType } from 'antd/es/table';
+import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
 
 export default function Scholarshipall() {
     const Router = useRouter();
@@ -15,6 +16,10 @@ export default function Scholarshipall() {
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
+    });
+    const { data: historyscholarship } = useQuery({
+        queryKey: 'historyscholarship',
+        queryFn: async () => getHistoryScholarship(),
     });
     const columns: ColumnsType<scholarshipData> = [
         {
@@ -41,7 +46,7 @@ export default function Scholarshipall() {
             key: 'scholarship_type_name',
         },
     ];
-    const columnsPassscholarship: ColumnsType<scholarshipData> = [
+    const columnsHistoryscholarship: ColumnsType<historyscholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
             dataIndex: 'scholarship_name',
@@ -84,8 +89,8 @@ export default function Scholarshipall() {
 
                 <p className="font-medium text-lg mb-5 pt-5">ทุนการศึกษาที่ผ่านมา</p>
                 <Table
-                    dataSource={scholarship?.result}
-                    columns={columnsPassscholarship}
+                    dataSource={historyscholarship?.result}
+                    columns={columnsHistoryscholarship}
                     bordered
                     pagination={false}
                 />

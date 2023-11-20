@@ -13,15 +13,16 @@ import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
 import { Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { getStudent, studentInfoData } from '@/dataService/getStudent';
 
 dayjs.extend(buddhistEra);
 
 export default function ManageStudent() {
-    const [userdata, setUserdata] = useState<userInfoData[]>();
+    const [studentdata, setStudentdata] = useState<studentInfoData[]>();
 
-    const { data: userinfo } = useQuery({
-        queryKey: 'userinfo',
-        queryFn: async () => getuserinfo(),
+    const { data: studentinfo } = useQuery({
+        queryKey: 'studentinfo',
+        queryFn: async () => getStudent(),
     });
 
     const { mutate } = useMutation({
@@ -31,7 +32,7 @@ export default function ManageStudent() {
         },
         onSuccess: (item: updateUserStatusRespone) => {
             Swal.fire('สถานะ', 'อัพเดตสถานะสำเร็จ', 'success');
-            setUserdata(item.result);
+            setStudentdata(item.result);
         },
         onError: () => {
             Swal.fire('สถานะ', 'อัพเดตสถานะไม่สำเร็จ', 'error');
@@ -49,26 +50,26 @@ export default function ManageStudent() {
             cancelButtonText: 'ยกเลิก',
         }).then((result: any) => {
             if (result.isConfirmed) {
-                mutate({ is_active: isActive ? 'Y' : 'N', user_id: user_id });
+                mutate({ user_id: user_id });
             }
         });
     };
 
     useEffect(() => {
-        setUserdata(userinfo?.result);
-    }, [userinfo]);
-    const columns: ColumnsType<userInfoData> = [
-        {
-            title: 'ลำดับที่',
-            dataIndex: 'userId',
-            key: 'userId',
-            render: (value: string) => <div>{value}</div>,
-        },
+        setStudentdata(studentinfo?.result);
+    }, [studentinfo]);
+    const columns: ColumnsType<studentInfoData> = [
+        // {
+        //     title: 'ลำดับที่',
+        //     dataIndex: 'user_id',
+        //     key: 'user_id',
+        //     render: (value: string) => <div>{value}</div>,
+        // },
         {
             title: 'ชื่อ-นามสกุล',
             dataIndex: 'name',
             key: 'name',
-            render: (_, value: userInfoData) => (
+            render: (_, value: studentInfoData) => (
                 <div>
                     {value.firstname} {value.lastname}
                 </div>
@@ -76,8 +77,8 @@ export default function ManageStudent() {
         },
         {
             title: 'รหัสนักศึกษา',
-            dataIndex: 'studentId',
-            key: 'studentId',
+            dataIndex: 'login_id',
+            key: 'login_id',
             render: (value: string) => <div>{value}</div>,
         },
         {
@@ -97,9 +98,9 @@ export default function ManageStudent() {
         },
         {
             title: 'สถานะ',
-            dataIndex: 'is_active',
-            key: 'is_active',
-            render: (_, value: userInfoData) => {
+            dataIndex: 'user_id',
+            key: 'user_id',
+            render: (_, value: studentInfoData) => {
                 return (
                     <div>
                         <label className="relative inline-flex items-center mr-5 cursor-pointer">
@@ -132,7 +133,7 @@ export default function ManageStudent() {
         <Layout title="จัดการนักศึกษา">
             <div className="">
                 <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                    <Table dataSource={userdata} columns={columns} bordered pagination={false} />
+                    <Table dataSource={studentdata} columns={columns} bordered pagination={false} />
                 </div>
             </div>
         </Layout>

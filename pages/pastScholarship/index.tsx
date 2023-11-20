@@ -1,6 +1,5 @@
 import Layout from '@/components/layout';
 import { useQuery } from 'react-query';
-import { getScholarship, scholarshipData } from '@/dataService/getscholarship';
 import dayjs from 'dayjs';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
@@ -8,6 +7,7 @@ import { useState } from 'react';
 import { Select, Table, Tag } from 'antd';
 import Column from 'antd/es/table/Column';
 import { ColumnsType } from 'antd/es/table';
+import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
 
 dayjs.extend(buddhistEra);
 type filterDataType = {
@@ -15,12 +15,12 @@ type filterDataType = {
     schoalrship_year?: string;
 };
 export default function PastScholarship() {
-    const { data: scholarship } = useQuery({
-        queryKey: 'scholarship',
-        queryFn: async () => getScholarship(),
+    const { data: historyscholarship } = useQuery({
+        queryKey: 'historyscholarship',
+        queryFn: async () => getHistoryScholarship(),
     });
     const [filterData, setfilterData] = useState<filterDataType>();
-    const columns: ColumnsType<scholarshipData> = [
+    const columns: ColumnsType<historyscholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
             dataIndex: 'scholarship_name',
@@ -103,7 +103,7 @@ export default function PastScholarship() {
                         </div>
                     </div>
                     <Table
-                        dataSource={scholarship?.result}
+                        dataSource={historyscholarship?.result}
                         columns={columns}
                         bordered
                         pagination={false}
