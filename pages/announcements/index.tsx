@@ -5,7 +5,7 @@ import { Button, Form, Input, Modal, Pagination } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
 import { useMutation, useQuery } from 'react-query';
 import Swal from 'sweetalert2';
@@ -62,17 +62,18 @@ export default function Announcements() {
         <Layout title="ข่าวประชาสัมพันธ์">
             <div className="">
                 <div className=" mx-auto  lg:max-w-7xl pt-10 px-5 lg:px-0">
-                    {parseInt(String(sessionStorage.getItem('role_id')), 10) == 1 && (
-                        <button
-                            className="btn btn-error text-white bg-blue-600 border-none hover:bg-blue-700 "
-                            onClick={() => {
-                                showModal();
-                            }}
-                        >
-                            <BsPencilSquare className="text-white " />
-                            <div className="pl-3">เขียนข่าวประชาสัมพันธ์</div>
-                        </button>
-                    )}
+                    {typeof sessionStorage !== 'undefined' &&
+                        parseInt(String(sessionStorage.getItem('role_id')), 10) === 1 && (
+                            <button
+                                className="btn btn-error text-white bg-blue-600 border-none hover:bg-blue-700"
+                                onClick={() => {
+                                    showModal();
+                                }}
+                            >
+                                <BsPencilSquare className="text-white" />
+                                <div className="pl-3">เขียนข่าวประชาสัมพันธ์</div>
+                            </button>
+                        )}
 
                     <Modal open={open} footer={null} onCancel={handleCancel} centered width={700}>
                         <Form form={form} onFinish={onHandleSubmit} layout="vertical">
