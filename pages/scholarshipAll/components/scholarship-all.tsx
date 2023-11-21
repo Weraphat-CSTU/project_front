@@ -4,11 +4,13 @@ import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import dayjs from 'dayjs';
-import { Table } from 'antd';
+import { Table, Tag } from 'antd';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
+import { MdOutlineDescription } from 'react-icons/md';
 import 'dayjs/locale/th';
 import { ColumnsType } from 'antd/es/table';
 import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
+import { getScholarshipComing, scholarshipComingData } from '@/dataService/getScholarshipComing';
 
 export default function Scholarshipall() {
     const Router = useRouter();
@@ -17,15 +19,28 @@ export default function Scholarshipall() {
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
+    const { data: scholarshipcoming } = useQuery({
+        queryKey: 'scholarshipcoming',
+        queryFn: async () => getScholarshipComing(),
+    });
     const { data: historyscholarship } = useQuery({
         queryKey: 'historyscholarship',
         queryFn: async () => getHistoryScholarship(),
     });
+
     const columns: ColumnsType<scholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
-            dataIndex: 'scholarship_name',
-            key: 'scholarship_name',
+            dataIndex: 'scholarship_id',
+            key: 'scholarship_id',
+            render: (_, value: scholarshipData) => (
+                <a
+                    className="cursor-pointer"
+                    onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
+                >
+                    {value.scholarship_name}
+                </a>
+            ),
         },
         {
             title: 'ปีการศึกษา',
@@ -44,13 +59,68 @@ export default function Scholarshipall() {
             title: 'ประเภท',
             dataIndex: 'scholarship_type_name',
             key: 'scholarship_type_name',
+            render: (value: string) => {
+                if (value === 'ทุนภายใน') {
+                    return <Tag color="blue">{value}</Tag>;
+                } else {
+                    return <Tag color="red">{value}</Tag>;
+                }
+            },
+        },
+    ];
+    const columnsScholarshipComing: ColumnsType<scholarshipComingData> = [
+        {
+            title: 'ชื่อทุนการศึกษา',
+            dataIndex: 'scholarship_id',
+            key: 'scholarship_id',
+            render: (_, value: scholarshipComingData) => (
+                <a
+                    className="cursor-pointer"
+                    onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
+                >
+                    {value.scholarship_name}
+                </a>
+            ),
+        },
+        {
+            title: 'ปีการศึกษา',
+            dataIndex: 'scholarship_year',
+            key: 'scholarship_year',
+        },
+        {
+            title: 'ระยะเวลาเปิดรับสมัคร',
+            dataIndex: 'start_date-end_date',
+            key: 'start_date',
+            render: (_, value: scholarshipComingData) => (
+                <div>{getDate(value.start_date, value.end_date)}</div>
+            ),
+        },
+        {
+            title: 'ประเภท',
+            dataIndex: 'scholarship_type_name',
+            key: 'scholarship_type_name',
+            render: (value: string) => {
+                if (value === 'ทุนภายใน') {
+                    return <Tag color="blue">{value}</Tag>;
+                } else {
+                    return <Tag color="red">{value}</Tag>;
+                }
+            },
         },
     ];
     const columnsHistoryscholarship: ColumnsType<historyscholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
-            dataIndex: 'scholarship_name',
-            key: 'scholarship_name',
+            dataIndex: 'scholarship_id',
+            key: 'scholarship_id',
+            render: (_, value: historyscholarshipData) => (
+                <a
+                    className="cursor-pointer"
+                    onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
+                >
+                    {value.scholarship_name}
+                </a>
+            ),
         },
         {
             title: 'ปีการศึกษา',
@@ -69,6 +139,13 @@ export default function Scholarshipall() {
             title: 'ประเภท',
             dataIndex: 'scholarship_type_name',
             key: 'scholarship_type_name',
+            render: (value: string) => {
+                if (value === 'ทุนภายใน') {
+                    return <Tag color="blue">{value}</Tag>;
+                } else {
+                    return <Tag color="red">{value}</Tag>;
+                }
+            },
         },
     ];
     return (
@@ -85,7 +162,12 @@ export default function Scholarshipall() {
                 <p className="font-medium text-lg mb-5 pt-5">
                     ทุนการศึกษาที่จะเปิดรับสมัครเร็ว ๆ นี้
                 </p>
-                <Table columns={columns} bordered pagination={false} />
+                <Table
+                    dataSource={scholarshipcoming?.result}
+                    columns={columnsScholarshipComing}
+                    bordered
+                    pagination={false}
+                />
 
                 <p className="font-medium text-lg mb-5 pt-5">ทุนการศึกษาที่ผ่านมา</p>
                 <Table

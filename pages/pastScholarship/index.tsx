@@ -8,6 +8,7 @@ import { Select, Table, Tag } from 'antd';
 import Column from 'antd/es/table/Column';
 import { ColumnsType } from 'antd/es/table';
 import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
+import { useRouter } from 'next/router';
 
 dayjs.extend(buddhistEra);
 type filterDataType = {
@@ -15,6 +16,7 @@ type filterDataType = {
     schoalrship_year?: string;
 };
 export default function PastScholarship() {
+    const Router = useRouter();
     const { data: historyscholarship } = useQuery({
         queryKey: 'historyscholarship',
         queryFn: async () => getHistoryScholarship(),
@@ -23,8 +25,16 @@ export default function PastScholarship() {
     const columns: ColumnsType<historyscholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
-            dataIndex: 'scholarship_name',
-            key: 'scholarship_name',
+            dataIndex: 'scholarship_id',
+            key: 'scholarship_id',
+            render: (_, value: historyscholarshipData) => (
+                <a
+                    className="cursor-pointer"
+                    onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
+                >
+                    {value.scholarship_name}
+                </a>
+            ),
         },
         {
             title: 'ปีการศึกษา',
