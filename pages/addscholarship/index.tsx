@@ -400,7 +400,7 @@ export default function Addscholarship() {
                                 <Button
                                     type="primary"
                                     htmlType="submit"
-                                    className="text-white bg-[#08a479] px-8 py-2 rounded-lg"
+                                    className="text-white bg-[#08a479] px-8  rounded-lg "
                                 >
                                     บันทึก
                                 </Button>

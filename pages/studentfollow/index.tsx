@@ -7,6 +7,7 @@ import dayjs from 'dayjs';
 import { Tag } from 'antd';
 
 import 'dayjs/locale/th';
+import { getFollowScholarship } from '@/dataService/getfollowScholarship';
 
 export default function Studentfollow() {
     const Router = useRouter();
@@ -14,7 +15,10 @@ export default function Studentfollow() {
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
-
+    const { data: followscholarship } = useQuery({
+        queryKey: 'followscholarship',
+        queryFn: async () => getFollowScholarship(),
+    });
     return (
         <Layout title="ทุนการศึกษาที่กำลังติดตาม">
             <div className="mx-auto max-w-3xl lg:max-w-7xl pt-10">

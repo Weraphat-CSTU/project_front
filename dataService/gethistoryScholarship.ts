@@ -9,7 +9,7 @@ export type historyscholarshipData = {
     scholarship_grade:string,
     class_type_id:number,
     create_date:string,
-    is_active:'Y'|'N',
+    is_active:'Y',
     scholarship_type_id: number,
     scholarship_condition:string,
     scholarship_qualification:string,

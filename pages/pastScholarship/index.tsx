@@ -29,7 +29,7 @@ export default function PastScholarship() {
             key: 'scholarship_id',
             render: (_, value: historyscholarshipData) => (
                 <a
-                    className="cursor-pointer"
+                    className="cursor-pointer text-blue-500"
                     onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
                 >
                     {value.scholarship_name}

@@ -28,7 +28,6 @@ export type scholarshipDataBody = {
 }
 
   export async function getScholarshipID(param?:scholarshipDataParam) : Promise<scholarshipDataBody|undefined>{
-    console.log(param?.scholarship_id)
     const respone = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/getScholarship/${param?.scholarship_id}`)
     
 

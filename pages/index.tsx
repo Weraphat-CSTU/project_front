@@ -44,7 +44,7 @@ export default function Index() {
                         alt="Picture of the author"
                     />
 
-                    <div className="flex items-center  w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0 slide-left">
+                    <div className="flex items-center w-full lg:h-[600px] mx-auto max-w-3xl md:max-w-5xl lg:max-w-7xl absolute inset-0 slide-left">
                         <div className="space-y-3 -translate-y-20 lg:translate-y-0  lg:space-y-6 pl-5 pt-5 pb-10 lg:pl-5 lg:pb-0 lg:pt-0">
                             <div className="font-bold text-white  text-2xl md:text-4xl">
                                 ทุนการศึกษาสำหรับนักศึกษา
@@ -168,7 +168,11 @@ export default function Index() {
                                                 {item.scholarship_type_name} (
                                                 {item.scholarship_year})
                                             </div>
-                                            <div>{getDate(item.start_date, item.end_date)}</div>
+                                            <div className="font-normal">
+                                                {' '}
+                                                เปิดรับสมัคร:{' '}
+                                                {getDate(item.start_date, item.end_date)}
+                                            </div>
                                         </div>
                                     );
                                 })}
@@ -176,7 +180,7 @@ export default function Index() {
                         </div>
                         <div className=" w-full lg:w-3/5 pt-10 lg:pt-0 pl-7 lg:pl-5 pb-10 -mx-3">
                             <div className="font-bold text-md md:text-lg lg:text-xl pb-5">
-                                ปฏิทันกำหนดการ
+                                ปฏิทินกำหนดการ
                             </div>
                             <Fullcalendar />
                         </div>

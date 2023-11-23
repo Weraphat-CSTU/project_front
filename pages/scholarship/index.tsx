@@ -1,18 +1,50 @@
 import Layout from '@/components/layout';
 import { useRouter } from 'next/router';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { getScholarship } from '@/dataService/getscholarship';
 import { getDate } from '@/utils/getDate';
 import Fullcalendar from '@/components/fullcalendar';
 import Image from 'next/image';
+import { Button, Form, message } from 'antd';
+import { createSubscribePlayloadParam, postSubscribe } from '@/dataService/postSubscribe';
+import Swal from 'sweetalert2';
+import { getuserinfo } from '@/dataService/getuserInfo';
+import { useMemo } from 'react';
+import { getScholarshipID } from '@/dataService/getScholarshipID';
 
 export default function Scholarship() {
     const Router = useRouter();
-
+    const [form] = Form.useForm<createSubscribePlayloadParam>();
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
+
+    const { data: userinfo, isLoading } = useQuery({
+        queryKey: 'userinfo',
+        queryFn: async () => getuserinfo(),
+    });
+    const items = useMemo(() => userinfo?.result[0], [userinfo]);
+
+    const { mutate, isLoading: isLoadingSubscribe } = useMutation({
+        mutationKey: ['subscribescholarship', Router.query.id],
+        mutationFn: async (data: { param: createSubscribePlayloadParam }) => {
+            return postSubscribe(data.param);
+        },
+        onSuccess: () => {
+            message.success('คุณติดตามทุนการศึกษานี้แล้ว');
+        },
+        onError: () => {
+            message.error('คุณติดตามทุนการศึกษานี้ไม่สำเร็จ');
+        },
+    });
+
+    const onHandleSubmit = (value: createSubscribePlayloadParam): void => {
+        const normalResult: createSubscribePlayloadParam = {
+            scholarship_id: value.scholarship_id,
+        };
+        mutate({ param: normalResult });
+    };
 
     return (
         <Layout>
@@ -41,19 +73,40 @@ export default function Scholarship() {
                                     <div
                                         key={index}
                                         className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50"
-                                        onClick={() =>
-                                            Router.push(
-                                                `/scholarship-detail/${item.scholarship_id}`,
-                                            )
-                                        }
                                     >
-                                        <div className="font-semibold text-xl">
-                                            {item.scholarship_name}
+                                        <div className="flex justify-between">
+                                            <div
+                                                className="space-y-3"
+                                                onClick={() =>
+                                                    Router.push(
+                                                        `/scholarship-detail/${item.scholarship_id}`,
+                                                    )
+                                                }
+                                            >
+                                                <div className="font-semibold text-xl text-blue-600 hover:text-blue-500 hover:underline">
+                                                    {item.scholarship_name}
+                                                </div>
+                                                <div className="font-normal text-[17px]">
+                                                    {item.scholarship_type_name} (
+                                                    {item.scholarship_year})
+                                                </div>
+                                                <div className="font-normal">
+                                                    {' '}
+                                                    เปิดรับสมัคร:{' '}
+                                                    {getDate(item.start_date, item.end_date)}
+                                                </div>
+                                            </div>
+                                            <Button
+                                                className=" text-white bg-red-600"
+                                                onClick={() => {
+                                                    onHandleSubmit({
+                                                        scholarship_id: item.scholarship_id,
+                                                    });
+                                                }}
+                                            >
+                                                ติดตาม
+                                            </Button>
                                         </div>
-                                        <div className="font-normal text-[17px]">
-                                            {item.scholarship_type_name} ({item.scholarship_year})
-                                        </div>
-                                        <div>{getDate(item.start_date, item.end_date)}</div>
                                     </div>
                                 );
                             })}

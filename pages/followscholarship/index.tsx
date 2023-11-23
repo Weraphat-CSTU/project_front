@@ -9,31 +9,33 @@ import { useEffect, useState } from 'react';
 import { BiCalendarPlus, BiMessageError } from 'react-icons/bi';
 import { useRouter } from 'next/router';
 import 'dayjs/locale/th';
+import { getStudent, studentInfoData } from '@/dataService/getStudent';
 
 dayjs.extend(buddhistEra);
 
 export default function Followscholarship() {
     const rounter = useRouter();
-    const [userdata, setUserdata] = useState<userInfoData[]>();
-    const { data: userinfo } = useQuery({
-        queryKey: 'userinfo',
-        queryFn: async () => getuserinfo(),
+    const [studentdata, setStudentdata] = useState<studentInfoData[]>();
+
+    const { data: studentfollowScholarship } = useQuery({
+        queryKey: 'studentfollowScholarship',
+        queryFn: async () => getStudent(),
     });
     useEffect(() => {
-        setUserdata(userinfo?.result);
-    }, [userinfo]);
-    const columns: ColumnsType<userInfoData> = [
-        {
-            title: 'ลำดับที่',
-            dataIndex: 'userId',
-            key: 'userId',
-            render: (value: string) => <div>{value}</div>,
-        },
+        setStudentdata(studentfollowScholarship?.result);
+    }, [studentfollowScholarship]);
+    const columns: ColumnsType<studentInfoData> = [
+        // {
+        //     title: 'ลำดับที่',
+        //     dataIndex: 'userId',
+        //     key: 'userId',
+        //     render: (value: string) => <div>{value}</div>,
+        // },
         {
             title: 'ชื่อ-นามสกุล',
             dataIndex: 'name',
             key: 'name',
-            render: (_, value: userInfoData) => (
+            render: (_, value: studentInfoData) => (
                 <div>
                     {value.firstname} {value.lastname}
                 </div>
@@ -41,8 +43,8 @@ export default function Followscholarship() {
         },
         {
             title: 'รหัสนักศึกษา',
-            dataIndex: 'studentId',
-            key: 'studentId',
+            dataIndex: 'login_id',
+            key: 'login_id',
             render: (value: string) => <div>{value}</div>,
         },
         {
@@ -52,14 +54,14 @@ export default function Followscholarship() {
 
             render: (value: string) => <div> {value}</div>,
         },
-        {
-            title: 'วันที่ติดตามทุน',
-            dataIndex: 'create_date',
-            key: 'create_date',
-            render: (value: string) => (
-                <div>{dayjs(value).locale('th').format('DD MMMM BBBB')}</div>
-            ),
-        },
+        // {
+        //     title: 'วันที่ติดตามทุน',
+        //     dataIndex: 'create_date',
+        //     key: 'create_date',
+        //     // render: (value: string) => (
+        //     //     <div>{dayjs(value).locale('th').format('DD MMMM BBBB')}</div>
+        //     // ),
+        // },
         {
             title: 'ทุนการศึกษาที่กำลังติดตาม',
             dataIndex: 'is_active',
@@ -83,7 +85,7 @@ export default function Followscholarship() {
         <Layout title="นักศึกษาที่กำลังติดตามทุนการศึกษา">
             <div className="mx-auto lg:max-w-7xl pt-10">
                 <div>
-                    <Table dataSource={userdata} columns={columns} bordered pagination={false} />
+                    <Table dataSource={studentdata} columns={columns} bordered pagination={false} />
                 </div>
             </div>
         </Layout>

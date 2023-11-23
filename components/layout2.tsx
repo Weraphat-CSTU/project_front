@@ -170,7 +170,11 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
 
                                         <hr />
                                         <div className="">
-                                            <Link href="/login" onClick={() => setisOpen(!isOpen)} className='cursor-pointer py-2 text-lg font-medium h-10 text-white  px-5 rounded-lg  bg-[#EB9D48]'>
+                                            <Link
+                                                href="/login"
+                                                onClick={() => setisOpen(!isOpen)}
+                                                className="cursor-pointer py-2 text-lg font-medium h-10 text-white  px-5 rounded-lg  bg-[#EB9D48]"
+                                            >
                                                 เข้าสู่ระบบ
                                             </Link>
                                         </div>

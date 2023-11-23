@@ -1,12 +1,9 @@
-import Layout2 from '@/components/layout2';
 import { getScholarship, scholarshipData } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import dayjs from 'dayjs';
 import { Table, Tag } from 'antd';
-import buddhistEra from 'dayjs/plugin/buddhistEra';
-import { MdOutlineDescription } from 'react-icons/md';
 import 'dayjs/locale/th';
 import { ColumnsType } from 'antd/es/table';
 import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
@@ -35,7 +32,7 @@ export default function Scholarshipall() {
             key: 'scholarship_id',
             render: (_, value: scholarshipData) => (
                 <a
-                    className="cursor-pointer"
+                    className="cursor-pointer text-blue-500"
                     onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
                 >
                     {value.scholarship_name}
@@ -75,7 +72,7 @@ export default function Scholarshipall() {
             key: 'scholarship_id',
             render: (_, value: scholarshipComingData) => (
                 <a
-                    className="cursor-pointer"
+                    className="cursor-pointer text-blue-500"
                     onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
                 >
                     {value.scholarship_name}
@@ -115,7 +112,7 @@ export default function Scholarshipall() {
             key: 'scholarship_id',
             render: (_, value: historyscholarshipData) => (
                 <a
-                    className="cursor-pointer"
+                    className="cursor-pointer text-blue-500"
                     onClick={() => Router.push(`/scholarship-detail/${value.scholarship_id}`)}
                 >
                     {value.scholarship_name}
@@ -151,7 +148,7 @@ export default function Scholarshipall() {
     return (
         <div className="w-full min-h-screen ">
             <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                <p className="font-medium text-lg mb-5">ทุนการศึกษาที่กำลังดำเนินการ</p>
+                <p className="font-semibold text-lg mb-5">ทุนการศึกษาที่กำลังดำเนินการ</p>
                 <Table
                     dataSource={scholarship?.result}
                     columns={columns}
@@ -159,7 +156,7 @@ export default function Scholarshipall() {
                     pagination={false}
                 />
 
-                <p className="font-medium text-lg mb-5 pt-5">
+                <p className="font-semibold text-lg mb-5 pt-5">
                     ทุนการศึกษาที่จะเปิดรับสมัครเร็ว ๆ นี้
                 </p>
                 <Table
@@ -169,7 +166,7 @@ export default function Scholarshipall() {
                     pagination={false}
                 />
 
-                <p className="font-medium text-lg mb-5 pt-5">ทุนการศึกษาที่ผ่านมา</p>
+                <p className="font-semibold text-lg mb-5 pt-5">ทุนการศึกษาที่ผ่านมา</p>
                 <Table
                     dataSource={historyscholarship?.result}
                     columns={columnsHistoryscholarship}
