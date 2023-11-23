@@ -4,28 +4,21 @@ import { useMutation, useQuery } from 'react-query';
 import { getScholarship } from '@/dataService/getscholarship';
 import { getDate } from '@/utils/getDate';
 import Fullcalendar from '@/components/fullcalendar';
-import Image from 'next/image';
-import { Button, Form, message } from 'antd';
+import { Button, Tag, message } from 'antd';
 import { createSubscribePlayloadParam, postSubscribe } from '@/dataService/postSubscribe';
-import Swal from 'sweetalert2';
-import { getuserinfo } from '@/dataService/getuserInfo';
-import { useMemo } from 'react';
-import { getScholarshipID } from '@/dataService/getScholarshipID';
+import { getFollowScholarship } from '@/dataService/getfollowScholarship';
 
 export default function Scholarship() {
     const Router = useRouter();
-    const [form] = Form.useForm<createSubscribePlayloadParam>();
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
 
-    const { data: userinfo, isLoading } = useQuery({
-        queryKey: 'userinfo',
-        queryFn: async () => getuserinfo(),
+    const { data: followscholarship } = useQuery({
+        queryKey: 'followscholarship',
+        queryFn: async () => getFollowScholarship(),
     });
-    const items = useMemo(() => userinfo?.result[0], [userinfo]);
-
     const { mutate, isLoading: isLoadingSubscribe } = useMutation({
         mutationKey: ['subscribescholarship', Router.query.id],
         mutationFn: async (data: { param: createSubscribePlayloadParam }) => {
@@ -87,8 +80,16 @@ export default function Scholarship() {
                                                     {item.scholarship_name}
                                                 </div>
                                                 <div className="font-normal text-[17px]">
-                                                    {item.scholarship_type_name} (
-                                                    {item.scholarship_year})
+                                                    {item.scholarship_type_name === 'ทุนภายใน' ? (
+                                                        <Tag color="blue">
+                                                            {item.scholarship_type_name}
+                                                        </Tag>
+                                                    ) : (
+                                                        <Tag color="red">
+                                                            {item.scholarship_type_name}
+                                                        </Tag>
+                                                    )}{' '}
+                                                    (ปีการศึกษา {item.scholarship_year})
                                                 </div>
                                                 <div className="font-normal">
                                                     {' '}
@@ -96,6 +97,7 @@ export default function Scholarship() {
                                                     {getDate(item.start_date, item.end_date)}
                                                 </div>
                                             </div>
+
                                             <Button
                                                 className=" text-white bg-red-600"
                                                 onClick={() => {

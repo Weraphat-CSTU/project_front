@@ -64,8 +64,8 @@ export default function Followscholarship() {
         // },
         {
             title: 'ทุนการศึกษาที่กำลังติดตาม',
-            dataIndex: 'is_active',
-            key: 'is_active',
+            dataIndex: 'user_id',
+            key: 'user_id',
             render: () => {
                 return (
                     <button

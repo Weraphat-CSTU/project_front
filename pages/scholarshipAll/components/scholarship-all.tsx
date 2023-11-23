@@ -172,6 +172,7 @@ export default function Scholarshipall() {
                     columns={columnsHistoryscholarship}
                     bordered
                     pagination={false}
+                    className="mb-10"
                 />
             </div>
         </div>

@@ -26,7 +26,7 @@ export default function ScholarshipDetailInner() {
                     <Skeleton active />
                 </div>
             ) : (
-                <div className="w-full h-screen">
+                <div className="w-full ">
                     <div className="mx-auto max-w-3xl lg:max-w-7xl">
                         <div className="w-full h-3/5 border rounded-md shadow-lg p-5 mb-3 mt-3 space-y-5">
                             <div className="flex">

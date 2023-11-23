@@ -23,7 +23,7 @@ export default function Studentfollow() {
         <Layout title="ทุนการศึกษาที่กำลังติดตาม">
             <div className="mx-auto max-w-3xl lg:max-w-7xl pt-10">
                 <div className="lg:flex w-full space-x-10 ">
-                    {scholarship?.result.map((item, index) => (
+                    {followscholarship?.result.map((item, index) => (
                         <div
                             key={index}
                             className="border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 cursor-pointer hover:bg-slate-50 w-full max-h-screen"
