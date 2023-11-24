@@ -7,18 +7,16 @@ import Fullcalendar from '@/components/fullcalendar';
 import { Button, Tag, message } from 'antd';
 import { createSubscribePlayloadParam, postSubscribe } from '@/dataService/postSubscribe';
 import { getFollowScholarship } from '@/dataService/getfollowScholarship';
+import { unSubscribe, unSubscribePlayloadParam } from '@/dataService/unSubscribe';
 
 export default function Scholarship() {
     const Router = useRouter();
-    const { data: scholarship } = useQuery({
-        queryKey: 'scholarship',
-        queryFn: async () => getScholarship(),
-    });
 
     const { data: followscholarship } = useQuery({
         queryKey: 'followscholarship',
         queryFn: async () => getFollowScholarship(),
     });
+
     const { mutate, isLoading: isLoadingSubscribe } = useMutation({
         mutationKey: ['subscribescholarship', Router.query.id],
         mutationFn: async (data: { param: createSubscribePlayloadParam }) => {
@@ -32,13 +30,31 @@ export default function Scholarship() {
         },
     });
 
-    const onHandleSubmit = (value: createSubscribePlayloadParam): void => {
+    const onHandleSubscribe = (value: createSubscribePlayloadParam): void => {
         const normalResult: createSubscribePlayloadParam = {
             scholarship_id: value.scholarship_id,
         };
         mutate({ param: normalResult });
     };
 
+    const { mutate: unFollow, isLoading: isLoadingunSubscribe } = useMutation({
+        mutationKey: ['unsubscribescholarship', Router.query.id],
+        mutationFn: async (data: { param: unSubscribePlayloadParam }) => {
+            return unSubscribe(data.param);
+        },
+        onSuccess: () => {
+            message.success('คุณเลิกติดตามทุนการศึกษานี้แล้ว');
+        },
+        onError: () => {
+            message.error('คุณเลิกติดตามทุนการศึกษานี้ไม่สำเร็จ');
+        },
+    });
+    const onHandlerUnsubscribe = (value: unSubscribePlayloadParam): void => {
+        const normalResult: unSubscribePlayloadParam = {
+            subscribe_id: value.subscribe_id,
+        };
+        unFollow({ param: normalResult });
+    };
     return (
         <Layout>
             <img
@@ -61,7 +77,7 @@ export default function Scholarship() {
                             </div>
                         </div>
                         <div className="w-full pt-5 ">
-                            {scholarship?.result.map((item, index) => {
+                            {followscholarship?.result.map((item, index) => {
                                 return (
                                     <div
                                         key={index}
@@ -88,26 +104,37 @@ export default function Scholarship() {
                                                         <Tag color="red">
                                                             {item.scholarship_type_name}
                                                         </Tag>
-                                                    )}{' '}
+                                                    )}
                                                     (ปีการศึกษา {item.scholarship_year})
                                                 </div>
                                                 <div className="font-normal">
-                                                    {' '}
-                                                    เปิดรับสมัคร:{' '}
+                                                    รับสมัคร:{' '}
                                                     {getDate(item.start_date, item.end_date)}
                                                 </div>
                                             </div>
-
-                                            <Button
-                                                className=" text-white bg-red-600"
-                                                onClick={() => {
-                                                    onHandleSubmit({
-                                                        scholarship_id: item.scholarship_id,
-                                                    });
-                                                }}
-                                            >
-                                                ติดตาม
-                                            </Button>
+                                            {item.is_follow === 'Y' ? (
+                                                <Button
+                                                    className=" text-white bg-gray-600"
+                                                    onClick={() => {
+                                                        onHandlerUnsubscribe({
+                                                            subscribe_id: item.subscribe_id,
+                                                        });
+                                                    }}
+                                                >
+                                                    ติดตามแล้ว
+                                                </Button>
+                                            ) : (
+                                                <Button
+                                                    className=" text-white bg-red-600"
+                                                    onClick={() => {
+                                                        onHandleSubscribe({
+                                                            scholarship_id: item.scholarship_id,
+                                                        });
+                                                    }}
+                                                >
+                                                    ติดตาม
+                                                </Button>
+                                            )}
                                         </div>
                                     </div>
                                 );

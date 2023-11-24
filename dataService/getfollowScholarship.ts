@@ -17,7 +17,8 @@ export type followScholarshipData = {
   class_type_name: string,
   color_tag:string,
   scholarship_year_id:number,
-  is_follow:'Y'
+  is_follow:'Y',
+  subscribe_id:string
 }
 
 export type followScholarshipDataBody = {
