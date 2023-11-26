@@ -12,10 +12,14 @@ import { unSubscribe, unSubscribePlayloadParam } from '@/dataService/unSubscribe
 export default function Scholarship() {
     const Router = useRouter();
 
-    const { data: followscholarship } = useQuery({
+    const { data: followscholarship, refetch } = useQuery({
         queryKey: 'followscholarship',
         queryFn: async () => getFollowScholarship(),
     });
+
+    const refetchData = (): void => {
+        refetch();
+    };
 
     const { mutate, isLoading: isLoadingSubscribe } = useMutation({
         mutationKey: ['subscribescholarship', Router.query.id],
@@ -24,6 +28,7 @@ export default function Scholarship() {
         },
         onSuccess: () => {
             message.success('คุณติดตามทุนการศึกษานี้แล้ว');
+            refetchData();
         },
         onError: () => {
             message.error('คุณติดตามทุนการศึกษานี้ไม่สำเร็จ');
@@ -44,6 +49,7 @@ export default function Scholarship() {
         },
         onSuccess: () => {
             message.success('คุณเลิกติดตามทุนการศึกษานี้แล้ว');
+            refetchData();
         },
         onError: () => {
             message.error('คุณเลิกติดตามทุนการศึกษานี้ไม่สำเร็จ');

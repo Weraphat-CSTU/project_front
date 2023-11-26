@@ -1,11 +1,9 @@
 import Layout from '@/components/layout';
-import { getScholarship, scholarshipData } from '@/dataService/getscholarship';
 import { useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import dayjs from 'dayjs';
 import { Tag } from 'antd';
-
 import 'dayjs/locale/th';
 import { getFollowScholarship } from '@/dataService/getfollowScholarship';
 
