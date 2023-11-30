@@ -140,7 +140,7 @@ export default function Index() {
                         <div className="w-full lg:w-2/5 lg:pr-5 ">
                             <div className="flex justify-between items-center ">
                                 <div className="font-bold text-md md:text-lg lg:text-xl mx-3">
-                                    ทุนการศึกษาที่กำลังดำเนินการ
+                                    ทุนการศึกษาที่เปิดรับสมัคร
                                 </div>
                                 <div
                                     className="text-blue-500 font-medium text-lg hover:underline cursor-pointer mx-3"

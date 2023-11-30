@@ -1,5 +1,5 @@
 import { loginPlayload, postLogin } from '@/dataService/postLogin';
-import { Form, Input } from 'antd';
+import { Button, Form, Input, message } from 'antd';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { useAtom } from 'jotai';
@@ -15,6 +15,9 @@ export default function loginForm() {
         mutationKey: ['login'],
         mutationFn: async (value: loginPlayload) => {
             return postLogin({ data: value });
+        },
+        onMutate: () => {
+            message.loading('กำลังโหลด');
         },
         onSuccess: (data) => {
             const base64Url = data.result.accessToken.split('.')[1];
@@ -95,12 +98,14 @@ export default function loginForm() {
                                 />
                             </Form.Item>
 
-                            <button
-                                type="submit"
-                                className="py-3 rounded-md bg-[#EB9D48] label-text text-xl text-white mt-10 hover:bg-[#cf8535]"
+                            <Button
+                                htmlType="submit"
+                                className="  bg-[#EB9D48] label-text text-xl text-white mt-10 hover:bg-[#cf8535]"
+                                disabled={isLoading}
+                                loading={isLoading}
                             >
                                 เข้าสู่ระบบ
-                            </button>
+                            </Button>
                             <Link
                                 href={'/'}
                                 className="text-lg font-bold text-blue-500 hover:underline mt-10 text-center"

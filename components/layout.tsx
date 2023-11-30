@@ -60,13 +60,13 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                     icons: <IoSettingsOutline />,
                 },
 
-                { path: '/followscholarship', lebel: 'ติดตามทุน', id: 6, icons: <IoIosSchool /> },
-                {
-                    path: '/createalert',
-                    lebel: 'รายการแจ้งเตือน',
-                    id: 2,
-                    icons: <BiMessageError />,
-                },
+                // { path: '/followscholarship', lebel: 'ติดตามทุน', id: 6, icons: <IoIosSchool /> },
+                // {
+                //     path: '/createalert',
+                //     lebel: 'รายการแจ้งเตือน',
+                //     id: 2,
+                //     icons: <BiMessageError />,
+                // },
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 7, icons: <GrHistory /> },
             ]);
         } else if (role_id === '2') {

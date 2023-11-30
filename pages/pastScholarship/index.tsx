@@ -9,6 +9,7 @@ import Column from 'antd/es/table/Column';
 import { ColumnsType } from 'antd/es/table';
 import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
 import { useRouter } from 'next/router';
+import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
 
 dayjs.extend(buddhistEra);
 type filterDataType = {
@@ -20,6 +21,10 @@ export default function PastScholarship() {
     const { data: historyscholarship } = useQuery({
         queryKey: 'historyscholarship',
         queryFn: async () => getHistoryScholarship(),
+    });
+    const { data: scholarshipTypeData } = useQuery({
+        queryKey: 'scholarshipTypeData',
+        queryFn: async () => getScholarshiptype(),
     });
     const [filterData, setfilterData] = useState<filterDataType>();
     const columns: ColumnsType<historyscholarshipData> = [
@@ -82,13 +87,11 @@ export default function PastScholarship() {
                                         });
                                     }}
                                     placeholder="เลือกประเภททุน"
-                                >
-                                    <Select.Option selected value="alltype">
-                                        ทุกประเภท
-                                    </Select.Option>
-                                    <Select.Option value="in">ทุนภายใน</Select.Option>
-                                    <Select.Option value="out">ทุนภายนอก</Select.Option>
-                                </Select>
+                                    options={scholarshipTypeData?.result.map((item) => ({
+                                        label: item.scholarship_type_name,
+                                        value: item.scholarship_type_id,
+                                    }))}
+                                />
                             </div>
                             <div className="form-control w-full max-w-xs pb-5 lg:pl-5">
                                 <label className="label">

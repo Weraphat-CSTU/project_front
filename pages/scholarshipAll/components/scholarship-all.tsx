@@ -1,13 +1,18 @@
 import { getScholarship, scholarshipData } from '@/dataService/getscholarship';
-import { useQuery } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import dayjs from 'dayjs';
-import { Table, Tag } from 'antd';
+import { Table, Tag, message } from 'antd';
 import 'dayjs/locale/th';
 import { ColumnsType } from 'antd/es/table';
 import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
 import { getScholarshipComing, scholarshipComingData } from '@/dataService/getScholarshipComing';
+import { BsPencilSquare } from 'react-icons/bs';
+import {
+    alertEmailScholarshipPlayloadParam,
+    postAlertScholarship,
+} from '@/dataService/postAlertScholarship';
 
 export default function Scholarshipall() {
     const Router = useRouter();
@@ -24,7 +29,29 @@ export default function Scholarshipall() {
         queryKey: 'historyscholarship',
         queryFn: async () => getHistoryScholarship(),
     });
+    const { mutate, isLoading: isLoadingSubscribe } = useMutation({
+        mutationKey: ['alertemailscholarship', Router.query.id],
+        mutationFn: async (data: { param: alertEmailScholarshipPlayloadParam }) => {
+            return postAlertScholarship(data.param);
+        },
+        onMutate: () => {
+            message.loading('กำลังโหลด');
+        },
+        onSuccess: () => {
+            message.success('คุณส่งอีเมลแจ้งเตือนสำเร็จ');
+        },
+        onError: () => {
+            message.error('คุณส่งอีเมลแจ้งเตือนไม่สำเร็จ');
+        },
+    });
 
+    const onHandleAlert = (value: alertEmailScholarshipPlayloadParam): void => {
+        const normalResult: alertEmailScholarshipPlayloadParam = {
+            scholarship_id: value.scholarship_id,
+        };
+
+        mutate({ param: normalResult });
+    };
     const columns: ColumnsType<scholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
@@ -63,6 +90,21 @@ export default function Scholarshipall() {
                     return <Tag color="red">{value}</Tag>;
                 }
             },
+        },
+        {
+            title: 'แจ้งเตือนทุนเปิดใหม่',
+            dataIndex: 'scholarship_id',
+            key: 'scholarship_id',
+            render: (value: string) => (
+                <button
+                    className="btn btn-error text-white bg-red-600 border-none hover:bg-red-700 "
+                    onClick={() => {
+                        onHandleAlert({ scholarship_id: value });
+                    }}
+                >
+                    <BsPencilSquare className="text-white " />
+                </button>
+            ),
         },
     ];
     const columnsScholarshipComing: ColumnsType<scholarshipComingData> = [
@@ -148,7 +190,7 @@ export default function Scholarshipall() {
     return (
         <div className="w-full min-h-screen ">
             <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                <p className="font-semibold text-lg mb-5">ทุนการศึกษาที่กำลังดำเนินการ</p>
+                <p className="font-semibold text-lg mb-5">ทุนการศึกษาที่เปิดรับสมัคร</p>
                 <Table
                     dataSource={scholarship?.result}
                     columns={columns}
@@ -166,7 +208,7 @@ export default function Scholarshipall() {
                     pagination={false}
                 />
 
-                <p className="font-semibold text-lg mb-5 pt-5">ทุนการศึกษาที่ผ่านมา</p>
+                <p className="font-semibold text-lg mb-5 pt-5">ทุนการศึกษาที่ปิดรับสมัคร</p>
                 <Table
                     dataSource={historyscholarship?.result}
                     columns={columnsHistoryscholarship}

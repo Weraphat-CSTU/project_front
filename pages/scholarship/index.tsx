@@ -17,18 +17,17 @@ export default function Scholarship() {
         queryFn: async () => getFollowScholarship(),
     });
 
-    const refetchData = (): void => {
-        refetch();
-    };
-
     const { mutate, isLoading: isLoadingSubscribe } = useMutation({
         mutationKey: ['subscribescholarship', Router.query.id],
         mutationFn: async (data: { param: createSubscribePlayloadParam }) => {
             return postSubscribe(data.param);
         },
+        onMutate: () => {
+            message.loading('กำลังโหลด');
+        },
         onSuccess: () => {
             message.success('คุณติดตามทุนการศึกษานี้แล้ว');
-            refetchData();
+            refetch();
         },
         onError: () => {
             message.error('คุณติดตามทุนการศึกษานี้ไม่สำเร็จ');
@@ -47,9 +46,12 @@ export default function Scholarship() {
         mutationFn: async (data: { param: unSubscribePlayloadParam }) => {
             return unSubscribe(data.param);
         },
+        onMutate: () => {
+            message.loading('กำลังโหลด');
+        },
         onSuccess: () => {
             message.success('คุณเลิกติดตามทุนการศึกษานี้แล้ว');
-            refetchData();
+            refetch();
         },
         onError: () => {
             message.error('คุณเลิกติดตามทุนการศึกษานี้ไม่สำเร็จ');
@@ -74,7 +76,7 @@ export default function Scholarship() {
                 <div className="flex ">
                     <div className="w-full lg:w-2/5 pr-5 ">
                         <div className="flex justify-between items-center">
-                            <div className=" font-medium text-xl">ทุนการศึกษาที่กำลังดำเนินการ</div>
+                            <div className=" font-medium text-xl">ทุนการศึกษาที่เปิดรับสมัคร</div>
                             <div
                                 className="text-blue-500 font-medium text-lg hover:underline cursor-pointer"
                                 onClick={() => Router.push('/scholarshipAll')}
@@ -126,6 +128,7 @@ export default function Scholarship() {
                                                             subscribe_id: item.subscribe_id,
                                                         });
                                                     }}
+                                                    loading={isLoadingSubscribe}
                                                 >
                                                     ติดตามแล้ว
                                                 </Button>
@@ -137,6 +140,7 @@ export default function Scholarship() {
                                                             scholarship_id: item.scholarship_id,
                                                         });
                                                     }}
+                                                    loading={isLoadingunSubscribe}
                                                 >
                                                     ติดตาม
                                                 </Button>

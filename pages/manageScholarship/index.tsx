@@ -1,5 +1,4 @@
 import Layout from '@/components/layout';
-import { getScholarship, scholarshipData } from '@/dataService/getscholarship';
 import dayjs from 'dayjs';
 import { FiEdit } from 'react-icons/fi';
 import { MdDeleteOutline } from 'react-icons/md';
@@ -17,15 +16,21 @@ import { useRouter } from 'next/router';
 import { BiCalendarPlus } from 'react-icons/bi';
 import { Table, Select, Tag } from 'antd';
 import { ColumnsType } from 'antd/es/table';
+import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
+import { getManageScholarship, manageScholarshipData } from '@/dataService/getmanageScholarship';
 
 dayjs.extend(buddhistEra);
 
 export default function manageScholarship() {
     const router = useRouter();
-    const [scholarshipdata, setScholarshipdata] = useState<scholarshipData[]>();
-    const { data: scholarship } = useQuery({
-        queryKey: 'scholarship',
-        queryFn: async () => getScholarship(),
+    const [manageScholarshipdata, setmanageScholarshipdata] = useState<manageScholarshipData[]>();
+    const { data: manageScholarship } = useQuery({
+        queryKey: 'manageScholarship',
+        queryFn: async () => getManageScholarship(),
+    });
+    const { data: scholarshipTypeData } = useQuery({
+        queryKey: 'scholarshipTypeData',
+        queryFn: async () => getScholarshiptype(),
     });
     const [filterData, setfilterData] = useState<string>();
     const { mutate } = useMutation({
@@ -35,7 +40,7 @@ export default function manageScholarship() {
         },
         onSuccess: (item: deletescholarshipRespone) => {
             Swal.fire('ลบสำเร็จ', '', 'success');
-            setScholarshipdata(item.result);
+            setmanageScholarshipdata(item.result);
         },
         onError: () => {
             Swal.fire('ลบไม่สำเร็จ', '', 'error');
@@ -58,10 +63,10 @@ export default function manageScholarship() {
     };
 
     useEffect(() => {
-        setScholarshipdata(scholarship?.result);
-    }, [scholarship]); //ทำงานเมื่อเข้าสู่หน้าเว้บครั้งแรก หรือ จนกว่าจะเกิดการเปลี่ยนแปลง
+        setmanageScholarshipdata(manageScholarship?.result);
+    }, [manageScholarship]); //ทำงานเมื่อเข้าสู่หน้าเว้บครั้งแรก หรือ จนกว่าจะเกิดการเปลี่ยนแปลง
 
-    const columns: ColumnsType<scholarshipData> = [
+    const columns: ColumnsType<manageScholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
             dataIndex: 'scholarship_name',
@@ -138,13 +143,11 @@ export default function manageScholarship() {
                                     value={filterData}
                                     onChange={setfilterData}
                                     placeholder="เลือกประเภททุน"
-                                >
-                                    <Select.Option selected value="alltype">
-                                        ทุกประเภท
-                                    </Select.Option>
-                                    <Select.Option value="in">ทุนภายใน</Select.Option>
-                                    <Select.Option value="out">ทุนภายนอก</Select.Option>
-                                </Select>
+                                    options={scholarshipTypeData?.result.map((item) => ({
+                                        label: item.scholarship_type_name,
+                                        value: item.scholarship_type_id,
+                                    }))}
+                                />
                             </div>
                         </div>
                         <div className="flex justify-end">
@@ -159,7 +162,7 @@ export default function manageScholarship() {
                         </div>
                     </div>
                     <Table
-                        dataSource={scholarshipdata}
+                        dataSource={manageScholarshipdata}
                         columns={columns}
                         bordered
                         pagination={false}
