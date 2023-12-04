@@ -12,13 +12,13 @@ export async function postAlertScholarship(param: alertEmailScholarshipPlayloadP
    
     const getToken = sessionStorage.getItem('accessToken');
 
-    const respone = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/alertschoalrship/${param.scholarship_id}`,
+    const respone = await axios.post(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/alertscholarship/${param.scholarship_id}`,
     {},
     {
         headers: {
             Authorization: `Bearer ${getToken}`,
           },
     })
-    
+    console.log(respone)
     return Promise.resolve( {result : respone.data.result });
 }
