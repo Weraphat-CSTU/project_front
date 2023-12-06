@@ -1,7 +1,7 @@
 import axios from "axios"
 
 export type infoMationData = {
-  
+  info_id:string,
     title: string,
     description: string,
    create_date:string,

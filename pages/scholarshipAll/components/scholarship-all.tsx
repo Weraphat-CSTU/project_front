@@ -32,13 +32,14 @@ export default function Scholarshipall() {
     const { mutate, isLoading: isLoadingSubscribe } = useMutation({
         mutationKey: ['alertemailscholarship', Router.query.id],
         mutationFn: async (data: { param: alertEmailScholarshipPlayloadParam }) => {
+            console.log(data.param);
             return postAlertScholarship(data.param);
         },
         onMutate: () => {
             message.loading('กำลังโหลด');
         },
-        onSuccess: () => {
-            message.success('คุณส่งอีเมลแจ้งเตือนสำเร็จ');
+        onSuccess: (data) => {
+            message.success(`คุณส่งอีเมลแจ้งเตือนสำเร็จ, ${data.result.length}`);
         },
         onError: () => {
             message.error('คุณส่งอีเมลแจ้งเตือนไม่สำเร็จ');
@@ -52,6 +53,27 @@ export default function Scholarshipall() {
 
         mutate({ param: normalResult });
     };
+    const conditionalColumn =
+        typeof sessionStorage !== 'undefined' &&
+        parseInt(String(sessionStorage.getItem('role_id')), 10) === 1
+            ? [
+                  {
+                      title: 'แจ้งเตือนทุนเปิดใหม่',
+                      dataIndex: 'scholarship_id',
+                      key: 'scholarship_id',
+                      render: (value: string) => (
+                          <button
+                              className="btn btn-error text-white bg-red-600 border-none hover:bg-red-700"
+                              onClick={() => {
+                                  onHandleAlert({ scholarship_id: value });
+                              }}
+                          >
+                              <BsPencilSquare className="text-white" />
+                          </button>
+                      ),
+                  },
+              ]
+            : [];
     const columns: ColumnsType<scholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
@@ -91,21 +113,7 @@ export default function Scholarshipall() {
                 }
             },
         },
-        {
-            title: 'แจ้งเตือนทุนเปิดใหม่',
-            dataIndex: 'scholarship_id',
-            key: 'scholarship_id',
-            render: (value: string) => (
-                <button
-                    className="btn btn-error text-white bg-red-600 border-none hover:bg-red-700 "
-                    onClick={() => {
-                        onHandleAlert({ scholarship_id: value });
-                    }}
-                >
-                    <BsPencilSquare className="text-white " />
-                </button>
-            ),
-        },
+        ...conditionalColumn,
     ];
     const columnsScholarshipComing: ColumnsType<scholarshipComingData> = [
         {

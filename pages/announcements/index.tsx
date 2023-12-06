@@ -1,27 +1,51 @@
 import Layout from '@/components/layout';
-import { getInfomation } from '@/dataService/getinformation';
+import {
+    deleteInformation,
+    deleteinformationParam,
+    deleteinformationRespone,
+} from '@/dataService/deleteinformation';
+import { getInfomation, infoMationData } from '@/dataService/getinformation';
 import { createInfoMationPlayload, postInfomation } from '@/dataService/postInformation';
+
 import { Button, Form, Input, Modal, Pagination } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
-import { useState } from 'react';
+
+import { useEffect, useState } from 'react';
 import { BsPencilSquare } from 'react-icons/bs';
+import { FiEdit } from 'react-icons/fi';
+import { MdDeleteOutline } from 'react-icons/md';
 import { useMutation, useQuery } from 'react-query';
 import Swal from 'sweetalert2';
+import EditInformation from './components/EditInformationForm';
 
 dayjs.extend(buddhistEra);
 
 export default function Announcements() {
-    const [open, setOpen] = useState(false);
+    const [openwrite, setOpenWrite] = useState(false);
     const [form] = Form.useForm<createInfoMationPlayload>();
-    const showModal = () => {
-        setOpen(true);
+    const showModalWrite = () => {
+        setOpenWrite(true);
     };
     const handleCancel = () => {
-        setOpen(false);
+        setOpenWrite(false);
     };
-    const { data: information, isLoading: isLoadingInfo } = useQuery({
+
+    const [openedit, setOpenEdit] = useState(false);
+    const showModalEdit = () => {
+        setOpenEdit(true);
+    };
+    const handleCancelEdit = () => {
+        setOpenEdit(false);
+    };
+
+    const [editInformation, setEditInformation] = useState<infoMationData>();
+    const {
+        data: information,
+        isLoading: isLoadingInfo,
+        refetch,
+    } = useQuery({
         queryKey: 'information',
         queryFn: async () => getInfomation(),
     });
@@ -33,6 +57,7 @@ export default function Announcements() {
         },
         onSuccess: () => {
             Swal.fire('ข่าวประชาสัมพันธ์', 'คุณเพิ่มข่าวประชาสัมพันธ์สำเร็จ', 'success');
+            refetch();
         },
         onError: () => {
             Swal.fire('ข่าวประชาสัมพันธ์', 'คุณเพิ่มข่าวประชาสัมพันธ์ไม่สำเร็จ', 'error');
@@ -57,6 +82,39 @@ export default function Announcements() {
             }
         });
     };
+    const [informationdata, setinformationdata] = useState<infoMationData[]>();
+    const { mutate: mutateInformation } = useMutation({
+        mutationKey: 'deletescholarshipdata',
+        mutationFn: async (data: deleteinformationParam) => {
+            return deleteInformation(data);
+        },
+        onSuccess: (item: deleteinformationRespone) => {
+            Swal.fire('ลบสำเร็จ', '', 'success');
+            setinformationdata(item.result);
+            refetch();
+        },
+        onError: () => {
+            Swal.fire('ลบไม่สำเร็จ', '', 'error');
+        },
+    });
+    const removeInformation = (info_id: string): void => {
+        Swal.fire({
+            title: 'ต้องการลบข่าวประชาสัมพันธ์?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'ยืนยัน',
+            cancelButtonText: 'ยกเลิก',
+        }).then((result: any) => {
+            if (result.isConfirmed) {
+                mutateInformation({ info_id: info_id });
+            }
+        });
+    };
+    useEffect(() => {
+        setinformationdata(information?.result);
+    }, [informationdata]);
 
     return (
         <Layout title="ข่าวประชาสัมพันธ์">
@@ -67,7 +125,7 @@ export default function Announcements() {
                             <button
                                 className="btn btn-error text-white bg-blue-600 border-none hover:bg-blue-700"
                                 onClick={() => {
-                                    showModal();
+                                    showModalWrite();
                                 }}
                             >
                                 <BsPencilSquare className="text-white" />
@@ -75,7 +133,13 @@ export default function Announcements() {
                             </button>
                         )}
 
-                    <Modal open={open} footer={null} onCancel={handleCancel} centered width={700}>
+                    <Modal
+                        open={openwrite}
+                        footer={null}
+                        onCancel={handleCancel}
+                        centered
+                        width={700}
+                    >
                         <Form form={form} onFinish={onHandleSubmit} layout="vertical">
                             <div className="w-full font-medium ">
                                 <div className="text-lg">ข้อความแจ้งเตือน</div>
@@ -132,6 +196,15 @@ export default function Announcements() {
                             </div>
                         </Form>
                     </Modal>
+                    <Modal
+                        open={openedit}
+                        footer={null}
+                        onCancel={handleCancelEdit}
+                        centered
+                        width={700}
+                    >
+                        <EditInformation editInformation={editInformation} onClose={setOpenEdit} />
+                    </Modal>
                     <Pagination
                         defaultCurrent={6}
                         total={3}
@@ -140,7 +213,29 @@ export default function Announcements() {
                     />
                     {information?.result.map((items, index) => (
                         <div key={index} className="w-full  p-5 rounded-md shadow-md mt-5 border">
-                            <div className="font-semibold text-2xl">{items.title}</div>
+                            {typeof sessionStorage !== 'undefined' &&
+                            parseInt(String(sessionStorage.getItem('role_id')), 10) === 1 ? (
+                                <div className="flex justify-between">
+                                    <div className="font-semibold text-2xl">{items.title}</div>
+                                    <div className="flex space-x-10">
+                                        <FiEdit
+                                            className="cursor-pointer"
+                                            onClick={() => {
+                                                showModalEdit();
+                                                setEditInformation(items);
+                                            }}
+                                        />
+                                        <MdDeleteOutline
+                                            className="text-red-600 text-xl cursor-pointer"
+                                            onClick={() => {
+                                                removeInformation(items.info_id);
+                                            }}
+                                        />
+                                    </div>
+                                </div>
+                            ) : (
+                                <div className="font-semibold text-2xl">{items.title}</div>
+                            )}
                             <div className="mt-5 text-lg"> {items.description}</div>
                             <div className="mt-5 text-lg">
                                 วันที่ประกาศ :{' '}

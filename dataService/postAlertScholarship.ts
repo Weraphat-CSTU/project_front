@@ -4,8 +4,16 @@ export type alertEmailScholarshipPlayloadParam ={
     scholarship_id:string,
   }
 
+  export type alertEmailDataRespone = {
+    firstname: string,
+    lastname: string,
+    email:string,
+    scholarship_id: string,
+    scholarship_name: string
+  }
+
 export type alertEmailScholarshipPlayloadRespone = {
-    result: boolean;
+    result: alertEmailDataRespone[];
 };
 
 export async function postAlertScholarship(param: alertEmailScholarshipPlayloadParam): Promise<alertEmailScholarshipPlayloadRespone> {
