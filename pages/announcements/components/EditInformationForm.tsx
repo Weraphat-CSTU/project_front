@@ -1,8 +1,8 @@
-import { infoMationData } from '@/dataService/getinformation';
+import { getInfomation, infoMationData } from '@/dataService/getinformation';
 import { editInformation, updateInformation } from '@/dataService/putInformation';
 import { Button, Form, Input } from 'antd';
 import { useEffect, useState } from 'react';
-import { useMutation } from 'react-query';
+import { useMutation, useQuery } from 'react-query';
 import Swal from 'sweetalert2';
 type prop = {
     editInformation: infoMationData | undefined;
@@ -15,6 +15,14 @@ export default function EditInformation({ editInformation, onClose }: prop) {
     const handleCancelEdit = () => {
         setOpenEdit(false);
     };
+    const {
+        data: information,
+        isLoading: isLoadingInfo,
+        refetch,
+    } = useQuery({
+        queryKey: 'information',
+        queryFn: async () => getInfomation(),
+    });
 
     const { mutate, isLoading: isLoadingEditinformation } = useMutation({
         mutationKey: 'createInformation',
@@ -30,6 +38,7 @@ export default function EditInformation({ editInformation, onClose }: prop) {
         onSuccess: () => {
             Swal.fire('ข่าวประชาสัมพันธ์', 'คุณแก้ไขข่าวประชาสัมพันธ์สำเร็จ', 'success');
             onClose(false);
+            refetch();
         },
         onError: () => {
             Swal.fire('ข่าวประชาสัมพันธ์', 'คุณแก้ไขข่าวประชาสัมพันธ์ไม่สำเร็จ', 'error');
