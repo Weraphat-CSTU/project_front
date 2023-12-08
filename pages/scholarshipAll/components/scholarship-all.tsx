@@ -6,17 +6,22 @@ import dayjs from 'dayjs';
 import { Table, Tag, message } from 'antd';
 import 'dayjs/locale/th';
 import { ColumnsType } from 'antd/es/table';
-import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
+import {
+    getHistoryScholarship,
+    historyScholarshipQuery,
+    historyscholarshipData,
+} from '@/dataService/gethistoryScholarship';
 import { getScholarshipComing, scholarshipComingData } from '@/dataService/getScholarshipComing';
 import { BsPencilSquare } from 'react-icons/bs';
 import {
     alertEmailScholarshipPlayloadParam,
     postAlertScholarship,
 } from '@/dataService/postAlertScholarship';
+import { useState } from 'react';
 
 export default function Scholarshipall() {
     const Router = useRouter();
-
+    const [filterData, setfilterData] = useState<historyScholarshipQuery>();
     const { data: scholarship } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
@@ -27,7 +32,7 @@ export default function Scholarshipall() {
     });
     const { data: historyscholarship } = useQuery({
         queryKey: 'historyscholarship',
-        queryFn: async () => getHistoryScholarship(),
+        queryFn: async () => getHistoryScholarship(filterData),
     });
     const { mutate, isLoading: isLoadingSubscribe } = useMutation({
         mutationKey: ['alertemailscholarship', Router.query.id],
