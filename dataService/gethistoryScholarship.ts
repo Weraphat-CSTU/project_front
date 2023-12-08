@@ -18,13 +18,22 @@ export type historyscholarshipData = {
     color_tag:string,
     scholarship_year_id:number
 }
-
+export type historyScholarshipQuery = {
+  scholarship_type_id?: string;
+  schoalrship_year?: string;
+};
 export type historyscholarshipDataBody = {
     result : historyscholarshipData[]
 }
 
-  export async function getHistoryScholarship() : Promise<historyscholarshipDataBody|undefined>{
-    const respone = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/getHistoryScholarship`)
+  export async function getHistoryScholarship(query:historyScholarshipQuery|undefined) : Promise<historyscholarshipDataBody|undefined>{
+    const respone = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/getHistoryScholarship`,{
+      params: {
+        scholarship_id:query?.scholarship_type_id,
+        scholaship_year:query?.schoalrship_year
+      },
+    }
+    )
 
     return Promise.resolve({result : respone.data.result})
 }

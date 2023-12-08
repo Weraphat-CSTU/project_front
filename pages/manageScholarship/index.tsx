@@ -17,22 +17,27 @@ import { BiCalendarPlus } from 'react-icons/bi';
 import { Table, Select, Tag } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
-import { getManageScholarship, manageScholarshipData } from '@/dataService/getmanageScholarship';
+import {
+    getManageScholarship,
+    manageScholarshipData,
+    manageScholarshipQuery,
+} from '@/dataService/getmanageScholarship';
 
 dayjs.extend(buddhistEra);
 
 export default function manageScholarship() {
     const router = useRouter();
+    const [filterData, setfilterData] = useState<manageScholarshipQuery>();
     const [manageScholarshipdata, setmanageScholarshipdata] = useState<manageScholarshipData[]>();
     const { data: manageScholarship } = useQuery({
-        queryKey: 'manageScholarship',
-        queryFn: async () => getManageScholarship(),
+        queryKey: ['manageScholarship', filterData],
+        queryFn: async () => getManageScholarship(filterData),
     });
     const { data: scholarshipTypeData } = useQuery({
         queryKey: 'scholarshipTypeData',
         queryFn: async () => getScholarshiptype(),
     });
-    const [filterData, setfilterData] = useState<string>();
+
     const { mutate } = useMutation({
         mutationKey: 'deletescholarshipdata',
         mutationFn: async (data: deletescholarshipParam) => {
@@ -140,8 +145,14 @@ export default function manageScholarship() {
                                     <span className="label-text">ประเภททุนการศึกษา</span>
                                 </label>
                                 <Select
-                                    value={filterData}
-                                    onChange={setfilterData}
+                                    value={filterData?.scholarship_type_id}
+                                    allowClear
+                                    onChange={(value) => {
+                                        setfilterData({
+                                            ...filterData,
+                                            scholarship_type_id: value,
+                                        });
+                                    }}
                                     placeholder="เลือกประเภททุน"
                                     options={scholarshipTypeData?.result.map((item) => ({
                                         label: item.scholarship_type_name,

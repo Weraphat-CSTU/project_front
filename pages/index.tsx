@@ -204,7 +204,7 @@ export default function Index() {
                                     />
                                 </div>
                                 <div className=" pt-5 space-y-3">
-                                    <div className="font-bold text-xl text-center">หน่วยงาน</div>
+                                    <div className="font-bold text-xl text-center">ทุนภายนอก</div>
                                     <div className="text-center">
                                         ทุนจากหน่วยงาน องค์กร ในประเทศไทย
                                     </div>
@@ -222,7 +222,7 @@ export default function Index() {
                                     />
                                 </div>
                                 <div className=" pt-8 space-y-3">
-                                    <div className="font-bold text-xl text-center">มหาวิทยาลัย</div>
+                                    <div className="font-bold text-xl text-center">ทุนภายใน</div>
                                     <div className="text-center">ทุนจากมหาวิทยาลัยธรรมศาสตร์</div>
                                 </div>
                             </div>

@@ -7,26 +7,28 @@ import { useState } from 'react';
 import { Select, Table, Tag } from 'antd';
 import Column from 'antd/es/table/Column';
 import { ColumnsType } from 'antd/es/table';
-import { getHistoryScholarship, historyscholarshipData } from '@/dataService/gethistoryScholarship';
+import {
+    getHistoryScholarship,
+    historyScholarshipQuery,
+    historyscholarshipData,
+} from '@/dataService/gethistoryScholarship';
 import { useRouter } from 'next/router';
 import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
 
 dayjs.extend(buddhistEra);
-type filterDataType = {
-    scholarship_type_id?: string;
-    schoalrship_year?: string;
-};
+
 export default function PastScholarship() {
     const Router = useRouter();
+    const [filterData, setfilterData] = useState<historyScholarshipQuery>();
     const { data: historyscholarship } = useQuery({
-        queryKey: 'historyscholarship',
-        queryFn: async () => getHistoryScholarship(),
+        queryKey: ['historyscholarship', filterData],
+        queryFn: async () => getHistoryScholarship(filterData),
     });
     const { data: scholarshipTypeData } = useQuery({
         queryKey: 'scholarshipTypeData',
         queryFn: async () => getScholarshiptype(),
     });
-    const [filterData, setfilterData] = useState<filterDataType>();
+
     const columns: ColumnsType<historyscholarshipData> = [
         {
             title: 'ชื่อทุนการศึกษา',
@@ -80,6 +82,7 @@ export default function PastScholarship() {
                                 </label>
                                 <Select
                                     value={filterData?.scholarship_type_id}
+                                    allowClear
                                     onChange={(value) => {
                                         setfilterData({
                                             ...filterData,
@@ -93,7 +96,7 @@ export default function PastScholarship() {
                                     }))}
                                 />
                             </div>
-                            <div className="form-control w-full max-w-xs pb-5 lg:pl-5">
+                            {/* <div className="form-control w-full max-w-xs pb-5 lg:pl-5">
                                 <label className="label">
                                     <span className="label-text">ปีการศึกษา</span>
                                 </label>
@@ -112,7 +115,7 @@ export default function PastScholarship() {
                                     </Select.Option>
                                     <Select.Option value="2566">ปีการศึกษา 2566</Select.Option>
                                 </Select>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                     <Table

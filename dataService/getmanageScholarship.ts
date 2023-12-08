@@ -18,17 +18,24 @@ export type manageScholarshipData = {
     color_tag:string,
     scholarship_year_id:number
 }
-
+export type manageScholarshipQuery = {
+  scholarship_type_id?: string;
+  schoalrship_year?: string;
+};
 export type manageScholarshipDataBody = {
     result : manageScholarshipData[]
 }
 
-  export async function getManageScholarship() : Promise<manageScholarshipDataBody|undefined>{
+  export async function getManageScholarship(query:manageScholarshipQuery|undefined) : Promise<manageScholarshipDataBody|undefined>{
     const getToken = sessionStorage.getItem('accessToken');
     const respone = await axios.get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/api/scholarship/getManageScholarship`,
     {
         headers: {
             Authorization: `Bearer ${getToken}`,
+          },
+          params: {
+            scholarship_id:query?.scholarship_type_id,
+            scholaship_year:query?.schoalrship_year
           },
     })
 

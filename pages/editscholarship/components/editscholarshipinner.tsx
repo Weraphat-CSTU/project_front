@@ -23,7 +23,7 @@ type filterDataType = {
 };
 
 interface editScholarshipForm extends editScholarship {
-    date_rang: Date[];
+    date_rang: Date[] | null;
 }
 
 export default function EditscholarshipInner() {
@@ -116,13 +116,19 @@ export default function EditscholarshipInner() {
         });
     };
     useEffect(() => {
+        console.log(dayjs(scholarship?.result[0].start_date));
         form.setFieldsValue({
             scholarship_name: scholarship?.result[0].scholarship_name,
             scholarship_year: scholarship?.result[0].scholarship_year,
             scholarship_grade: scholarship?.result[0].scholarship_grade,
             scholarship_condition: scholarship?.result[0].scholarship_condition,
-            start_date: scholarship?.result[0].start_date,
-            end_date: scholarship?.result[0].end_date,
+            date_rang:
+                scholarship?.result[0].start_date && scholarship.result[0].end_date
+                    ? [
+                          dayjs(scholarship.result[0].start_date),
+                          dayjs(scholarship.result[0].end_date),
+                      ]
+                    : undefined,
             scholarship_qualification: scholarship?.result[0].scholarship_qualification,
             scholarship_type_id: scholarship?.result[0].scholarship_type_id,
             class_type_id: scholarship?.result[0].class_type_id,
@@ -222,6 +228,17 @@ export default function EditscholarshipInner() {
                                             ]}
                                         >
                                             <DatePicker.RangePicker
+                                                value={
+                                                    scholarship?.result[0].start_date &&
+                                                    scholarship.result[0].end_date
+                                                        ? [
+                                                              dayjs(
+                                                                  scholarship.result[0].start_date,
+                                                              ),
+                                                              dayjs(scholarship.result[0].end_date),
+                                                          ]
+                                                        : undefined
+                                                }
                                                 style={{ width: '100%' }}
                                                 format={'DD MMM BBBB'}
                                                 size="large"
@@ -403,19 +420,24 @@ export default function EditscholarshipInner() {
                                         </div>
                                     </div>
                                 </label> */}
-                        </div>
-                        <div className="w-full h-2/5 flex justify-between ">
-                            <div className="w-2/4  border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3 lg:mr-5">
-                                <div className="text-2xl font-extrabold dark:text-white">
-                                    รายละเอียดเพิ่มเติม
+                            <label className="lebel">
+                                <div className="flex items-center mt-3  w-full">
+                                    <span className="label-text text-lg  w-2/5">
+                                        รายละเอียดเพิ่มเติม
+                                    </span>
+                                    <div className="w-full">
+                                        <Form.Item name="scholarship_qualification">
+                                            <Input
+                                                placeholder="รายละเอียดเพิ่มเติม"
+                                                size="large"
+                                                allowClear
+                                            />
+                                        </Form.Item>
+                                    </div>
                                 </div>
-                                <div className="w-full">
-                                    <Form.Item name="scholarship_qualification">
-                                        <Input placeholder="รายละเอียด" size="large" allowClear />
-                                    </Form.Item>
-                                </div>
-                            </div>
+                            </label>
                         </div>
+
                         <div className="flex justify-center ">
                             <Button
                                 type="primary"
