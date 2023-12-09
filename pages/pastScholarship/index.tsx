@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
 import { useState } from 'react';
-import { Select, Table, Tag } from 'antd';
+import { Select, Skeleton, Table, Tag } from 'antd';
 import Column from 'antd/es/table/Column';
 import { ColumnsType } from 'antd/es/table';
 import {
@@ -20,7 +20,7 @@ dayjs.extend(buddhistEra);
 export default function PastScholarship() {
     const Router = useRouter();
     const [filterData, setfilterData] = useState<historyScholarshipQuery>();
-    const { data: historyscholarship } = useQuery({
+    const { data: historyscholarship, isLoading: isLoadingHistoryScholarship } = useQuery({
         queryKey: ['historyscholarship', filterData],
         queryFn: async () => getHistoryScholarship(filterData),
     });
@@ -72,31 +72,36 @@ export default function PastScholarship() {
 
     return (
         <Layout title="ประวัติทุนการศึกษา">
-            <div className="">
-                <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                    <div className="flex flex-warp">
-                        <div className="w-full flex">
-                            <div className="form-control w-full max-w-xs pb-5 lg:pr-5">
-                                <label className="label">
-                                    <span className="label-text">ประเภททุนการศึกษา</span>
-                                </label>
-                                <Select
-                                    value={filterData?.scholarship_type_id}
-                                    allowClear
-                                    onChange={(value) => {
-                                        setfilterData({
-                                            ...filterData,
-                                            scholarship_type_id: value,
-                                        });
-                                    }}
-                                    placeholder="เลือกประเภททุน"
-                                    options={scholarshipTypeData?.result.map((item) => ({
-                                        label: item.scholarship_type_name,
-                                        value: item.scholarship_type_id,
-                                    }))}
-                                />
-                            </div>
-                            {/* <div className="form-control w-full max-w-xs pb-5 lg:pl-5">
+            {isLoadingHistoryScholarship ? (
+                <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                    <Skeleton active />
+                </div>
+            ) : (
+                <div className="">
+                    <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
+                        <div className="flex flex-warp">
+                            <div className="w-full flex">
+                                <div className="form-control w-full max-w-xs pb-5 lg:pr-5">
+                                    <label className="label">
+                                        <span className="label-text">ประเภททุนการศึกษา</span>
+                                    </label>
+                                    <Select
+                                        value={filterData?.scholarship_type_id}
+                                        allowClear
+                                        onChange={(value) => {
+                                            setfilterData({
+                                                ...filterData,
+                                                scholarship_type_id: value,
+                                            });
+                                        }}
+                                        placeholder="เลือกประเภททุน"
+                                        options={scholarshipTypeData?.result.map((item) => ({
+                                            label: item.scholarship_type_name,
+                                            value: item.scholarship_type_id,
+                                        }))}
+                                    />
+                                </div>
+                                {/* <div className="form-control w-full max-w-xs pb-5 lg:pl-5">
                                 <label className="label">
                                     <span className="label-text">ปีการศึกษา</span>
                                 </label>
@@ -116,16 +121,17 @@ export default function PastScholarship() {
                                     <Select.Option value="2566">ปีการศึกษา 2566</Select.Option>
                                 </Select>
                             </div> */}
+                            </div>
                         </div>
+                        <Table
+                            dataSource={historyscholarship?.result}
+                            columns={columns}
+                            bordered
+                            pagination={false}
+                        />
                     </div>
-                    <Table
-                        dataSource={historyscholarship?.result}
-                        columns={columns}
-                        bordered
-                        pagination={false}
-                    />
                 </div>
-            </div>
+            )}
         </Layout>
     );
 }

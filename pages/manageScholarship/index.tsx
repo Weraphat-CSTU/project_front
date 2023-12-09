@@ -14,7 +14,7 @@ import {
 import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import { BiCalendarPlus } from 'react-icons/bi';
-import { Table, Select, Tag } from 'antd';
+import { Table, Select, Tag, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { getScholarshiptype } from '@/dataService/getScholarshipTypes';
 import {
@@ -29,7 +29,7 @@ export default function manageScholarship() {
     const router = useRouter();
     const [filterData, setfilterData] = useState<manageScholarshipQuery>();
     const [manageScholarshipdata, setmanageScholarshipdata] = useState<manageScholarshipData[]>();
-    const { data: manageScholarship } = useQuery({
+    const { data: manageScholarship, isLoading: isLoadingManageScholarship } = useQuery({
         queryKey: ['manageScholarship', filterData],
         queryFn: async () => getManageScholarship(filterData),
     });
@@ -136,50 +136,56 @@ export default function manageScholarship() {
 
     return (
         <Layout title="จัดการทุนการศึกษา">
-            <div className="">
-                <div className=" mx-auto lg:max-w-7xl pt-10 ">
-                    <div className="flex flex-warp items-center">
-                        <div className="w-full">
-                            <div className="form-control w-full max-w-xs pb-5">
-                                <label className="label">
-                                    <span className="label-text">ประเภททุนการศึกษา</span>
-                                </label>
-                                <Select
-                                    value={filterData?.scholarship_type_id}
-                                    allowClear
-                                    onChange={(value) => {
-                                        setfilterData({
-                                            ...filterData,
-                                            scholarship_type_id: value,
-                                        });
+            {isLoadingManageScholarship ? (
+                <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                    <Skeleton active />
+                </div>
+            ) : (
+                <div className="">
+                    <div className=" mx-auto lg:max-w-7xl pt-10 ">
+                        <div className="flex flex-warp items-center">
+                            <div className="w-full">
+                                <div className="form-control w-full max-w-xs pb-5">
+                                    <label className="label">
+                                        <span className="label-text">ประเภททุนการศึกษา</span>
+                                    </label>
+                                    <Select
+                                        value={filterData?.scholarship_type_id}
+                                        allowClear
+                                        onChange={(value) => {
+                                            setfilterData({
+                                                ...filterData,
+                                                scholarship_type_id: value,
+                                            });
+                                        }}
+                                        placeholder="เลือกประเภททุน"
+                                        options={scholarshipTypeData?.result.map((item) => ({
+                                            label: item.scholarship_type_name,
+                                            value: item.scholarship_type_id,
+                                        }))}
+                                    />
+                                </div>
+                            </div>
+                            <div className="flex justify-end">
+                                <button
+                                    className="btn btn-info text-white bg-blue-600 border-none hover:bg-blue-700"
+                                    onClick={() => {
+                                        router.push('/addscholarship');
                                     }}
-                                    placeholder="เลือกประเภททุน"
-                                    options={scholarshipTypeData?.result.map((item) => ({
-                                        label: item.scholarship_type_name,
-                                        value: item.scholarship_type_id,
-                                    }))}
-                                />
+                                >
+                                    <BiCalendarPlus className="text-white" /> เพิ่มทุน
+                                </button>
                             </div>
                         </div>
-                        <div className="flex justify-end">
-                            <button
-                                className="btn btn-info text-white bg-blue-600 border-none hover:bg-blue-700"
-                                onClick={() => {
-                                    router.push('/addscholarship');
-                                }}
-                            >
-                                <BiCalendarPlus className="text-white" /> เพิ่มทุน
-                            </button>
-                        </div>
+                        <Table
+                            dataSource={manageScholarshipdata}
+                            columns={columns}
+                            bordered
+                            pagination={false}
+                        />
                     </div>
-                    <Table
-                        dataSource={manageScholarshipdata}
-                        columns={columns}
-                        bordered
-                        pagination={false}
-                    />
                 </div>
-            </div>
+            )}
         </Layout>
     );
 }

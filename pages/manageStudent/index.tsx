@@ -10,7 +10,7 @@ import Swal from 'sweetalert2';
 import dayjs from 'dayjs';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
 import 'dayjs/locale/th';
-import { Table } from 'antd';
+import { Skeleton, Table } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import { getStudent, studentInfoData } from '@/dataService/getStudent';
 
@@ -19,7 +19,7 @@ dayjs.extend(buddhistEra);
 export default function ManageStudent() {
     const [studentdata, setStudentdata] = useState<studentInfoData[]>();
 
-    const { data: studentinfo } = useQuery({
+    const { data: studentinfo, isLoading: isLoadingStudent } = useQuery({
         queryKey: 'studentinfo',
         queryFn: async () => getStudent(),
     });
@@ -130,11 +130,22 @@ export default function ManageStudent() {
     ];
     return (
         <Layout title="จัดการนักศึกษา">
-            <div className="">
-                <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                    <Table dataSource={studentdata} columns={columns} bordered pagination={false} />
+            {isLoadingStudent ? (
+                <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                    <Skeleton active />
                 </div>
-            </div>
+            ) : (
+                <div className="">
+                    <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
+                        <Table
+                            dataSource={studentdata}
+                            columns={columns}
+                            bordered
+                            pagination={false}
+                        />
+                    </div>
+                </div>
+            )}
         </Layout>
     );
 }

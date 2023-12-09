@@ -3,7 +3,7 @@ import { useMutation, useQuery } from 'react-query';
 import { useRouter } from 'next/router';
 import { getDate } from '@/utils/getDate';
 import dayjs from 'dayjs';
-import { Table, Tag, message } from 'antd';
+import { Skeleton, Table, Tag, message } from 'antd';
 import 'dayjs/locale/th';
 import { ColumnsType } from 'antd/es/table';
 import {
@@ -22,15 +22,15 @@ import { useState } from 'react';
 export default function Scholarshipall() {
     const Router = useRouter();
     const [filterData, setfilterData] = useState<historyScholarshipQuery>();
-    const { data: scholarship } = useQuery({
+    const { data: scholarship, isLoading: isLoadingScholarshipAll } = useQuery({
         queryKey: 'scholarship',
         queryFn: async () => getScholarship(),
     });
-    const { data: scholarshipcoming } = useQuery({
+    const { data: scholarshipcoming, isLoading: isLoadingScholarshipComing } = useQuery({
         queryKey: 'scholarshipcoming',
         queryFn: async () => getScholarshipComing(),
     });
-    const { data: historyscholarship } = useQuery({
+    const { data: historyscholarship, isLoading: isLoadingHistoryScholarship } = useQuery({
         queryKey: 'historyscholarship',
         queryFn: async () => getHistoryScholarship(filterData),
     });
@@ -201,35 +201,45 @@ export default function Scholarshipall() {
         },
     ];
     return (
-        <div className="w-full min-h-screen ">
-            <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
-                <p className="font-semibold text-lg mb-5">ทุนการศึกษาที่เปิดรับสมัคร</p>
-                <Table
-                    dataSource={scholarship?.result}
-                    columns={columns}
-                    bordered
-                    pagination={false}
-                />
+        <>
+            {isLoadingScholarshipAll &&
+            isLoadingScholarshipComing &&
+            isLoadingHistoryScholarship ? (
+                <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                    <Skeleton active />
+                </div>
+            ) : (
+                <div className="w-full min-h-screen ">
+                    <div className=" mx-auto max-w-3xl lg:max-w-7xl pt-10 ">
+                        <p className="font-semibold text-lg mb-5">ทุนการศึกษาที่เปิดรับสมัคร</p>
+                        <Table
+                            dataSource={scholarship?.result}
+                            columns={columns}
+                            bordered
+                            pagination={false}
+                        />
 
-                <p className="font-semibold text-lg mb-5 pt-5">
-                    ทุนการศึกษาที่จะเปิดรับสมัครเร็ว ๆ นี้
-                </p>
-                <Table
-                    dataSource={scholarshipcoming?.result}
-                    columns={columnsScholarshipComing}
-                    bordered
-                    pagination={false}
-                />
+                        <p className="font-semibold text-lg mb-5 pt-5">
+                            ทุนการศึกษาที่จะเปิดรับสมัครเร็ว ๆ นี้
+                        </p>
+                        <Table
+                            dataSource={scholarshipcoming?.result}
+                            columns={columnsScholarshipComing}
+                            bordered
+                            pagination={false}
+                        />
 
-                <p className="font-semibold text-lg mb-5 pt-5">ทุนการศึกษาที่ปิดรับสมัคร</p>
-                <Table
-                    dataSource={historyscholarship?.result}
-                    columns={columnsHistoryscholarship}
-                    bordered
-                    pagination={false}
-                    className="mb-10"
-                />
-            </div>
-        </div>
+                        <p className="font-semibold text-lg mb-5 pt-5">ทุนการศึกษาที่ปิดรับสมัคร</p>
+                        <Table
+                            dataSource={historyscholarship?.result}
+                            columns={columnsHistoryscholarship}
+                            bordered
+                            pagination={false}
+                            className="mb-10"
+                        />
+                    </div>
+                </div>
+            )}
+        </>
     );
 }
