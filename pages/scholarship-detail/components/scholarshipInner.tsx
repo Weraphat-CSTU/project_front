@@ -19,6 +19,14 @@ export default function ScholarshipDetailInner() {
     });
 
     const items = useMemo(() => scholarshipID?.result[0], [scholarshipID]);
+    const inputText = items?.scholarship_qualification;
+
+    // ใช้ regex เพื่อ split เมื่อพบตัวเลขที่ขึ้นต้นด้วย "1."
+    const splittedArray = inputText?.split(/(?=\d+\.\s)/);
+
+    // ลบส่วนว่างที่อาจเกิดขึ้นจากการ split ที่เป็นประโยคแรก
+    const filteredArray = splittedArray?.filter((item) => item.trim() !== '');
+
     return (
         <>
             {isLoadingScholarshipID ? (
@@ -61,7 +69,7 @@ export default function ScholarshipDetailInner() {
                                 <div className="text-2xl font-extrabold dark:text-white">
                                     รายละเอียดเพิ่มเติม
                                 </div>
-                                <div className="">{items?.scholarship_qualification}</div>
+                                <div className="">{filteredArray}</div>
                             </div>
                             <div className="w-full  lg:w-2/4  lg:ml-5 border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
                                 <FullcalendarID />

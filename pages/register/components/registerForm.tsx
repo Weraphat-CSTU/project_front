@@ -131,7 +131,7 @@ export default function RegisterForm() {
                             </Form.Item>
 
                             <Form.Item
-                                label="รหัสนักศึกษา"
+                                label="รหัสนักศึกษา/รหัสผู้ใช้"
                                 name={'login_id'}
                                 rules={[
                                     {

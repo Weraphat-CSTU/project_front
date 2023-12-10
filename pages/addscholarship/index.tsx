@@ -163,11 +163,14 @@ export default function Addscholarship() {
                                                     size="large"
                                                     className="w-full"
                                                 >
-                                                    <Select.Option selected value="alltype">
-                                                        ทุกปีการศึกษา
+                                                    <Select.Option selected value="2565">
+                                                        ปีการศึกษา 2565
                                                     </Select.Option>
                                                     <Select.Option value="2566">
                                                         ปีการศึกษา 2566
+                                                    </Select.Option>
+                                                    <Select.Option value="2567">
+                                                        ปีการศึกษา 2567
                                                     </Select.Option>
                                                 </Select>
                                             </Form.Item>

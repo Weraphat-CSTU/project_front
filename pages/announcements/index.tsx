@@ -7,7 +7,7 @@ import {
 import { getInfomation, infoMationData } from '@/dataService/getinformation';
 import { createInfoMationPlayload, postInfomation } from '@/dataService/postInformation';
 
-import { Button, Form, Input, Modal, Pagination, Skeleton } from 'antd';
+import { Button, Form, Input, Modal, Pagination, Skeleton, message } from 'antd';
 import dayjs from 'dayjs';
 import 'dayjs/locale/th';
 import buddhistEra from 'dayjs/plugin/buddhistEra';
@@ -54,6 +54,9 @@ export default function Announcements() {
         mutationKey: 'createInformation',
         mutationFn: async (data: createInfoMationPlayload) => {
             return postInfomation({ data: data });
+        },
+        onMutate: () => {
+            message.loading('กำลังโหลด');
         },
         onSuccess: () => {
             Swal.fire('ข่าวประชาสัมพันธ์', 'คุณเพิ่มข่าวประชาสัมพันธ์สำเร็จ', 'success');
