@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import Link from 'next/link';
 import { AiOutlineClose } from 'react-icons/ai';
 import Image from 'next/image';
+import { Skeleton } from 'antd';
 
 type props = {
     children?: React.ReactNode;
@@ -183,48 +184,54 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                             </div>
                         </div>
                     </div>
-                    <div>
-                        <div className="flex flex-none w-full">{children}</div>
+                    {isLoading ? (
+                        <div className="mx-auto max-w-3xl lg:max-w-7xl mt-10">
+                            <Skeleton active />
+                        </div>
+                    ) : (
+                        <div>
+                            <div className="flex flex-none w-full">{children}</div>
 
-                        <section id="contact" className="w-full h-auto p-2 bg-[#EB9D48]">
-                            <div className=" mx-3 lg:mx-auto  lg:max-w-7xl md:flex ">
-                                <div className="w-full md:w-1/2">
-                                    <div className="font-semibold md:font-bold text-white text-xl text-center md:text-left md:text-3xl pt-1 md:pt-5 ">
-                                        ติดต่อ
+                            <section id="contact" className="w-full h-auto p-2 bg-[#EB9D48]">
+                                <div className=" mx-3 lg:mx-auto  lg:max-w-7xl md:flex ">
+                                    <div className="w-full md:w-1/2">
+                                        <div className="font-semibold md:font-bold text-white text-xl text-center md:text-left md:text-3xl pt-1 md:pt-5 ">
+                                            ติดต่อ
+                                        </div>
+                                        <div className="lg:space-y-1 md:pt-3 text-center md:text-left">
+                                            <div className="text-white text-sm md:text-base">
+                                                สาขาวิชาวิทยาการคอมพิวเตอร์ มธ. ศูนย์รังสิต
+                                            </div>
+                                            <div className="text-white text-sm md:text-base">
+                                                อาคารบรรยายรวม 2
+                                            </div>
+                                            <div className="text-white text-sm md:text-base">
+                                                คณะวิทยาศาสตร์และเทคโนโลยีมหาวิทยาลัยธรรมศาสตร์
+                                                ศูนย์รังสิต
+                                            </div>
+                                            <div className="text-white text-sm md:text-base">
+                                                ปทุมธานี 12120
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="lg:space-y-1 md:pt-3 text-center md:text-left">
-                                        <div className="text-white text-sm md:text-base">
-                                            สาขาวิชาวิทยาการคอมพิวเตอร์ มธ. ศูนย์รังสิต
+                                    <div className="w-full md:w-1/2 lg:space-y-1 md:pt-16 max-md:text-center">
+                                        <div className="text-white max-md:text-sm">
+                                            โทรศัพท์ : 0-2986-9154, 0-2986-9156, 0-2986-9138-39
                                         </div>
-                                        <div className="text-white text-sm md:text-base">
-                                            อาคารบรรยายรวม 2
+                                        <div className="text-white max-md:text-sm">
+                                            โทรสาร : 0-2986-9157
                                         </div>
-                                        <div className="text-white text-sm md:text-base">
-                                            คณะวิทยาศาสตร์และเทคโนโลยีมหาวิทยาลัยธรรมศาสตร์
-                                            ศูนย์รังสิต
+                                        <div className="text-white max-md:text-sm">
+                                            Email: scitu_cs@sci.tu.ac.th
                                         </div>
-                                        <div className="text-white text-sm md:text-base">
-                                            ปทุมธานี 12120
+                                        <div className="text-white max-md:text-sm">
+                                            Facebook: @CSTUadmissioncenter
                                         </div>
                                     </div>
                                 </div>
-                                <div className="w-full md:w-1/2 lg:space-y-1 md:pt-16 max-md:text-center">
-                                    <div className="text-white max-md:text-sm">
-                                        โทรศัพท์ : 0-2986-9154, 0-2986-9156, 0-2986-9138-39
-                                    </div>
-                                    <div className="text-white max-md:text-sm">
-                                        โทรสาร : 0-2986-9157
-                                    </div>
-                                    <div className="text-white max-md:text-sm">
-                                        Email: scitu_cs@sci.tu.ac.th
-                                    </div>
-                                    <div className="text-white max-md:text-sm">
-                                        Facebook: @CSTUadmissioncenter
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </div>
+                            </section>
+                        </div>
+                    )}
                 </div>
             )}
         </>
