@@ -12,7 +12,7 @@ import {
     historyscholarshipData,
 } from '@/dataService/gethistoryScholarship';
 import { getScholarshipComing, scholarshipComingData } from '@/dataService/getScholarshipComing';
-import { BsPencilSquare } from 'react-icons/bs';
+import { FiSend } from 'react-icons/fi';
 import {
     alertEmailScholarshipPlayloadParam,
     postAlertScholarship,
@@ -67,14 +67,16 @@ export default function Scholarshipall() {
                       dataIndex: 'scholarship_id',
                       key: 'scholarship_id',
                       render: (value: string) => (
-                          <button
-                              className="btn btn-error text-white bg-red-600 border-none hover:bg-red-700"
-                              onClick={() => {
-                                  onHandleAlert({ scholarship_id: value });
-                              }}
-                          >
-                              <BsPencilSquare className="text-white" />
-                          </button>
+                          <div className="flex justify-center">
+                              <button
+                                  className="btn btn-error text-white  "
+                                  onClick={() => {
+                                      onHandleAlert({ scholarship_id: value });
+                                  }}
+                              >
+                                  <FiSend className="text-blue-600 text-lg" />
+                              </button>
+                          </div>
                       ),
                   },
               ]

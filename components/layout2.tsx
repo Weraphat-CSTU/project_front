@@ -190,7 +190,7 @@ const Layout2: FC<props> = ({ children, isLoading }) => {
                         </div>
                     ) : (
                         <div>
-                            <div className="flex flex-none w-full">{children}</div>
+                            <div className="flex  min-h-screen flex-none w-full">{children}</div>
 
                             <section id="contact" className="w-full h-auto p-2 bg-[#EB9D48]">
                                 <div className=" mx-3 lg:mx-auto  lg:max-w-7xl md:flex ">

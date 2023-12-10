@@ -69,7 +69,13 @@ export default function ScholarshipDetailInner() {
                                 <div className="text-2xl font-extrabold dark:text-white">
                                     รายละเอียดเพิ่มเติม
                                 </div>
-                                <div className="">{filteredArray}</div>
+                                <div className="">
+                                    {filteredArray?.map((item, index) => (
+                                        <div key={index} className="mb-3">
+                                            {item}
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                             <div className="w-full  lg:w-2/4  lg:ml-5 border rounded-md shadow-lg mb-3 p-3 mt-3 space-y-3">
                                 <FullcalendarID />
