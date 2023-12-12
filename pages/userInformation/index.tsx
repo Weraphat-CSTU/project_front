@@ -25,13 +25,12 @@ export default function userInformation() {
                             <div className="w-2/6 h-96 border-r p-2 text-center flex items-center justify-center">
                                 <div className="space-y-5">
                                     <p className="text-lg font-medium">โปรไฟล์</p>
-                                    <Image
-                                        src="/น้อนปาร์ค.jpg"
+                                    <img
+                                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1184095057024929862/11341b0ccedd3228.jpeg?ex=658ab975&is=65784475&hm=944f985c3d585000b6af7724dfc400c5ebe68b348b78dbed94e4c18aa1e55b59&"
                                         width={100}
                                         height={50}
                                         alt="Picture of the author"
                                         className="object-cover w-auto h-auto"
-                                        priority
                                     />
                                 </div>
                             </div>
