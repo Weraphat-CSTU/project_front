@@ -44,7 +44,7 @@ export default function Scholarshipall() {
             message.loading('กำลังโหลด');
         },
         onSuccess: (data) => {
-            message.success(`คุณส่งอีเมลแจ้งเตือนสำเร็จ, ${data.result.length}`);
+            message.success(`คุณส่งอีเมลแจ้งเตือนสำเร็จ, ${data.result.length} อีเมล`);
         },
         onError: () => {
             message.error('คุณส่งอีเมลแจ้งเตือนไม่สำเร็จ');
