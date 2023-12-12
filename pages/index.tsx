@@ -13,6 +13,7 @@ import Layout2 from '@/components/layout2';
 import { getDate } from '@/utils/getDate';
 import Fullcalendar from '@/components/fullcalendar';
 import dayjs from 'dayjs';
+import { Tag } from 'antd';
 
 export default function Index() {
     const useSwiperRef = useRef<SwiperClass>();
@@ -161,12 +162,20 @@ export default function Index() {
                                                 )
                                             }
                                         >
-                                            <div className="font-semibold text-xl">
+                                            <div className="font-semibold text-xl text-blue-600 hover:text-blue-500 hover:underline">
                                                 {item.scholarship_name}
                                             </div>
                                             <div className="font-normal text-[17px]">
-                                                {item.scholarship_type_name} (
-                                                {item.scholarship_year})
+                                                {item.scholarship_type_name === 'ทุนภายใน' ? (
+                                                    <Tag color="blue">
+                                                        {item.scholarship_type_name}
+                                                    </Tag>
+                                                ) : (
+                                                    <Tag color="red">
+                                                        {item.scholarship_type_name}
+                                                    </Tag>
+                                                )}{' '}
+                                                ( ปีการศึกษา {item.scholarship_year})
                                             </div>
                                             <div className="font-normal">
                                                 {' '}
