@@ -58,7 +58,7 @@ export default function RegisterForm() {
     return (
         <div>
             <Form form={form} onFinish={onSubmit} layout="vertical">
-                <div className="w-full h-screen mx-auto max-w-xl  bg-white p-3 px-10 absolute inset-0 opacity-95 shadow-md rounded-lg  waves-park py-10">
+                <div className="w-full mx-auto max-w-5xl  bg-white p-3 px-10 absolute inset-0 opacity-95 shadow-md rounded-lg  waves-park py-10 translate-y-20">
                     <div className="w-full flex justify-center">
                         <Image
                             src="/qjg3jmr9-removebg-preview.png"
@@ -71,9 +71,9 @@ export default function RegisterForm() {
                         ลงทะเบียน
                     </h1>
                     <div className="flex justify-center mt-5">
-                        <div className="form-control w-full max-w-xl">
+                        <div className="form-control w-full max-w-5xl">
                             <div className="flex flex-wrap">
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/2 lg:pr-5">
                                     <Form.Item
                                         label="ชื่อจริง"
                                         name={'firstname'}
@@ -92,7 +92,7 @@ export default function RegisterForm() {
                                     </Form.Item>
                                 </div>
 
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/2 lg:pl-5">
                                     <Form.Item
                                         label="นามสกุล"
                                         name={'lastname'}
@@ -111,45 +111,48 @@ export default function RegisterForm() {
                                     </Form.Item>
                                 </div>
                             </div>
-
-                            <Form.Item
-                                label="บัตรประจำตัวประชาชน"
-                                name={'card_id'}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'กรุณากรอกบัตรประจำตัวประชาชน!',
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    placeholder="กรอกบัตรประจำตัวประชาชน"
-                                    maxLength={13}
-                                    style={{ height: 40 }}
-                                    allowClear
-                                />
-                            </Form.Item>
-
-                            <Form.Item
-                                label="รหัสนักศึกษา/รหัสผู้ใช้"
-                                name={'login_id'}
-                                rules={[
-                                    {
-                                        required: true,
-                                        message: 'กรุณากรอกนามสกุล!',
-                                    },
-                                ]}
-                            >
-                                <Input
-                                    placeholder="กรอกนามสกุล"
-                                    maxLength={10}
-                                    style={{ height: 40 }}
-                                    allowClear
-                                />
-                            </Form.Item>
-
                             <div className="flex flex-wrap">
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/2 lg:pr-5">
+                                    <Form.Item
+                                        label="บัตรประจำตัวประชาชน"
+                                        name={'card_id'}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'กรุณากรอกบัตรประจำตัวประชาชน!',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            placeholder="กรอกบัตรประจำตัวประชาชน"
+                                            maxLength={13}
+                                            style={{ height: 40 }}
+                                            allowClear
+                                        />
+                                    </Form.Item>
+                                </div>
+                                <div className="w-full lg:w-1/2 lg:pl-5">
+                                    <Form.Item
+                                        label="รหัสนักศึกษา/รหัสผู้ใช้"
+                                        name={'login_id'}
+                                        rules={[
+                                            {
+                                                required: true,
+                                                message: 'กรุณากรอกนามสกุล!',
+                                            },
+                                        ]}
+                                    >
+                                        <Input
+                                            placeholder="กรอกนามสกุล"
+                                            maxLength={10}
+                                            style={{ height: 40 }}
+                                            allowClear
+                                        />
+                                    </Form.Item>
+                                </div>
+                            </div>
+                            <div className="flex flex-wrap">
+                                <div className="w-full lg:w-1/3 lg:pr-3">
                                     <Form.Item
                                         label="เบอร์โทรศัพท์"
                                         name={'phone'}
@@ -168,7 +171,7 @@ export default function RegisterForm() {
                                         />
                                     </Form.Item>
                                 </div>
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/3 lg:pl-3 lg:pr-3">
                                     <Form.Item
                                         label="อีเมล"
                                         name={'email'}
@@ -186,10 +189,7 @@ export default function RegisterForm() {
                                         />
                                     </Form.Item>
                                 </div>
-                            </div>
-
-                            <div className="flex flex-wrap">
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/3 lg:pl-3">
                                     <Form.Item label="ไอดีไลน์" name={'line_id'}>
                                         <Input
                                             placeholder="กรอกไอดีไลน์"
@@ -198,7 +198,31 @@ export default function RegisterForm() {
                                         />
                                     </Form.Item>
                                 </div>
-                                <div className="w-full lg:w-1/2">
+                            </div>
+
+                            <div className="flex flex-wrap">
+                                {/* <div className="w-full lg:w-1/2 lg:pr-5">
+                                    <Form.Item label="ไอดีไลน์" name={'line_id'}>
+                                        <Input
+                                            placeholder="กรอกไอดีไลน์"
+                                            style={{ height: 40 }}
+                                            allowClear
+                                        />
+                                    </Form.Item>
+                                </div> */}
+                                {/* <div className="w-full lg:w-1/2 lg:pl-5">
+                                    <Form.Item label="เกรดเฉลี่ย" name={'grade'}>
+                                        <Input
+                                            placeholder="กรอกเกรดเฉลี่ย"
+                                            style={{ height: 40 }}
+                                            allowClear
+                                        />
+                                    </Form.Item>
+                                </div> */}
+                            </div>
+
+                            <div className="flex flex-wrap">
+                                <div className="w-full lg:w-1/3 lg:pr-3">
                                     <Form.Item label="เกรดเฉลี่ย" name={'grade'}>
                                         <Input
                                             placeholder="กรอกเกรดเฉลี่ย"
@@ -207,10 +231,7 @@ export default function RegisterForm() {
                                         />
                                     </Form.Item>
                                 </div>
-                            </div>
-
-                            <div className="flex flex-wrap">
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/3 lg:pl-3 lg:pr-3">
                                     <Form.Item
                                         label="รหัสผ่าน"
                                         name={'password'}
@@ -245,7 +266,7 @@ export default function RegisterForm() {
                                     </Form.Item>
                                 </div>
 
-                                <div className="w-full lg:w-1/2">
+                                <div className="w-full lg:w-1/3 lg:pl-3">
                                     <Form.Item
                                         label="ยืนยันรหัสผ่าน"
                                         name={'cpassword'}
@@ -281,13 +302,14 @@ export default function RegisterForm() {
 
                             <button
                                 type="submit"
-                                className="py-3 rounded-md bg-[#0094FF] label-text text-xl text-white mt-10"
+                                className="py-2 rounded-md bg-[#0094FF] label-text text-lg text-white "
+                                disabled={isLoading}
                             >
                                 ยืนยัน
                             </button>
                             <Link
                                 href={'/'}
-                                className="text-lg font-bold text-blue-500 hover:underline mt-5 text-center"
+                                className="text-lg  text-blue-500 hover:underline mt-5 text-center"
                             >
                                 กลับสู่หน้าแรก
                             </Link>
