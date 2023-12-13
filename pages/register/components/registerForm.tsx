@@ -138,12 +138,12 @@ export default function RegisterForm() {
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'กรุณากรอกนามสกุล!',
+                                                message: 'กรุณากรอกรหัสนักศึกษา/รหัสผู้ใช้!',
                                             },
                                         ]}
                                     >
                                         <Input
-                                            placeholder="กรอกนามสกุล"
+                                            placeholder="กรอกรหัสนักศึกษา/รหัสผู้ใช้"
                                             maxLength={10}
                                             style={{ height: 40 }}
                                             allowClear
