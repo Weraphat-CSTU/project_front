@@ -40,6 +40,7 @@ interface createScholarshipForm extends createScholarshipPlayload {
 //1.สร้าง type สำหรับข้อมูลในพร้อม
 export default function Addscholarship() {
     const Router = useRouter();
+    const { TextArea } = Input;
     const [color, setColor] = useState<string>();
     const [showcolor, setShowcolor] = useState<string>();
 
@@ -389,7 +390,7 @@ export default function Addscholarship() {
                                         </span>
                                         <div className="w-full">
                                             <Form.Item name={'scholarship_qualification'}>
-                                                <Input
+                                                <TextArea
                                                     placeholder="รายละเอียดเพิ่มเติม"
                                                     size="large"
                                                     allowClear

@@ -28,7 +28,7 @@ interface editScholarshipForm extends editScholarship {
 
 export default function EditscholarshipInner() {
     const Router = useRouter();
-
+    const { TextArea } = Input;
     const fileTypes = ['PDF'];
     const [filterData, setfilterData] = useState<filterDataType>();
     const { data: classTypeYearData } = useQuery({
@@ -427,7 +427,7 @@ export default function EditscholarshipInner() {
                                     </span>
                                     <div className="w-full">
                                         <Form.Item name="scholarship_qualification">
-                                            <Input
+                                            <TextArea
                                                 placeholder="รายละเอียดเพิ่มเติม"
                                                 size="large"
                                                 allowClear
