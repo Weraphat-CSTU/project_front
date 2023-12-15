@@ -9,10 +9,13 @@ import Link from 'next/link';
 interface registerForm extends registerPlayload {
     cpassword: string;
 }
-
+type Iform = {
+    nationalID: string;
+};
 export default function RegisterForm() {
     const Router = useRouter();
     const Swal = require('sweetalert2');
+
     const [form] = Form.useForm<registerForm>();
     const { mutate, isLoading } = useMutation({
         mutationKey: 'register',
@@ -29,10 +32,11 @@ export default function RegisterForm() {
     });
 
     const onSubmit = (result: registerForm) => {
+        const normalEmail = result.email.split('@');
         const normalResult: registerPlayload = {
             firstname: result.firstname,
             lastname: result.lastname,
-            email: result.email,
+            email: normalEmail + '@dome.tu.ac.th',
             login_id: result.login_id,
             password: result.password,
             card_id: result.card_id.replaceAll('-', ''),
@@ -54,6 +58,26 @@ export default function RegisterForm() {
                 mutate(normalResult);
             }
         });
+    };
+
+    function validNationalID(id: string) {
+        if (id.length !== 13) return false;
+
+        let sum = 0;
+        for (let i = 0; i < 12; i++) {
+            sum += parseInt(id.charAt(i)) * (13 - i);
+        }
+
+        let mod = sum % 11;
+        let check = (11 - mod) % 10;
+
+        return check === parseInt(id.charAt(12));
+    }
+    const validateNationalID = (_rule: any, value: string) => {
+        if (!validNationalID(value.toString())) {
+            return Promise.reject('กรุณากรอกบัตรประชาชนให้ถูกต้อง');
+        }
+        return Promise.resolve();
     };
     return (
         <div>
@@ -119,13 +143,20 @@ export default function RegisterForm() {
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'กรุณากรอกบัตรประจำตัวประชาชน!',
+                                                validator: validateNationalID,
                                             },
                                         ]}
                                     >
                                         <Input
                                             placeholder="กรอกบัตรประจำตัวประชาชน"
                                             maxLength={13}
+                                            onInput={(e) => {
+                                                e.preventDefault();
+                                                const isNumeric = /^[0-9]*$/;
+                                                if (!isNumeric.test(e.currentTarget.value)) {
+                                                    e.currentTarget.value = '';
+                                                }
+                                            }}
                                             style={{ height: 40 }}
                                             allowClear
                                         />
@@ -145,6 +176,13 @@ export default function RegisterForm() {
                                         <Input
                                             placeholder="กรอกรหัสนักศึกษา/รหัสผู้ใช้"
                                             maxLength={10}
+                                            onInput={(e) => {
+                                                e.preventDefault();
+                                                const isNumeric = /^[0-9]*$/;
+                                                if (!isNumeric.test(e.currentTarget.value)) {
+                                                    e.currentTarget.value = '';
+                                                }
+                                            }}
                                             style={{ height: 40 }}
                                             allowClear
                                         />
@@ -184,6 +222,7 @@ export default function RegisterForm() {
                                     >
                                         <Input
                                             placeholder="กรอกอีเมล"
+                                            addonAfter="@dome.tu.ac.th"
                                             style={{ height: 40 }}
                                             allowClear
                                         />
