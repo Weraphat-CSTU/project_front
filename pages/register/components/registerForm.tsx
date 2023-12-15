@@ -79,6 +79,23 @@ export default function RegisterForm() {
         }
         return Promise.resolve();
     };
+
+    const validateStudentID = (
+        _rule: any,
+        value: string,
+        callback: (error?: string) => void | Promise<void>,
+    ) => {
+        const result = value.toString();
+        if (result.length !== 10) callback('กรุณากรอกรหัสนักศึกษา/รหัสผู้ใช้');
+        const date = new Date();
+        const getyear = String(date.getFullYear() + 543).substring(2, 4);
+
+        if (Number(result.substring(0, 2)) <= Number(getyear)) {
+            callback();
+        } else {
+            callback('รหัสนักศึกษาไม่ถูกต้อง');
+        }
+    };
     return (
         <div>
             <Form form={form} onFinish={onSubmit} layout="vertical">
@@ -169,7 +186,8 @@ export default function RegisterForm() {
                                         rules={[
                                             {
                                                 required: true,
-                                                message: 'กรุณากรอกรหัสนักศึกษา/รหัสผู้ใช้!',
+                                                validator: (_rule, value, callback) =>
+                                                    validateStudentID(_rule, value, callback),
                                             },
                                         ]}
                                     >
