@@ -1,38 +1,108 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# CsScholarship เว็บแอปพลิเคชันสำหรับจัดการทุนการศึกษา สาขา วิทยาการคอมพิวเตอร์
 
-## Getting Started
+เป็นแอปพลิเคชันที่พัฒนาด้วย React-Typescript
 
-First, run the development server:
+## โครงสร้างโฟลเดอร์
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+├── .github
+├── components
+│    ├── displayItem.tsx
+│    ├── fullcalendar.tsx
+│    ├── fullcalendarID.tsx
+│    ├── layout.tsx
+│    └── layout2.tsx
+├── dataService
+│    ├── deleteinformation.ts
+│    ├── deleteScholarship.ts
+│    ├── getcalendat.ts
+│    ├── getfollowScholarship.ts
+│    ├── gethistoryScholarship.ts
+│    ├── getinformation.ts
+│    ├── getmanageScholarship.ts
+│    ├── getscholarhship.ts
+│    ├── getScholarshipComing.ts
+│    ├── getScholarshipID.ts
+│    ├── getScholarshipTypes.ts
+│    ├── getStudent.ts
+│    ├── getTypeClassName.ts
+│    ├── getuserInfo.ts
+│    ├── postAlertScholarship.ts
+│    ├── postCreateScholarship.ts
+│    ├── postInformation.ts
+│    ├── postLogin.ts
+│    ├── postRegister.ts
+│    ├── postSubscribe.ts
+│    ├── putInformation.ts
+│    ├── putScholarshipID.ts
+│    ├── unSubscribe.ts
+│    └── updateUserStatus.ts
+├── pages
+│    ├── addscholarship
+│    ├── announcements
+│    ├── editscholarship
+│    ├── followscholarship
+│    ├── login
+│    ├── manageScholarship
+│    ├── manageStudent
+│    ├── pastScholarship
+│    ├── register
+│    ├── scholarship
+│    ├── scholarship-detail
+│    ├── scholarshipAll
+│    ├── student
+│    ├── studentfollow
+│    └── userInformation
+│        ├── _app.tsx
+│        ├── _document.tsx
+│        ├── index.tsx
+├── public
+├── styles
+│    ├── globals.css
+│    ├── slide-left.css
+│    ├── testCSS.css
+├── utils
+│    ├── event.ts
+│    ├── getDate.test.ts
+│    ├── getDate.ts
+│    ├── regx.ts
+├── .gitignore
+├── jest.config.js
+├── next.config.js
+├── package-lock.json
+├── package.json
+├── postcss.config.js
+├── README.md
+├── tailwind.config.js
+└── tsconfig.json
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ขั้นตอนในการติดตั้ง
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. ติดตั้ง node version 18.16.1 ที่นี่ https://nodejs.org/en/blog/release/v18.16.1
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+2. ติดตั้ง git ผ่าน Command Prompt หรือ Powershell ผ่านคำสั่ง
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+```
+winget install --id Git.Git -e --source winget
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+3. ใช้คำสั่ง git clone เพื่อทำการคัดลอกโปรเจกต์
 
-## Learn More
+```
+git clone https://github.com/Weraphat-CSTU/project_front.git
+```
 
-To learn more about Next.js, take a look at the following resources:
+4. ติดตั้ง node module ผ่านคำสั่ง
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+npm install
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## วิธีใช้งาน
 
-## Deploy on Vercel
+เมื่อทำการติดตั้งตามขั้นตอนทั้งหมดแล้ว สามารถ run ตามคำสั่งด้านล่างได้เลย
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+```
+npm run dev
+```
