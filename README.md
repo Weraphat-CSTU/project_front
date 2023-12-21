@@ -55,17 +55,17 @@
 │    └── userInformation
 │        ├── _app.tsx
 │        ├── _document.tsx
-│        ├── index.tsx
+│        └── index.tsx
 ├── public
 ├── styles
 │    ├── globals.css
 │    ├── slide-left.css
-│    ├── testCSS.css
+│    └── testCSS.css
 ├── utils
 │    ├── event.ts
 │    ├── getDate.test.ts
 │    ├── getDate.ts
-│    ├── regx.ts
+│    └── regx.ts
 ├── .gitignore
 ├── jest.config.js
 ├── next.config.js
