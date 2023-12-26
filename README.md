@@ -52,10 +52,10 @@
 │    ├── scholarshipAll
 │    ├── student
 │    ├── studentfollow
-│    └── userInformation
-│        ├── _app.tsx
-│        ├── _document.tsx
-│        └── index.tsx
+│    ├── userInformation
+│    ├── _app.tsx
+│    ├── _document.tsx
+│    └── index.tsx
 ├── public
 ├── styles
 │    ├── globals.css
