@@ -99,7 +99,7 @@ export default function Index() {
                                             <SwiperSlide>
                                                 <div className="relative border shadow-md space-y-5 w-[full] h-[350px] lg:w-[270px]  lg:h-[430px] p-3 rounded-md px-3">
                                                     <img
-                                                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164851487273406484/f006018d74046a40.png?ex=6544b77c&is=6532427c&hm=12a74e75f31ca00e112fbb993cef323a5d4c76bc0330e7911178f09019a4f052&"
+                                                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164851487273406484/f006018d74046a40.png?ex=6628cafc&is=6627797c&hm=56d8536ffb9dde6e35ab2be362ca02fca618cec445b3604c7403fe4d643c3483&"
                                                         width={100}
                                                         height={50}
                                                         className="object-cover  w-full h-36"
