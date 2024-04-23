@@ -113,7 +113,7 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         {/* <SlUser className="w-8 h-8" /> */}
                                         <img
-                                            src="https://cdn.discordapp.com/attachments/1153632685407871066/1184095057024929862/11341b0ccedd3228.jpeg?ex=658ab975&is=65784475&hm=944f985c3d585000b6af7724dfc400c5ebe68b348b78dbed94e4c18aa1e55b59&"
+                                            src="https://cdn.discordapp.com/attachments/1153632685407871066/1184095057024929862/11341b0ccedd3228.jpeg?ex=6628ed75&is=66279bf5&hm=ba0faff16137a545d95d31aa15c7d642d3873d6e3092f317eba6d04d5e4baa5a&"
                                             width={100}
                                             height={30}
                                             alt="Picture of the author"
