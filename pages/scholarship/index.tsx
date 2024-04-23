@@ -76,7 +76,7 @@ export default function Scholarship() {
             ) : (
                 <>
                     <img
-                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164511644118949918/CSTU.png?ex=65437afb&is=653105fb&hm=2eacfd2a9fb626ac976c187a4678e84c14bf44154bf9aa530ed53e5ce08236e3&"
+                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164511644118949918/CSTU.png?ex=6628dffb&is=66278e7b&hm=b47204f5b9c617fc0db5fa9efd2863c7a3ab4cb998d7844c9cd2c3e10c994ab4&"
                         width={1500}
                         height={1500}
                         className=" w-full object-cover brightness-90"
