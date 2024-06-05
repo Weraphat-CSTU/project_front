@@ -38,7 +38,7 @@ export default function Index() {
             <div className=" w-full min-h-screen bg-[#EFF1FE]">
                 <section id="homepage" className="relative">
                     <img
-                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164514618698371182/Dometu-transformed.png?ex=6628e2c0&is=66279140&hm=9fa1528e363e8b841e1d445aee0b37f7f761bccba463dba4b07d0098acda57b0&"
+                        src="https://drive.google.com/file/d/1auzvfkQjCvbGHZaExsiR6MfWYh7c1Y7b/view?usp=sharing"
                         width={600}
                         height={600}
                         className="object-cover brightness-50 w-full min-h-screen lg:min-h-0"
@@ -99,7 +99,7 @@ export default function Index() {
                                             <SwiperSlide>
                                                 <div className="relative border shadow-md space-y-5 w-[full] h-[350px] lg:w-[270px]  lg:h-[430px] p-3 rounded-md px-3">
                                                     <img
-                                                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1164851487273406484/f006018d74046a40.png?ex=6628cafc&is=6627797c&hm=56d8536ffb9dde6e35ab2be362ca02fca618cec445b3604c7403fe4d643c3483&"
+                                                        src="https://drive.google.com/file/d/1CXMptbwoX_Vk3kAsrFt4u0fM9cCNZTA3/view?usp=sharing"
                                                         width={100}
                                                         height={50}
                                                         className="object-cover  w-full h-36"
