@@ -26,7 +26,7 @@ export default function userInformation() {
                                 <div className="space-y-5">
                                     <p className="text-lg font-medium">โปรไฟล์</p>
                                     <img
-                                        src="https://cdn.discordapp.com/attachments/1153632685407871066/1184095057024929862/11341b0ccedd3228.jpeg?ex=6628ed75&is=66279bf5&hm=ba0faff16137a545d95d31aa15c7d642d3873d6e3092f317eba6d04d5e4baa5a&"
+                                        src="https://drive.google.com/file/d/1SVTBO9lF4I-fa4Sfjpnslrq6JhUAFimg/view?usp=sharing"
                                         width={100}
                                         height={50}
                                         alt="Picture of the author"
