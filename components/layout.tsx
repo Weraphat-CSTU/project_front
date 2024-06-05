@@ -60,13 +60,6 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                     icons: <IoSettingsOutline />,
                 },
 
-                // { path: '/followscholarship', lebel: 'ติดตามทุน', id: 6, icons: <IoIosSchool /> },
-                // {
-                //     path: '/createalert',
-                //     lebel: 'รายการแจ้งเตือน',
-                //     id: 2,
-                //     icons: <BiMessageError />,
-                // },
                 { path: '/pastScholarship', lebel: 'ประวัติทุน', id: 7, icons: <GrHistory /> },
             ]);
         } else if (role_id === '2') {
@@ -113,7 +106,7 @@ const Layout: FC<props> = ({ children, isLoading, title, subTitle }) => {
                                     <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
                                         {/* <SlUser className="w-8 h-8" /> */}
                                         <img
-                                            src="https://cdn.discordapp.com/attachments/1153632685407871066/1184095057024929862/11341b0ccedd3228.jpeg?ex=6628ed75&is=66279bf5&hm=ba0faff16137a545d95d31aa15c7d642d3873d6e3092f317eba6d04d5e4baa5a&"
+                                            src="https://drive.google.com/file/d/1nfemRjTcxIzXZ20aLAehhzI-wE4dfX1X/view?usp=sharing"
                                             width={100}
                                             height={30}
                                             alt="Picture of the author"
